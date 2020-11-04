@@ -54,6 +54,15 @@
         </div>
         {{-- side profile ended --}}
         {{-- main column --}}
+        @if ($matches == null)
+        <div class="col-lg-7 col-md-12 col-sm-12">
+            <div class="row">
+                <div class="col-12">
+                    <p>No Match Today</p>
+                </div>
+            </div>
+        </div>
+        @endif
         <div class="col-lg-7 col-md-12 col-sm-12">
             <div class="row">
                 <div class="col-12">
