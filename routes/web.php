@@ -51,11 +51,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/admin', function(){
             return view('admin.home');
         })->name('admin.home');
-        Route::get('force/update/fixtures',function(){
-            $forceUpdate = new FixtureController();
-            $forceUpdate->getFixtureFromApi();
-            return back();
-        });
         // Route::get('/dashboard/user', 'AdminController@user')->name('dashboard.user');
         // Route::get('/dashboard/fixture', 'AdminController@fixture')->name('dashboard.fixture');
         // Route::resource('user', 'UserController');
