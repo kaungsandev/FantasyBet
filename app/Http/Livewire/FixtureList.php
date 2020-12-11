@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Http\Controllers\FixtureController;
 use App\Models\Fixture;
 use Illuminate\Support\Facades\Cache;
 use Livewire\Component;
@@ -9,18 +10,19 @@ use Livewire\Component;
 class FixtureList extends Component
 {
     public $matches;
-    public function mount(){
+    public function mount(FixtureController $fixureController){
+        
         if(cache('date') ===  date("Y-m-d")){
-            $this->updateFixture->getFixtureFromApi(); //update fixture data
-         }
-         if(cache('matches')){
-             $this->matches = cache('matches');
-         }else{
+            $fixureController->getFixtureFromApi();
+        }
+        if(cache('matches') !== null){
+            $this->matches = cache('matches');
+        }else{
             $this->matches = Fixture::where('status','SCHEDULED')
-            ->orderBy('id','DESC')->take(10)->get();
+            ->orderBy('id','ASC')->take(10)->get();
             $duration = now()->addDays(7);
             Cache::put('matches', $this->matches, $duration);
-         }
+        }
     }
     public function render()
     {
