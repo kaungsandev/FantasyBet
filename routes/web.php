@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FixtureController;
 use App\Http\Controllers\NewsApiController;
 use App\Http\Controllers\HomeController;
-
+use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Auth;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('tester', [TestController::class,'index']);
 
 Route::get('/', [HomeController::class, 'index']);
 
@@ -44,14 +44,18 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/get/api/news', [NewsApiController::class, 'getNewsFromApi'])->name('get_news');
     Route::get('/get/api/fixture', [FixtureController::class,'getFixtureFromApi'])->name('get.api.fixture');
 
-    // //Admin
-    // Route::middleware(['admin'])->group(function () {
-    //     //Checking access for dashboard
-    //     Route::get('/dashboard/user', 'AdminController@user')->name('dashboard.user');
-    //     Route::get('/dashboard/fixture', 'AdminController@fixture')->name('dashboard.fixture');
-    //     Route::resource('user', 'UserController');
-    //     Route::resource('fixture', 'FixtureController');
-    //     Route::get('/betresult', 'BetController@get_winner')->name('betresult');
-    // })	;
+    //Admin
+    Route::middleware(['admin'])->group(function () {
+        //Checking access for dashboard
+
+        Route::get('/admin', function(){
+            return view('admin.home');
+        })->name('admin.home');
+        // Route::get('/dashboard/user', 'AdminController@user')->name('dashboard.user');
+        // Route::get('/dashboard/fixture', 'AdminController@fixture')->name('dashboard.fixture');
+        // Route::resource('user', 'UserController');
+        Route::resource('fixture', 'FixtureController');
+        // Route::get('/betresult', 'BetController@get_winner')->name('betresult');
+    })	;
 });
 

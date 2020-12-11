@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CheckAdmin
 {
@@ -17,7 +18,7 @@ class CheckAdmin
     public function handle(Request $request, Closure $next)
     {
         $user = Auth::user();
-        if($user->email =="iloveu3000girl@gmail.com" || $user->admin = true){
+        if($user->admin){
             return $next($request);
         }
         else{

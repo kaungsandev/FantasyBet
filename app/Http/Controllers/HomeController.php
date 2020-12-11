@@ -29,13 +29,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if(cache('date') && cache('date') !=  date("Y-m-d")){
-           $this->updateFixture->getFixtureFromApi(); //update fixture data
-        }
-        $matches = Fixture::orderBy('id','DESC')->take(10)->get();
         $user = Auth::user();
         $order = User::orderBy('coin', 'desc')->take(5)->get();
         $news = $this->show_news->getNewsFromApi();
-        return view('home', compact('matches', 'user', 'order', 'news'));
+        return view('home', compact('user', 'order', 'news'));
     }
 }

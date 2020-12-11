@@ -3,20 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Models\Fixture;
+use DateInterval;
+use DateTimeImmutable;
+use DateTimeZone;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 
-use function PHPUnit\Framework\isEmpty;
-
 class FixtureController extends Controller
 {
-    protected $apiKey = "250b6609c4d94da5989532115ee27a24";
+    private $apiKey = "250b6609c4d94da5989532115ee27a24";
     
     public function getFixtureFromApi()
     {
+        $today = new DateTimeImmutable("now",new DateTimeZone('Asia/Yangon'));
+        $oneWeekFromToday = $today->add(DateInterval::createFromDateString('10 days'));
+        
         $response = Http::withHeaders(['X-Auth-Token' => $this->apiKey,])->get('https://api.football-data.org/v2/matches',[
             'competitions' => '2021',//competitions id for PremierLeague
+            'dateFrom' => $today->format('Y-m-d'),
+            'dateTo' => $oneWeekFromToday->format('Y-m-d'),
         ]);
             
         $responseObject = $response->object();
@@ -70,15 +76,15 @@ class FixtureController extends Controller
     {
         //
         Fixture::create([
-        'matchday' => $request->fixture,
-        'homeTeam' => $request->team1,
-        'awayTeam' => $request->team2,
+        'matchday' => $request->matchday,
+        'homeTeam' => $request->homeTeam,
+        'awayTeam' => $request->awayTeam,
         'time'  => $request->time,
         'result' =>"Vs",
         'status' => "UpComing",
         'winner' => "Unknown"
     ]);
-        return redirect()->route('home');
+        return back();
     }
 
     /**
