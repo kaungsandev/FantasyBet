@@ -15,8 +15,9 @@ class FixtureList extends Component
         if(cache('date') ===  date("Y-m-d")){
             $fixureController->getFixtureFromApi();
         }
-        if(cache('matches') !== null){
+        if(cache('matches')){
             $this->matches = cache('matches');
+            dd($this->matches);
         }else{
             $this->matches = Fixture::where('status','SCHEDULED')
             ->orderBy('id','ASC')->take(10)->get();
