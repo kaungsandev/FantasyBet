@@ -11,10 +11,9 @@ use Illuminate\Support\Facades\Auth;
 class BetController extends Controller
 {
     protected $get_news;
-    public function __construct(NewsApiController $get_news)
+    public function __construct()
     {
         $this->middleware('auth');
-        $this->get_news = $get_news;
     }
 
 
@@ -32,8 +31,7 @@ class BetController extends Controller
             $max = $team1supp+$team2supp;
             $suppval = ($team1supp*100)/$max;
         }
-        $news = $this->get_news->get_news();
-        return view('matchbet', compact('result', 'suppval', 'news', 'count'));
+        return view('matchbet', compact('result', 'suppval', 'count'));
     }
 
     public function trybet(Request $request)

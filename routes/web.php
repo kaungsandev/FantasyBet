@@ -1,14 +1,7 @@
 <?php
 
-use App\Http\Controllers\AccountController;
-use App\Http\Controllers\BetController;
-use App\Http\Controllers\FantasyApiController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\FixtureController;
-use App\Http\Controllers\NewsApiController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\TestController;
-use Illuminate\Support\Facades\Auth;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,17 +12,17 @@ use Illuminate\Support\Facades\Auth;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('tester', [TestController::class,'index']);
-
-Route::get('/', [HomeController::class, 'index']);
-
-Auth::routes();
-
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+require __DIR__.'/auth.php';
 
 
+Route::middleware(['auth'])->group(function(){
+    Route::get('/', function () {
+        return view('home');
+    })->name('home'); 
+    Route::get('/bet/match/{id}', [BetController::class, 'view'])->name('bet'); 
+});
 Route::middleware(['auth'])->group(function () {
-    Route::get('/bet/match/{id}', [BetController::class, 'view'])->name('bet');
+   
     Route::post('/bet/match/submit', [BetController::class, 'trybet'])->name('trybet');
     //Fantasy
     Route::get('/fantasy/players', [FantasyApiController::class, 'get_players'])->name('fantasy.players');
@@ -50,7 +43,7 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('/admin', function(){
             return view('admin.home');
-        })->name('admin.home');
+        })->name('dashboard');
         // Route::get('/dashboard/user', 'AdminController@user')->name('dashboard.user');
         // Route::get('/dashboard/fixture', 'AdminController@fixture')->name('dashboard.fixture');
         // Route::resource('user', 'UserController');
@@ -58,4 +51,3 @@ Route::middleware(['auth'])->group(function () {
         // Route::get('/betresult', 'BetController@get_winner')->name('betresult');
     })	;
 });
-
