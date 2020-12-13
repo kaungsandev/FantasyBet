@@ -19,19 +19,18 @@ class BetController extends Controller
 
     public function view(Request $request)
     {
-        $count = Bet::where('match_id', $request->id)->count();
-        $result = Fixture::where('id', $request->id)->first();
-        $temp1 = Bet::where('match_id', $request->id)->where('team', $result->team1)->get();
-        $temp2 = Bet::where('match_id', $request->id)->where('team', $result->team2)->get();
-        $team1supp = $temp1->count();
-        $team2supp = $temp2->count();
-        if ($team1supp == 0 && $team2supp == 0) {
-            $suppval = 50;
-        } else {
-            $max = $team1supp+$team2supp;
-            $suppval = ($team1supp*100)/$max;
+        $totalCount = Bet::where('match_id', $request->id)->count();//count total bet for specific match
+        $match= Fixture::where('id', $request->id)->first();
+        $temp1 = Bet::where('match_id', $request->id)->where('winner',"HOME_TEAM")->count();//get home team bets count;
+        $temp2 = Bet::where('match_id', $request->id)->where('winner', "AWAY_TEAM")->count();//get away team bets count;
+        if($totalCount >0){
+            $homeTeamCount = ($temp1/$totalCount)*100;
+            $awayTeamCount = ($temp2/$totalCount)*100;
+        }else{
+            $homeTeamCount = 0;
+            $awayTeamCount = 0;
         }
-        return view('matchbet', compact('result', 'suppval', 'count'));
+        return view('matchbet', compact('match', 'totalCount','homeTeamCount','awayTeamCount'));
     }
 
     public function trybet(Request $request)
@@ -39,21 +38,19 @@ class BetController extends Controller
         $user = Auth::user()->id;
         Bet::create([
             'match_id' => $request->matchId,
-            'fixture' => $request->fixture,
-            'team' => $request->choosenteam,
+            'winner' => $request->winner,
             'supporter' => $user,
             'amount' => $request->betamount,
         ]);
 
         $this->coinReduction($user, $request->betamount);
-        $condition="justbet";
-        $this->rankAdd($user, $condition);
+        $this->rankAdd($user, "justbet");
         $this->odd_cal($request->matchId, $request->choosenteam);
         return redirect()->route('home');
     }
     public function odd_cal($id, $team)
     {
-        $temp1 = Bet::where('match_id', $id)->where('team', $team)->get();
+        $temp1 = Bet::where('match_id', $id)->where('winner', $team)->get();
         $temp2 = Bet::where('match_id', $id)->get();
         $supporter_no_1 = $temp1->count();
         $total_no = $temp2->count();
@@ -79,7 +76,7 @@ class BetController extends Controller
     }
     public function get_winner(Request $request)
     {
-        $data =Bet::where('match_id', $request->id)->where('team', $request->winner)->get();
+        $data =Bet::where('match_id', $request->id)->where('winner', $request->winner)->get();
         foreach ($data as $key => $value) {
             # code...
             $user = $value->supporter;

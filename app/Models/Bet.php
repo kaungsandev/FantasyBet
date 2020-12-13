@@ -12,7 +12,7 @@ class Bet extends Model
     protected $fillable = [
         'match_id',
         'fixture', 
-        'team', 
+        'winner', 
         'supporter', 
         'amount'  
     ];

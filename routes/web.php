@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\FixtureController;
+use App\Http\Controllers\BetController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,17 +16,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 require __DIR__.'/auth.php';
-
+Route::get('test',[FixtureController::class,'getFixtureFromApi']);
 
 Route::middleware(['auth'])->group(function(){
     Route::get('/', function () {
         return view('home');
     })->name('home'); 
     Route::get('/bet/match/{id}', [BetController::class, 'view'])->name('bet'); 
+    Route::post('/bet/match/submit', [BetController::class, 'trybet'])->name('bets.store');
 });
 Route::middleware(['auth'])->group(function () {
    
-    Route::post('/bet/match/submit', [BetController::class, 'trybet'])->name('trybet');
+   
     //Fantasy
     Route::get('/fantasy/players', [FantasyApiController::class, 'get_players'])->name('fantasy.players');
     //News Page

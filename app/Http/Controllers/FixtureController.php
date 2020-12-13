@@ -17,23 +17,24 @@ class FixtureController extends Controller
     public function getFixtureFromApi()
     {
         $today = new DateTimeImmutable("now",new DateTimeZone('Asia/Yangon'));
-        $oneWeekFromToday = $today->add(DateInterval::createFromDateString('10 days'));
-        
-        $response = Http::withHeaders(['X-Auth-Token' => $this->apiKey,])->get('https://api.football-data.org/v2/matches',[
+        $oneWeekFromToday = $today->add(DateInterval::createFromDateString('7 days'));
+        if(cache('date') == false){Cache::put('date',date('Y-m-d',strtotime("-1 days")));}
+        $response =Http::withHeaders(['X-Auth-Token' => $this->apiKey,])->get('https://api.football-data.org/v2/matches',[
             'competitions' => '2021',//competitions id for PremierLeague
-            'dateFrom' => $today->format('Y-m-d'),
+            'dateFrom' => cache('date'), //this will be yesterdays's date when method called for second time
             'dateTo' => $oneWeekFromToday->format('Y-m-d'),
         ]);
-            
         $responseObject = $response->object();
         $matches = $responseObject->matches;
         if($matches != null){
             foreach ($matches as $match) 
             {
-                Fixture::create([
+                Fixture::updateOrInsert(
+                    [//Query Filter
                     'matchday' => $match->matchday,
                     'homeTeam' => $match->homeTeam->name,
-                    'awayTeam' => $match->awayTeam->name,
+                    'awayTeam' => $match->awayTeam->name,],
+                    [
                     'time' => $match->utcDate,
                     'result' => $match->score->fullTime->homeTeam.'-'.$match->score->fullTime->awayTeam,
                     'status' => $match->status,
@@ -41,7 +42,7 @@ class FixtureController extends Controller
                     ]);
             }
         }
-        Cache::put('date', $responseObject->filters->dateTo);
+        Cache::put('date', $today->format('Y-m-d'));
     }
 
         /**

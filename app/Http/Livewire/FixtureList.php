@@ -11,8 +11,7 @@ class FixtureList extends Component
 {
     public $matches;
     public function mount(FixtureController $fixureController){
-        
-        if(cache('date') ===  date("Y-m-d")){
+        if(cache('date') != date("Y-m-d")){
             $fixureController->getFixtureFromApi();
         }
         if(cache('matches')){
