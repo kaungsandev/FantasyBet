@@ -1,7 +1,7 @@
 <x-app-layout>
 	<div class="w-full flex-col max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8n">
 		<div class="shadow bg-white flex-col p-5 text-xs lg:text-2xl">
-			<div class="w-full flex justify-between border-b-2 border-r-2 border-l-2 p-2 border-gray-200">
+			<div class="w-full flex justify-between border-b-2 border-r-2 border-l-2 p-2 bg-gradient-to-r from-blue-700 to-red-700 text-white">
 				<h3>Matchday {{$match->matchday}}</h3>
 				<p>{{date("F j ,g:i A", strtotime($match->time))}}</p>
 			</div>
