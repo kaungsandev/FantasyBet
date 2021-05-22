@@ -18,11 +18,11 @@
     
     <!-- Custom styles for this template-->
     <link href="{{asset('css/sb-admin-2.min.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('css/app.css')}}">
     @livewireStyles
 </head>
 
 <body id="page-top">
-    
     <!-- Page Wrapper -->
     <div id="wrapper">
         
@@ -41,8 +41,8 @@
             <hr class="sidebar-divider my-0">
             
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item <?php if(\Route::currentRouteName() == 'admin.home') echo "active" ?> ">
-                <a class="nav-link" href="{{route('admin.home')}}">
+            <li class="nav-item <?php if(\Route::currentRouteName() == 'dashboard') echo "active" ?> ">
+                <a class="nav-link" href="{{route('dashboard')}}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Home</span></a>
                 </li>
@@ -335,7 +335,7 @@
                         </div>
                         
                         <!-- Content Row -->
-                        <div class="row">
+                        <div class="min-w-full">
                             @yield('content')
                         </div>
                     </div>

@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 @section('content')
-  <!-- Collapsable Card Example -->
+  <div class="min-w-full flex flex-row ">
+    <!-- Collapsable Card Example -->
   <div class="card shadow mb-4">
     <!-- Card Header - Accordion -->
     <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
@@ -31,5 +32,6 @@
       </div>
     </div>
   </div>
-@livewire('fixture-list')
+  @livewire('fixture-list')
+  </div>
 @endsection
