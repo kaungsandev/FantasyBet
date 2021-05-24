@@ -4,53 +4,69 @@ namespace App\Http\Controllers;
 
 use App\Models\Fixture;
 use DateInterval;
+use DateTime;
 use DateTimeImmutable;
 use DateTimeZone;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
+use PhpParser\Node\Stmt\Echo_;
 
 class FixtureController extends Controller
 {
     private $apiKey = "250b6609c4d94da5989532115ee27a24";
     
-    public function getFixtureFromApi()
+    public function getFixtureFromApi($dateFrom,$dateTo)
     {
-        //if no cache 
-        if(cache('date') == false){
-            Cache::put('date',date('Y-m-d',strtotime("-1 days")));
-            $dateFrom = new DateTimeImmutable("now",new DateTimeZone('Asia/Yangon'));
-            $dateTo = $dateFrom->add(DateInterval::createFromDateString('7 days'));
-        }else{
-            $strToTime = strtotime(cache('date')); //string cache date to time
-            $dateFormat = date('Y-m-d', $strToTime);//format it in Y-m-d
-            $dateFrom = new DateTimeImmutable($dateFormat,new DateTimeZone('Asia/Yangon')); //convert to addable day format
-            $dateTo = $dateFrom->add(DateInterval::createFromDateString('7 days'));
-        }
-        $response =Http::withHeaders(['X-Auth-Token' => $this->apiKey,])->get('https://api.football-data.org/v2/matches',[
+        $success=true;
+        $response =Http::withHeaders(['X-Auth-Token' => $this->apiKey,])->get('https://api.football-data.org/v2/matches',
+        [
             'competitions' => '2021',//competitions id for PremierLeague
             'dateFrom' => $dateFrom->format('Y-m-d'), //this will be yesterdays's date when method called for second time
             'dateTo' => $dateTo->format('Y-m-d'),
-            ]);
+        ]);
             $responseObject = $response->object();
+            //dd($responseObject);
             $matches = $responseObject->matches;
-            if($matches != null){
+            if($matches != null)
+            {
                 foreach ($matches as $match) 
                 {
                     Fixture::updateOrInsert(
                         [//Query Filter
                             'matchday' => $match->matchday,
                             'homeTeam' => $match->homeTeam->name,
-                            'awayTeam' => $match->awayTeam->name,],
-                            [
-                                'time' => $match->utcDate,
-                                'result' => $match->score->fullTime->homeTeam.'-'.$match->score->fullTime->awayTeam,
-                                'status' => $match->status,
-                                'winner' => $match->score->winner,
-                                ]);
-                            }
-                        }
-                        Cache::put('date', $dateFrom->format('Y-m-d'));    
+                            'awayTeam' => $match->awayTeam->name,
+                        ],
+                        [
+                            'time' => $match->utcDate,
+                            'result' => $match->score->fullTime->homeTeam.'-'.$match->score->fullTime->awayTeam,
+                            'status' => $match->status,
+                            'winner' => $match->score->winner,
+                        ]);
+                }
+                return $success;
+            }
+        return !$success;
+    }
+    //auto update fixture data from oldest SCHEDULED FIXUTRE
+    public function updateFixtureFromApi(){
+
+    try {
+        $dateFrom = Fixture::where('status','SCHEDULED')->orderBy('time','asc')->firstorFail()->time;
+    } catch (\Throwable $th) {
+        $message = "404";
+        return $message;
+    }
+    //utc time format to string
+    $dateFrom = date('Y-m-d',strtotime($dateFrom));
+    //Immutable is important
+    $dateFrom = DateTimeImmutable::createFromFormat('Y-m-j', $dateFrom);
+    $dateTo = $dateFrom->add(DateInterval::createFromDateString('7 days'));
+    if($this->getFixtureFromApi($dateFrom,$dateTo)){
+        return "Fixture updated";
+    }
+    return $message;
     }
                     
                     /**

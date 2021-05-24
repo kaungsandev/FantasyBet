@@ -21,12 +21,12 @@
             @include('layouts.navigation')
 
             <!-- Page Heading -->
-            <header class="bg-white shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8n flex justify-between">
-                    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            <header class="bg-gray-200 shadow">
+                <div class="max-w-7xl mx-auto py-2 px-4 sm:px-6 lg:px-8n flex justify-between text-md">
+                    <h2 class="font-semibold text-gray-800 leading-tight">
                         Current Rank: {{ Auth::user()->rank_title }}
                     </h2>
-                    <h2 class="font-varela text-xl text-gray-800 leading-tight">
+                    <h2 class="font-varela text-gray-800 leading-tight">
                       {{ Auth::user()->coin }}F
                     </h2>
                 </div>
@@ -34,6 +34,7 @@
 
             <!-- Page Content -->
             <main>
+                @include('components.messages')
                 {{ $slot }}
             </main>
         </div>

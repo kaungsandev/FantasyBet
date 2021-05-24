@@ -6,9 +6,9 @@
 				<p>{{date("F j ,g:i A", strtotime($match->time))}}</p>
 			</div>
 			<div class="w-full mt-5 flex text-center justify-around">
-				<p class="font-bold m-2 border-b-2 border-blue-700">{{ $match->homeTeam }}</p>
-				<p class="m-2">Vs</p>
-				<p class="font-bold m-2 border-b-2 border-red-700">{{ $match->awayTeam }}</p>
+				<p class="w-full font-bold m-2 border-b-2 border-blue-700">{{ $match->homeTeam }}</p>
+				<p class="w-full m-2">Vs</p>
+				<p class="w-full font-bold m-2 border-b-2 border-red-700">{{ $match->awayTeam }}</p>
 			</div>
 			@if ($totalCount != 0)
 			<div class="w-full text-gray-400 mt-5 flex text-center justify-evenly text-sm">
@@ -21,9 +21,9 @@
 				Choose Your Bet
 			</div>
 			<div class="w-full mt-5 flex-col lg:flex-row text-center text-xs">
-				<button class="w-full lg:w-1/4 h-8 bg-blue-600 hover:bg-black px-3 py-1 rounded text-white mb-3 bet-modal" id="HOME_TEAM">Home Win</button>
+				<button class="w-full lg:w-1/4 h-8 bg-blue-600 hover:bg-black px-3 py-1 rounded text-white mb-3 bet-modal" id="HOME_TEAM">{{ $match->homeTeam }} Win</button>
 				<button class="w-full lg:w-1/4 h-8 bg-gray-600 hover:bg-black px-3 py-1 rounded text-white mb-3 bet-modal" id="DRAW">Draw</button>
-				<button class="w-full lg:w-1/4 h-8 bg-red-600 hover:bg-black px-3 py-1 rounded text-white mb-3 bet-modal" id="AWAY_TEAM">Away Win</button>	
+				<button class="w-full lg:w-1/4 h-8 bg-red-600 hover:bg-black px-3 py-1 rounded text-white mb-3 bet-modal" id="AWAY_TEAM">{{ $match->awayTeam }} Win</button>	
 			</div>
 		</div>
 	</div>

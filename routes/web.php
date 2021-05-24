@@ -5,6 +5,7 @@ use App\Http\Controllers\BetController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Models\Fixture;
+use Illuminate\Support\Facades\Cache;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,17 +18,10 @@ use App\Models\Fixture;
 |
 */
 require __DIR__.'/auth.php';
-Route::get('test',[FixtureController::class,'getFixtureFromApi']);
-Route::get('/get/matches',function(){
-    $matches = Fixture::where('status','SCHEDULED')
-    ->orderBy('id','ASC')->take(10)->get();
-    if(!$matches->count()){return 404;}//
-    return response()->Json($matches);
-});
+require __DIR__.'/test.php';
+
 Route::middleware(['auth'])->group(function(){
-    Route::get('/', function () {
-        return view('home');
-    })->name('home'); 
+    Route::view('/', 'home')->name('home');
     Route::get('/bet/match/{id}', [BetController::class, 'view'])->name('bet'); 
     Route::post('/bet/match/submit', [BetController::class, 'trybet'])->name('bets.store');
 });

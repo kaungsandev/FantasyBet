@@ -19,8 +19,11 @@ class BetController extends Controller
 
     public function view(Request $request)
     {
+        $match= Fixture::where('id', $request->id)->firstorFail();
+        if($match->status !== "SCHEDULED"){
+            return back()->with('info','The Match has already started or finished');
+        }
         $totalCount = Bet::where('match_id', $request->id)->count();//count total bet for specific match
-        $match= Fixture::where('id', $request->id)->first();
         $temp1 = Bet::where('match_id', $request->id)->where('winner',"HOME_TEAM")->count();//get home team bets count;
         $temp2 = Bet::where('match_id', $request->id)->where('winner', "AWAY_TEAM")->count();//get away team bets count;
         if($totalCount >0){
