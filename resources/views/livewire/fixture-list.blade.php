@@ -15,7 +15,7 @@
                 @if ($match->status == "FINISHED")
                 <p class="w-1/6 m-2 text-gray-600 lg:text-xl">{{$match->status}}</p>
                 @else
-                <p class="w-1/6 m-2 text-gray-600 lg:text-xl">{{date("F j ,g:i A", strtotime($match->time))}}</p>
+                <p class="w-1/6 m-2 text-gray-600 lg:text-lg">{{date("F j ,g:i A", strtotime($match->time))}}</p>
                 @endif
             </div>
         </a>

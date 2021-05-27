@@ -25,7 +25,7 @@ class FixtureList extends Component
             $message = $fixtureController->updateFixtureFromApi();
             //call new One
             $fixtureController->getFixtureFromApi($dateFrom,$dateTo);
-            $this->matches = Fixture::orderyBy('id','DESC')->all();
+            $this->matches = Fixture::orderBy('matchday','DESC')->get();
             $duration = now()->addHour();// cache will store data for 1hour 
             Cache::put('matches', $this->matches, $duration);
         }

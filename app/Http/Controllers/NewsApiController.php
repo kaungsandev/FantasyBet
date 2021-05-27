@@ -21,10 +21,6 @@ class NewsApiController extends Controller
     }
     //Requesting API
     public function getNewsFromApi(){
-        if (cache('news')) {
-            $data = Cache::get('news');
-        }else 
-        {
             $api_response = Http::get(
                 'https://newsapi.org/v2/top-headlines?',
                 [
@@ -36,10 +32,11 @@ class NewsApiController extends Controller
                 );
                 $response = $api_response->getBody()->getContents();
                 $decoded = json_decode($response);
-                $data = $decoded->articles;
-                Cache::put('news', $data, now()->addMinutes(30));
-            }
-            return $data;
+                $news = $decoded->articles;
+                Cache::put('news', $news, now()->addMinutes(30));
+            
+                return $news;
+                //return response()->json($news);
         }
         //home page news teaser;
         public function index(){

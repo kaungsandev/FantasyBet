@@ -106,10 +106,10 @@ class FixtureController extends Controller
                             'awayTeam' => $request->awayTeam,
                             'time'  => $request->time,
                             'result' =>"Vs",
-                            'status' => "UpComing",
+                            'status' => "SCHEDULED",
                             'winner' => "Unknown"
                             ]);
-                            return back();
+                            return back()->with('success',"Fixture created successfully.");
                         }
                         
                         /**

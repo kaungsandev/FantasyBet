@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\FixtureController;
 use App\Http\Controllers\BetController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Models\Fixture;
@@ -24,35 +25,30 @@ Route::middleware(['auth'])->group(function(){
     Route::view('/', 'home')->name('home');
     Route::get('/bet/match/{id}', [BetController::class, 'view'])->name('bet'); 
     Route::post('/bet/match/submit', [BetController::class, 'trybet'])->name('bets.store');
+
+    // News Page 
+    Route::view('/news','news')->name('news');
 });
 // stop working from below
 Route::middleware(['auth'])->group(function () {
-    
-    
-    
-    //Fantasy
-    Route::get('/fantasy/players', [FantasyApiController::class, 'get_players'])->name('fantasy.players');
-    //News Page
-    Route::get('/news',[NewsApiController::class, 'index'])->name('news');
-    //Profile Page
-    Route::get('/profile/$id', [AccountController::class, 'myprofile'])->name('profile');
+        // //Fantasy
+    // Route::get('/fantasy/players', [FantasyApiController::class, 'get_players'])->name('fantasy.players');
+    // //Profile Page
+    // Route::get('/profile/$id', [AccountController::class, 'myprofile'])->name('profile');
     Route::get('/logout', function () {
         Auth::logout();
         return redirect()->route('home');
     })->name('logout');
-    Route::get('/get/api/news', [NewsApiController::class, 'getNewsFromApi'])->name('get_news');
-    Route::get('/get/api/fixture', [FixtureController::class,'getFixtureFromApi'])->name('get.api.fixture');
     
     //Admin
     Route::middleware(['admin'])->group(function () {
         //Checking access for dashboard
         
-        Route::get('/admin', function(){
-            return view('admin.home');
-        })->name('dashboard');
+        Route::view('dashboard', 'admin.dashboard')->name('dashboard');
+        
         // Route::get('/dashboard/user', 'AdminController@user')->name('dashboard.user');
-        // Route::get('/dashboard/fixture', 'AdminController@fixture')->name('dashboard.fixture');
-        // Route::resource('user', 'UserController');
+        Route::view('/dashboard/fixture', 'admin.fixture')->name('dashboard.fixtures');
+        Route::view('/dashboard/users','admin.users')->name('dashboard.users');
         Route::resource('fixture', FixtureControllers::class);
         // Route::get('/betresult', 'BetController@get_winner')->name('betresult');
     })	;

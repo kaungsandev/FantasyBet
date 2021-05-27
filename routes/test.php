@@ -1,6 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FixtureController;
+use App\Http\Controllers\NewsApiController;
 use App\Models\Fixture;
 
 Route::get('/test/get/matches/api',function(FixtureController $fixture){
@@ -21,4 +22,7 @@ Route::get('/test/get/matches/db',function(){
     if(!$matches->count()){return 404;}//
     return response()->Json($matches);
 });
+
+Route::get('/test/get/news/api',[NewsApiController::class,'getNewsFromApi']);
+Route::view('/test/show/news','news')
 ?>
