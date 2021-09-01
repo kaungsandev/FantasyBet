@@ -3,7 +3,10 @@
 namespace App\Http\Livewire;
 
 use App\Http\Controllers\FixtureController;
+use App\Http\Traits\HasFixtures;
+use App\Http\Traits\HasTeams;
 use App\Models\Fixture;
+use App\Models\Teams;
 use DateInterval;
 use DateTimeImmutable;
 use DateTimeZone;
@@ -12,23 +15,17 @@ use Livewire\Component;
 
 class FixtureList extends Component
 {
-    public $matches;
+    use HasTeams,HasFixtures;
+
+    public $fixtures;
     public function mount(FixtureController $fixtureController){
-        if(cache('matches')){
-            $this->matches = cache('matches');
-        }else{
-            //get current date
-            $dateFrom = new DateTimeImmutable("now",new DateTimeZone('Asia/Yangon')); 
-            //add 7 days to current date
-            $dateTo = $dateFrom->add(DateInterval::createFromDateString('7 days'));
-            //update Old Data First();
-            $message = $fixtureController->updateFixtureFromApi();
-            //call new One
-            $fixtureController->getFixtureFromApi($dateFrom,$dateTo);
-            $this->matches = Fixture::orderBy('matchday','DESC')->get();
-            $duration = now()->addHour();// cache will store data for 1hour 
-            Cache::put('matches', $this->matches, $duration);
+        if(!cache('fixtures')){
+            $this->updateFixturesFromAPI();
         }
+        if(!cache('teams')){
+            $this->updateTeamsFromAPI();
+        }
+        $this->fixtures = $this->getLatestFixture();
     }
     public function render()
     {

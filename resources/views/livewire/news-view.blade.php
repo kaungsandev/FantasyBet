@@ -1,4 +1,4 @@
-<div class="w-full grid grid-cols-3 gap-12 max-w-7xl mx-auto px-6 sm:px-6 lg:px-8n py-2">
+<div class="w-full grid grid-cols-3 gap-12 mx-auto px-6 sm:px-6 lg:px-8n py-2">
     @foreach ($news as $new)
     <a href="{{$new->url}}">
         <div class="bg-white border-b-4 border-blue-500 w-full h-full">

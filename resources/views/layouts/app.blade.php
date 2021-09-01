@@ -12,6 +12,7 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/custom.css')}}">
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
@@ -20,22 +21,13 @@
         <div class="min-h-screen bg-gray-100">
             @include('layouts.navigation')
 
-            <!-- Page Heading -->
-            <header class="bg-gray-200 shadow">
-                <div class="max-w-7xl mx-auto py-2 px-4 sm:px-6 lg:px-8n flex justify-between text-md">
-                    <h2 class="font-semibold text-gray-800 leading-tight">
-                        Current Rank: {{ Auth::user()->rank_title }}
-                    </h2>
-                    <h2 class="font-varela text-gray-800 leading-tight">
-                      {{ Auth::user()->coin }}F
-                    </h2>
-                </div>
-            </header>
-
             <!-- Page Content -->
             <main>
+                <div class="w-full flex flex-row justify-around mx-auto">
                 @include('components.messages')
+                @livewire('side-panel')
                 {{ $slot }}
+                </div>
             </main>
         </div>
     </body>

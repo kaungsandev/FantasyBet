@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Archivo+Narrow|Pacifico|Roboto|Padauk:wght@400;700&display=swap');
-
+:root{
+    --theme-color:#37003c;
+}
 .font-varela{
     font-family: 'Varela Round';
 }
@@ -10,6 +12,9 @@
     letter-spacing: 0.8rem;
     color: black;
 }
-/*End MainView*/
-
-/* CSS HEX */
+.text-theme-color{
+    color: var(--theme-color);
+}
+.bg-theme-color{
+    background-color: var(--theme-color);
+}

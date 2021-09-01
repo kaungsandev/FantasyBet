@@ -21,11 +21,14 @@ use Illuminate\Support\Facades\Cache;
 require __DIR__.'/auth.php';
 require __DIR__.'/test.php';
 
+Route::get('/teams',[FixtureController::class, 'getTeams']);
+Route::get('/fixtures',[FixtureController::class,'getFixtures']);
+
 Route::middleware(['auth'])->group(function(){
     Route::view('/', 'home')->name('home');
     Route::get('/bet/match/{id}', [BetController::class, 'view'])->name('bet'); 
     Route::post('/bet/match/submit', [BetController::class, 'trybet'])->name('bets.store');
-
+    Route::view('/profile', 'profile')->name('profile');
     // News Page 
     Route::view('/news','news')->name('news');
 });

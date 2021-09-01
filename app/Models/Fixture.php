@@ -10,17 +10,18 @@ class Fixture extends Model
     use HasFactory;
     
     protected $fillable =[
-        'matchday',
-        'homeTeam', 
-        'awayTeam', 
-        'time',
-        'result', 
-        'status', 
-        'winner'
+        'event',
+        'finished', 
+        'kickoff_time', 
+        'started',
+        'home_team', 
+        'away_team', 
+        'home_team_score',
+        'away_team_score',
     ];
 
     public function bet()
     {
-        return $this->hasMany('App\Bet','match_id','id');
+        return $this->hasMany('App\Bet','event','id');
     }
 }
