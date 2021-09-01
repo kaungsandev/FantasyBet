@@ -4,10 +4,10 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 
-class SidePanel extends Component
+class LeftPanel extends Component
 {
     public function render()
     {
-        return view('livewire.side-panel');
+        return view('livewire.left-panel');
     }
 }

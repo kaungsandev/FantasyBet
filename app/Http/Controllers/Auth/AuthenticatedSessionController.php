@@ -7,6 +7,7 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -31,7 +32,11 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
-
+        // generate random avatar
+        $user_id = auth()->user()->id;
+        $random_avatar ='avataaars-'.rand(1,7).'.png';
+        Cache::put('avatar-'.$user_id, $random_avatar);
+        
         return redirect(RouteServiceProvider::HOME);
     }
 

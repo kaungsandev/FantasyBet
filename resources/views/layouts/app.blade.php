@@ -13,6 +13,7 @@
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         <link rel="stylesheet" href="{{ asset('css/custom.css')}}">
+        <link rel="stylesheet" href="{{ asset('css/fontawesome/all.css')}}">
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
@@ -21,12 +22,13 @@
         <div class="min-h-screen bg-gray-100">
             @include('layouts.navigation')
 
-            <!-- Page Content -->
+    <!-- Page Content -->
             <main>
-                <div class="w-full flex flex-row justify-around mx-auto">
                 @include('components.messages')
-                @livewire('side-panel')
+                <div class="w-full flex flex-row justify-around mx-auto">
+                @livewire('left-panel')
                 {{ $slot }}
+                @livewire('right-panel')
                 </div>
             </main>
         </div>

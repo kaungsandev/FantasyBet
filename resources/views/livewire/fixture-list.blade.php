@@ -1,11 +1,19 @@
 <div class="w-full flex-col max-w-7xl mx-auto pt-6  px-4 sm:px-6 lg:px-8n">
     <!-- component -->
-    @php $matchday = null; @endphp
+    @php $kickoff_time = null; @endphp
+    
     @foreach($fixtures as $fixture)
+    @php
+    $datetime = new DateTime($fixture->kickoff_time);
+    $timezone = new DateTimeZone('Asia/Yangon');
+    $datetime->setTimezone($timezone);
+    @endphp
     @if ($fixture->finished !=true)
-    @if($loop->first || $matchday != $fixture->event)
-    @php $matchday = $fixture->event @endphp
-    <h1 class="font-bold m-2 text-xs lg:text-2xl text-theme-color">Gameweek {{$matchday}}</h1>
+    @if($loop->first || $kickoff_time !== $datetime->format('l d F'))
+    @php $kickoff_time = $datetime->format('l d F') @endphp
+    <p class="w-2/6 leading-relaxed font-bold m-2 text-xs lg:text-2xl text-theme-color pr-2 border-r-1">
+        {{$datetime->format('l d F')}}
+    </p>
     @endif
     <div class="flex-col text-md text-auto">
         <a href="{{route('bet', ['id' => $fixture->event])}}" class=""> 
@@ -16,18 +24,8 @@
                 @elseif ($fixture->started === true)
                 <p class="w-2/6 ">0 | 0</p>
                 @else
-                <p class="w-2/6">
-                    @php
-                    $datetime = new DateTime($fixture->kickoff_time)
-                    @endphp
-                    <span class="pr-2 border-r-1">{{$datetime->format('Y-m-d')}}</span>
-                    <span class="bg-theme-color text-white pr-1 pl-1 rounded">
-                        @php
-                        $timezone = new DateTimeZone('Asia/Yangon');
-                        $datetime->setTimezone($timezone);
-                        @endphp
+                <p class="w-auto leading-relaxed bg-theme-color text-white pr-2 pl-2 rounded">
                         {{$datetime->format('h:i A')}}
-                    </span>
                 </p>
                 @endif
                 <p class="w-2/6">{{ $this->getTeamName($fixture->away_team) }}</p>         
@@ -36,5 +34,7 @@
     </div>
     @endif
     @endforeach
-    @livewire('news-view')
+    <div class="w-full grid grid-cols-1 gap-1 mx-auto  py-4">
+        @livewire('news-view')
+    </div>
 </div>
