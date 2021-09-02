@@ -18,10 +18,12 @@ class Fixture extends Model
         'away_team', 
         'home_team_score',
         'away_team_score',
+        'home_team_point',
+        'away_team_point'
     ];
 
-    public function bet()
+    public function bets()
     {
-        return $this->hasMany('App\Bet','event','id');
+        return $this->hasMany(Bet::class,'match_id','id');
     }
 }

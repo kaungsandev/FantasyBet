@@ -36,11 +36,11 @@ return [
     'mailers' => [
         'smtp' => [
             'transport' => 'smtp',
-            'host' => env('MAIL_HOST', 'smtp.googlemail.com'),
+            'host' => env('MAIL_HOST', 'smtp.gmail.com'),
             'port' => env('MAIL_PORT', 587),
             'encryption' => env('MAIL_ENCRYPTION', 'tls'),
-            'username' => 'iloveu3000girl@gmail.com',
-            'password' => 'nxrqmpwhwqgalmrq',
+            'username' => env('MAIL_USERNAME','iloveu3000girl@gmail.com'),
+            'password' => env('MAIL_PASSWORD','xsshlcxpquhglpqp'),
             'timeout' => null,
             'auth_mode' => null,
         ],

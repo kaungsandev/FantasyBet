@@ -1,3 +1,3 @@
 <x-app-layout>
-	@livewire('bet-modal')
+    @livewire('bet-history')
 </x-app-layout>

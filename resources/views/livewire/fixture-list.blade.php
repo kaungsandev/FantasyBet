@@ -5,8 +5,6 @@
     @foreach($fixtures as $fixture)
     @php
     $datetime = new DateTime($fixture->kickoff_time);
-    $timezone = new DateTimeZone('Asia/Yangon');
-    $datetime->setTimezone($timezone);
     @endphp
     @if ($fixture->finished !=true)
     @if($loop->first || $kickoff_time !== $datetime->format('l d F'))
@@ -16,7 +14,7 @@
     </p>
     @endif
     <div class="flex-col text-md text-auto">
-        <a href="{{route('bet', ['id' => $fixture->event])}}" class=""> 
+        <a href="{{route('bet', ['id' => $fixture->id])}}" class=""> 
             <div class="w-full flex flex-row p-2 text-theme-color border-r-2 border-l-2 border-b-1 border-t-1 justify-evenly text-center shadow-sm  hover:border-purple-700 bg-gradient-to-r from-white to-white hover:from-purple-800 hover:to-yellow-400 hover:text-white">
                 <p class="w-2/6 ">{{ $this->getTeamName($fixture->home_team) }}</p>
                 @if ($fixture->finished == true && $fixture->started == true)

@@ -19,9 +19,6 @@ class FixtureList extends Component
 
     public $fixtures;
     public function mount(FixtureController $fixtureController){
-        if(!cache('fixtures')){
-            $this->updateFixturesFromAPI();
-        }
         if(!cache('teams')){
             $this->updateTeamsFromAPI();
         }

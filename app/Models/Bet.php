@@ -11,14 +11,15 @@ class Bet extends Model
 
     protected $fillable = [
         'match_id',
-        'fixture', 
         'winner', 
         'supporter', 
-        'amount'  
+        'amount'  ,
+        'current_point',
+        'paid'
     ];
 
-    public function hasFixture(){
-        return $this->belongsTo('App\Fixture','id',);
+    public function fixture(){
+        return $this->belongsTo(Fixture::class,'id','match_id');
     }
 
 }

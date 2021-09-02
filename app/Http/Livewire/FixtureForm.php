@@ -14,10 +14,10 @@ class FixtureForm extends Component
     public $time;
 
     protected $rules = [
-        'matchday' => 'required',
-        'homeTeam' => 'required|min:6',
-        'awayTeam' => 'required|min:6',
-        'time' => 'required'
+        'event' => 'required',
+        'home_team' => 'required|min:6',
+        'away_team' => 'required|min:6',
+        'kickoff_time' => 'required'
     ];
 
     public function render()

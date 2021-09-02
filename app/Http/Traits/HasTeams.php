@@ -22,7 +22,9 @@ trait HasTeams {
         Cache::put('teams',Teams::all());
     }
     public function getTeamName($id){
-        $team = Teams::where('id',$id)->first();
-        return $team->name;
+        return Teams::where('id',$id)->first()->name;
+    }
+    public function getTeamShortName($id){
+        return Teams::where('id',$id)->first()->short_name;
     }
 }
