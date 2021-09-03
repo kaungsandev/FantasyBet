@@ -54,6 +54,7 @@ Route::get('/cache/fixture/clear',function(){
 
 Route::middleware(['auth'])->group(function(){
     Route::view('/', 'home')->name('home');
+    Route::view('/fixtures','fixture')->name('fixtures');
     Route::view('/bet/history','history')->name('bets.history');
     Route::view('/bet/match/{id}','matchbet')->middleware('matchstate-clean')->name('bet'); 
     Route::post('/bet/match/submit', [BetController::class, 'trybet'])->name('bets.store');

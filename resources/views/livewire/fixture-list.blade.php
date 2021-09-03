@@ -30,9 +30,7 @@
             </div>
         </a>
     </div>
+    <hr>
     @endif
     @endforeach
-    <div class="w-full grid grid-cols-1 gap-1 mx-auto  py-4">
-        @livewire('news-view')
-    </div>
 </div>

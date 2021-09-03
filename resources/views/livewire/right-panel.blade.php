@@ -1,9 +1,8 @@
 <div class="w-1/6 p-8 sticky top-0 h-screen">
     <div class="w-full flex flex-col">
         <div class="w-full rounded shadow-md p-2 bg-white mb-8">
-            <div class="w-full text-theme-color border-l-2 bg-white text-center hover:border-purple-700 hover:text-purple-700">
-                <div class="w-full p-2 pl-4 flex flex-row justify-end text-right">
-                    
+            <x-nav-link href="{{route('bets.history')}}" class="w-full text-theme-color border-l-2 bg-white text-center hover:border-purple-700 hover:text-purple-700">
+                <div class="w-full p-2 pl-4 flex flex-row justify-end text-right text-lg">
                     <p class="text-theme-color">
                         ${{auth()->user()->coin}}
                     </p>
@@ -11,7 +10,7 @@
                         <i class="fas fa-wallet"></i>
                     </p>          
                 </div>
-            </div>
+            </x-nav-link>
         </div>
         <div class="w-full bg-white shadow-md rounded-md">
             <h1 class="w-full text-lg font-bold p-2 bg-theme-color  rounded-t-md text-white">Best 10</h1>

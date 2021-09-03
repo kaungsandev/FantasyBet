@@ -12,12 +12,14 @@
         <p>{{$this->getTeamName($match->away_team)}}</p>
         @endif
         <p>${{$each_bet->amount}}</p>  
-        <p>+ {{$each_bet->amount*$each_bet->current_point}}</p>
         @if ($each_bet->paid == false && $match->finished == false)
+        <p class="text-green-400">{{$each_bet->amount *  $each_bet->current_point}}</p>
         <p class="text-green-400">Pending</p>
         @elseif ($each_bet->paid ==false && $match->finished ==true)
+        <p class="text-red-600"> -{{$each_bet->amount}}</p>
         <p class="text-red-600">Lose</p>
         @elseif ($each_bet->paid ==true && $match->finished ==true)
+        <p class="text-blue-600">+ {{$each_bet->amount*$each_bet->current_point}}</p>
         <p class="text-blue-600">Win</p>
         @endif
       
