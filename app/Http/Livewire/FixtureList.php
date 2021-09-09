@@ -18,10 +18,7 @@ class FixtureList extends Component
     use HasTeams,HasFixtures;
 
     public $fixtures;
-    public function mount(FixtureController $fixtureController){
-        if(!cache('teams')){
-            $this->updateTeamsFromAPI();
-        }
+    public function mount(){
         $this->fixtures = $this->getLatestFixture();
     }
     public function render()

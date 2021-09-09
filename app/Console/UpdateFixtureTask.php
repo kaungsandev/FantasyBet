@@ -23,12 +23,12 @@ class UpdateFixtureTask{
                 'home_team' =>$fixture['team_h'], 
                 'away_team' => $fixture['team_a'], 
             ],[
-                'event' => $fixture['event'],
+                // 'event' => $fixture['event'],
                 'finished' => (boolean)$fixture['finished'], 
                 'kickoff_time' => $datetime, 
                 'started' =>(boolean) $fixture['started'],
-                'home_team' =>$fixture['team_h'], 
-                'away_team' => $fixture['team_a'], 
+                // 'home_team' =>$fixture['team_h'], 
+                // 'away_team' => $fixture['team_a'], 
                 'home_team_score' => $fixture['team_h_score'],
                 'away_team_score' => $fixture['team_a_score'],
             ]);

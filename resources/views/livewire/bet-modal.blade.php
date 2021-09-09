@@ -1,32 +1,4 @@
 <div class="w-1/2">
-    <div class="w-full flex-col max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8n">
-		<div class="shadow bg-white flex-col p-5 text-xs lg:text-2xl">
-			<div class="w-full flex justify-between border-b-2 border-r-2 border-l-2 p-2 bg-gradient-to-r from-blue-700 to-red-700 text-white">
-				<h3>Gameweek {{$match->event}}</h3>
-				<p>{{date("F j ,g:i A", strtotime($match->kickoff_time))}}</p>
-			</div>
-			<div class="w-full mt-5 flex text-center justify-around">
-				<p class="w-full font-bold m-2 border-b-2 border-blue-700">{{ $this->getTeamName($match->home_team) }}</p>
-				<p class="w-full m-2">Vs</p>
-				<p class="w-full font-bold m-2 border-b-2 border-red-700">{{ $this->getTeamName($match->away_team) }}</p>
-			</div>
-			@if ($totalCount != 0)
-			<div class="w-full text-gray-400 mt-5 flex text-center justify-evenly text-sm">
-				<p class="m-2">Supports: {{ round($home_team_count,2) }}%</p>
-				<p class="m-2">Total: {{ $totalCount }}</p>
-				<p class="m-2">Supports: {{ round($away_team_count ,2)}}%</p>
-			</div>
-			@endif
-			<div class="w-full flex justify-center my-5 text-gray-700 text-sm">
-				Choose Your Bet
-			</div>
-			<div class="w-full mt-5 flex-col lg:flex-row text-center text-xs">
-				<button class="w-full lg:w-1/4 h-8 bg-blue-600 hover:bg-black px-3 py-1 rounded text-white mb-3 bet-modal" id="HOME_TEAM">{{ $match->homeTeam }} Win</button>
-				<button class="w-full lg:w-1/4 h-8 bg-gray-600 hover:bg-black px-3 py-1 rounded text-white mb-3 bet-modal" id="DRAW">Draw</button>
-				<button class="w-full lg:w-1/4 h-8 bg-red-600 hover:bg-black px-3 py-1 rounded text-white mb-3 bet-modal" id="AWAY_TEAM">{{ $match->awayTeam }} Win</button>	
-			</div>
-		</div>
-	</div>
 	<!-- component -->
     <div class="w-full flex-col max-w-7xl mx-auto rounded-lg py-6 px-4 sm:px-6 lg:px-8n">
 		<div class="shadow bg-white flex-col p-5 rounded-lg text-xs lg:text-2xl">

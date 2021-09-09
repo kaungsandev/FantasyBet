@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Models\Bet;
 use App\Models\Fixture;
 use App\Models\User;
 use DateTime;
@@ -11,6 +12,7 @@ use Illuminate\Support\Facades\Http;
 class UpdateBetResultTask{
     public function __invoke()
     {   
+        if(Bet::all()->count()){
         //get finished matches;
         $fixtures = Fixture::where('finished',true)->where('started',true)->get();
         foreach ($fixtures as $fixture) {
@@ -39,5 +41,6 @@ class UpdateBetResultTask{
                 }
             }
         }
+    }
     }
 }

@@ -32,10 +32,6 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
-        // generate random avatar
-        $user_id = auth()->user()->id;
-        $random_avatar ='avataaars-'.rand(1,7).'.png';
-        Cache::put('avatar-'.$user_id, $random_avatar);
         
         return redirect(RouteServiceProvider::HOME);
     }
