@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Auth;
 class BetController extends Controller
 {   
     use HasTeams;
-    protected $get_news;
     public function __construct()
     {
         $this->middleware('auth');
@@ -46,8 +45,7 @@ class BetController extends Controller
             return $match->away_team_point;
         }
     }
-    public function odd_cal($id, $team)
-    {
+    public function odd_cal($id, $team){
         $temp1 = Bet::where('match_id', $id)->where('winner', $team)->get();
         $temp2 = Bet::where('match_id', $id)->get();
         $supporter_no_1 = $temp1->count();
@@ -73,8 +71,7 @@ class BetController extends Controller
         }
         $data->save();
     }
-    public function addcoin($id, $point, $betamount)
-    {
+    public function addcoin($id, $point, $betamount){
         
         $user = User::where('id', $id)->first();
         $coin = round($betamount* $point);
@@ -98,5 +95,31 @@ class BetController extends Controller
             $user->rank_no +=5;
         }
         $user->save();
+    }
+    public function updateBetResult(Fixture $match){
+        $winner = null;
+        // decide who win the game
+        if($match->home_team_score > $match->away_team_score){
+            $winner = $match->home_team;
+        }else if($match->home_team_score < $match->away_team_score){
+            $winner = $match->away_team;
+        }
+        // Eloquent relationship/ fixture hasMany bets
+        foreach ($match->bets as $each_bet) {
+            // unpaid and bet for winning team only
+            // unpaid and bet for losing will be excluded
+            if($each_bet->paid == false && $winner == $each_bet->winner){
+                //Adding Coin for winner
+                $user = User::where('id', $each_bet->supporter)->first();
+                $coin = round($each_bet->amount * $each_bet->current_point);
+                $user->coin += ($coin + $each_bet->amount);
+                //Add rank
+                $user->rank_no +=5;
+                $user->save();
+                // Paid true
+                $each_bet->paid = true;
+                $each_bet->save();
+            }
+        }
     }
 }

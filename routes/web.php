@@ -22,36 +22,18 @@ use Illuminate\Support\Facades\Cache;
 require __DIR__.'/auth.php';
 require __DIR__.'/test.php';
 
-Route::get("/test/fixtures/bets",function(){
-    $fixtures = Fixture::where('finished',true)->where('started',true)->get();
-    foreach ($fixtures as $fixture) {
-        $winner = null;
-        if($fixture->home_team_score > $fixture->away_team_score){
-            $winner = $fixture->home_team;
-        }else if($fixture->home_team_score < $fixture->away_team_score){
-            $winner = $fixture->away_team;
-        }
-     foreach ($fixture->bets as $each_bet) {
-        if($each_bet->paid == false && $winner == $each_bet->winner){
-        //Adding Coin for winner
-        $user = User::where('id', $each_bet->supporter)->first();
-        $coin = round($each_bet->amount * $each_bet->current_point);
-        $user->coin += ($coin + $each_bet->amount);
-        $user->rank_no +=5;
-        $user->save();
-        // Paid true
-        $each_bet->paid = true;
-        $each_bet->save();
-        }
+Route::get('/test',function(){
+    $match = Fixture::findOrFail(31);
+    $date1 = new DateTime(now('Asia/Yangon'));
+    $date2 = new DateTime($match->kickoff_time);
+    var_dump($date1);
+    var_dump($date2);
+    if($date1 < $date2){
+        var_dump(false);
+    }else if($date1 > $date2){
+        var_dump(true);
     }
-    echo ("done");
-}
 });
-Route::get('/cache/fixture/clear',function(){
-    Cache::forget('fixtures');
-    return "Cache:clear";
-});
-
 Route::middleware(['auth'])->group(function(){
     Route::view('/', 'home')->name('home');
     Route::view('/fixtures','fixture')->name('fixtures');
@@ -64,7 +46,7 @@ Route::middleware(['auth'])->group(function(){
 });
 // stop working from below
 Route::middleware(['auth'])->group(function () {
-        // //Fantasy
+    // //Fantasy
     // Route::get('/fantasy/players', [FantasyApiController::class, 'get_players'])->name('fantasy.players');
     // //Profile Page
     // Route::get('/profile/$id', [AccountController::class, 'myprofile'])->name('profile');
