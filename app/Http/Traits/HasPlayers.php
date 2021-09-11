@@ -11,7 +11,7 @@ trait HasPlayers{
         $API_URL = 'https://fantasy.premierleague.com/api';
         $response = Http::get($API_URL.'/bootstrap-static/');
         $players =  $response->json();
-        Cache::put('players',$players['elements']);
+        Cache::put('players',$players['elements'],now()->addMinutes(45));
     }
     public function getTop10PlayersThisWeek(){
         $players = cache('players');
