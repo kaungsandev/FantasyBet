@@ -1,4 +1,4 @@
-<div class="w-1/2 mt-8">
+<div class="w-4/6 mt-8">
     <h1 class="text-xl font-bold underline mb-2">History</h1>
     @foreach ($history as $each_bet)
     @php
