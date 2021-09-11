@@ -19,7 +19,7 @@ trait HasFixtures {
     public function getLatestFixture(){
         //Find the latest not finished gameweek
         $latest_event = $this->getLatestEvent();
-        $fixtures = Fixture::where('event',$latest_event)->get();
+        $fixtures = Fixture::where('event',$latest_event)->orderBy('kickoff_time','asc')->get();
         return $fixtures;
 
     }
