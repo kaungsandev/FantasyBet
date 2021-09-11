@@ -17,7 +17,7 @@
                 </div>
                 
                 <!-- Navigation Links -->
-                <div class="hidden md:block mx-auto my-auto flex w-1/2">
+                {{-- <div class="hidden md:block mx-auto my-auto flex w-1/2">
                     <div class="relative">
                         <div class="absolute flex border border-transparent left-0 top-0 h-full w-10">
                             <div class="flex items-center justify-center rounded-tl rounded-bl z-10 bg-gray-200 text-gray-600 text-lg h-full w-full">
@@ -44,15 +44,17 @@
                     class="text-sm text-theme-color  bg-gray-200 sm:text-base relative w-full border rounded placeholder-gray-400 focus:border-indigo-400 focus:outline-none py-2 pr-2 pl-12">
                     
                 </div>
-                </div>
+                </div> --}}
             </div>
         
         <!-- Settings Dropdown -->
-        <div class="hidden sm:flex sm:items-center sm:pr-24">
+        <div class="hidden flex justify-end w-full sm:flex sm:items-center sm:pr-24">
             <x-dropdown align="right" width="48">
                 <x-slot name="trigger">
-                    <button class="flex items-center text-sm font-medium text-white hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
-                        <div>{{ Auth::user()->name }}</div>
+                    <button class="flex justify-center text-sm font-medium text-white hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
+                        <div class="w-full flex">
+                            <p class="w-full ">{{auth()->user()->name}}</p>
+                        </div>
                         
                         <div class="ml-1">
                             <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
