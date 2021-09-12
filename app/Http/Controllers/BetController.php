@@ -18,49 +18,61 @@ class BetController extends Controller
     }
 
     public function trybet(Request $request)
-    {
+    {   
         $user = Auth::user()->id;
         Bet::create([
             'match_id' => $request->match_id,
-            'winner' => $request->winner,
+            'winner' => $request->choice,
             'supporter' => $user,
             'amount' => $request->betamount,
-            'current_point' => $this->getCurrentPointForTeam($request->match_id,$request->winner),
+            'current_point' => $this->getCurrentPointForTeam($request->match_id,$request->choice),
             'paid' => false,
         ]);
 
         $this->coinReduction($user, $request->betamount);
         $this->rankAdd($user, "justbet");
-        $this->odd_cal($request->match_id, $request->winner);
+        $this->odd_cal($request->match_id, $request->choice);
         return redirect()->route('home')->with('success','Your bet is placed. Good Luck !');
     }
     // saved current point with each bet.
     // allow user to get their x times of point when their bet is submited
     // not the one that lastly update by odd_cal method;
-    public function getCurrentPointForTeam($match_id,$team){
+    public function getCurrentPointForTeam($match_id,$choice){    
         $match = Fixture::findOrFail($match_id);
-        if($match->home_team == $team){
+        if($choice == 'draw'){
+            return $match->draw_point;
+        }
+        else if($match->home_team == $choice){
             return $match->home_team_point;
         }else{
             return $match->away_team_point;
         }
     }
-    public function odd_cal($id, $team){
-        $temp1 = Bet::where('match_id', $id)->where('winner', $team)->get();
+    public function odd_cal($id, $choice){
+
+        //same bet 
+        $temp1 = Bet::where('match_id', $id)->where('winner', $choice)->get();
+        //total bet
         $temp2 = Bet::where('match_id', $id)->get();
         $supporter_no_1 = $temp1->count();
         $total_no = $temp2->count();
-        $supporter_no_2 = $total_no - $supporter_no_1;
-        if ($supporter_no_2 <=0) {
-            $supporter_no_2 = 1;
+        $total_supporter = $total_no - $supporter_no_1;
+        if ($total_supporter <=0) {
+            $total_supporter = 1;
         }
         $data = Fixture::where('id', $id)->first();
-        if ($data->home_team == $team) {
-            $data->home_team_point -= (($supporter_no_2/100)+0.2);
-            $data->away_team_point += (($supporter_no_1/100)+0.5);
-        } elseif ($data->away_team == $team) {
-            $data->home_team_point += (($supporter_no_2/100)+0.5);
+        if ($data->home_team == $choice) {
+            $data->home_team_point -= (($total_supporter/100)+0.2);
+            $data->away_team_point += (($supporter_no_1/100)+0.2);
+            $data->draw_point += (($supporter_no_1/100)+0.02);
+        } elseif ($data->away_team == $choice) {
+            $data->home_team_point += (($total_supporter/100)+0.2);
             $data->away_team_point -= (($supporter_no_1/100)+0.2);
+            $data->draw_point += (($supporter_no_1/100)+0.02);
+        }elseif($choice == 'draw'){
+            $data->draw_point -= (($supporter_no_1/100)+0.05);
+            $data->home_team_point += (($total_supporter/100));
+            $data->away_team_point += (($supporter_no_1/100));
         }
         // set minimum point
         if ($data->home_team_point <=0) {
@@ -68,6 +80,9 @@ class BetController extends Controller
         }
         if ($data->away_team_point <=0) {
             $data->away_team_point = 0.3;
+        }
+        if($data->draw_point <= 0){
+            $data->draw_point = 0.3;
         }
         $data->save();
     }
@@ -103,6 +118,8 @@ class BetController extends Controller
             $winner = $match->home_team;
         }else if($match->home_team_score < $match->away_team_score){
             $winner = $match->away_team;
+        }else if($match->home_team_score == $match->away_team_score){
+            $winner = "draw";
         }
         // Eloquent relationship/ fixture hasMany bets
         foreach ($match->bets as $each_bet) {

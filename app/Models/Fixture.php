@@ -19,7 +19,8 @@ class Fixture extends Model
         'home_team_score',
         'away_team_score',
         'home_team_point',
-        'away_team_point'
+        'away_team_point',
+        'draw_point'
     ];
 
     public function bets()

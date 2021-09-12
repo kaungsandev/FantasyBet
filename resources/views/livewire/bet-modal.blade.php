@@ -28,7 +28,12 @@
                     <span class="font-bold">{{$match->home_team_point}}</span>
                     )
                 </button>
-				<button class="w-full lg:w-1/4 h-8 bg-gray-600 hover:bg-black px-3 py-1 rounded text-white mb-3 bet-modal" id="DRAW">Draw</button>
+				<button class="w-full lg:w-1/4 h-8 bg-green-500 hover:bg-black px-3 py-1 rounded text-white mb-3 bet-modal" id="draw">
+                    <span class="font-bold">Draw</span> 
+                   	(x 
+                    <span class="font-bold">{{$match->draw_point}}</span>
+                    )
+                </button>
 				<button class="w-full lg:w-1/4 h-8 bg-red-600 hover:bg-black px-3 py-1 rounded text-white mb-3 bet-modal" id="{{$match->away_team}}">
                     <span class="font-bold">{{ $this->getTeamShortName($match->away_team) }}</span> 
                     Win (x 
@@ -54,7 +59,7 @@
 					<input name="betamount" placeholder="min: 10" class="border-b-2 border-top-0 border-blue-400 py-2 px-3 text-grey-darkest w-full" type="number" name="coin" min="10" step="10" max="{{ Auth::user()->coin }}" required>
 				</div>
 				<input type="hidden" name="match_id" value="{{ $match->id }}">
-				<input id="winner" type="hidden" name="winner">
+				<input id="choice" type="hidden" name="choice">
 				<div class="flex justify-end items-center w-100 border-t p-3">
 					<button class="bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-white mr-1 close-modal">Cancel</button>
 					<button type="submit" class="bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded text-white">Bet</button>
@@ -72,7 +77,7 @@
 		openModal.forEach(open=> {
 			open.addEventListener('click', function (){
 			document.getElementById('modal-title').innerText = this.innerText;
-			document.getElementById('winner').value= this.id;
+			document.getElementById('choice').value= this.id;
 			modal.classList.remove('hidden')
 		});
 		})

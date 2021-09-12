@@ -10,6 +10,10 @@
         <p>{{$this->getTeamName($match->home_team)}}</p>
         @elseif($match->away_team == $each_bet->winner)
         <p>{{$this->getTeamName($match->away_team)}}</p>
+        @elseif($each_bet->winner == 'draw')
+        <p>{{$this->getTeamShortName($match->home_team).'|'.$this->getTeamShortName($match->away_team)}} 
+        <span class="text-green-400">Draw</span>
+        </p>
         @endif
         <p>${{$each_bet->amount}}</p>  
         @if ($each_bet->paid == false && $match->finished == false)
