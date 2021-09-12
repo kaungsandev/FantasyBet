@@ -14,7 +14,8 @@ use phpDocumentor\Reflection\Types\Nullable;
 trait HasFixtures {
     
     public function getLatestEvent(){
-        return Fixture::where('finished',false)->first()->event;
+        // added orderby id to avoid search algorithm failure
+        return Fixture::where('finished',false)->orderBy('id')->first()->event;
     }
     public function getLatestFixture(){
         //Find the latest not finished gameweek
