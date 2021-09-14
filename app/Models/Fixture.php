@@ -27,4 +27,11 @@ class Fixture extends Model
     {
         return $this->hasMany(Bet::class,'match_id','id');
     }
+    // hometeam
+    public function hometeam(){
+        return $this->belongsTo(Teams::class,'home_team');
+    }
+    public function awayteam(){
+        return $this->belongsTo(Teams::class,'away_team');
+    }
 }

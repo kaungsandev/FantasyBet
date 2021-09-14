@@ -18,8 +18,15 @@ class Bet extends Model
         'paid'
     ];
 
+    
     public function fixture(){
-        return $this->belongsTo(Fixture::class,'id','match_id');
+        return $this->belongsTo(Fixture::class,'match_id');
+    }
+    public function team(){
+        return $this->belongsTo(Teams::class,'winner');
+    }
+    public function user(){
+        return $this->belongsTo(User::class,'supporter');
     }
 
 }

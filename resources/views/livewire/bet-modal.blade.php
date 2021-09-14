@@ -3,13 +3,13 @@
     <div class="w-full flex-col max-w-7xl mx-auto rounded-lg py-6 px-4 sm:px-6 lg:px-8n">
 		<div class="shadow bg-white flex-col p-5 rounded-lg text-xs lg:text-2xl">
 			<div class="w-full flex justify-between rounded-lg  p-2 bg-gradient-to-r from-blue-700 to-red-700 text-white">
-				<h3>Gameweek {{$match->event}}</h3>
-				<p>{{date("F j ,g:i A", strtotime($match->kickoff_time))}}</p>
+				<h3>Gameweek {{$fixture->event}}</h3>
+				<p>{{date("F j ,g:i A", strtotime($fixture->kickoff_time))}}</p>
 			</div>
 			<div class="w-full mt-5 flex text-center justify-around">
-				<p class="w-full font-bold m-2">{{ $this->getTeamName($match->home_team) }}</p>
+				<p class="w-full font-bold m-2">{{ $fixture->hometeam->name }}</p>
 				<p class="w-full m-2">Vs</p>
-				<p class="w-full font-bold m-2">{{ $this->getTeamName($match->away_team) }}</p>
+				<p class="w-full font-bold m-2">{{ $fixture->awayteam->name }}</p>
 			</div>
 			@if ($totalCount != 0)
 			<div class="w-full text-gray-400 mt-5 flex text-center justify-evenly text-sm">
@@ -22,22 +22,22 @@
 				Choose Your Bet
 			</div>
 			<div class="w-full mt-5 flex-col lg:flex-row text-center text-xs">
-				<button class="w-full lg:w-1/4 h-8 bg-blue-600 hover:bg-black px-3 py-1 rounded text-white mb-3 bet-modal" id="{{$match->home_team}}">
-                    <span class="font-bold">{{ $this->getTeamShortName($match->home_team) }}</span> 
+				<button class="w-full lg:w-1/4 h-8 bg-blue-600 hover:bg-black px-3 py-1 rounded text-white mb-3 bet-modal" id="{{$fixture->home_team}}">
+                    <span class="font-bold">{{ $fixture->hometeam->short_name }}</span> 
                     Win (x 
-                    <span class="font-bold">{{$match->home_team_point}}</span>
+                    <span class="font-bold">{{$fixture->home_team_point}}</span>
                     )
                 </button>
 				<button class="w-full lg:w-1/4 h-8 bg-green-500 hover:bg-black px-3 py-1 rounded text-white mb-3 bet-modal" id="draw">
                     <span class="font-bold">Draw</span> 
                    	(x 
-                    <span class="font-bold">{{$match->draw_point}}</span>
+                    <span class="font-bold">{{$fixture->draw_point}}</span>
                     )
                 </button>
-				<button class="w-full lg:w-1/4 h-8 bg-red-600 hover:bg-black px-3 py-1 rounded text-white mb-3 bet-modal" id="{{$match->away_team}}">
-                    <span class="font-bold">{{ $this->getTeamShortName($match->away_team) }}</span> 
+				<button class="w-full lg:w-1/4 h-8 bg-red-600 hover:bg-black px-3 py-1 rounded text-white mb-3 bet-modal" id="{{$fixture->away_team}}">
+                    <span class="font-bold">{{ $fixture->awayteam->short_name }}</span> 
                     Win (x 
-                    <span class="font-bold">{{$match->away_team_point}}</span>
+                    <span class="font-bold">{{$fixture->away_team_point}}</span>
                     )
                 </button>	
 			</div>
@@ -58,7 +58,7 @@
 					<p class="my-4">ဘယ်လောက်ထည့်မလဲ</p>
 					<input name="betamount" placeholder="min: 10" class="border-b-2 border-top-0 border-blue-400 py-2 px-3 text-grey-darkest w-full" type="number" name="coin" min="10" step="10" max="{{ Auth::user()->coin }}" required>
 				</div>
-				<input type="hidden" name="match_id" value="{{ $match->id }}">
+				<input type="hidden" name="match_id" value="{{ $fixture->id }}">
 				<input id="choice" type="hidden" name="choice">
 				<div class="flex justify-end items-center w-100 border-t p-3">
 					<button class="bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-white mr-1 close-modal">Cancel</button>
@@ -67,7 +67,10 @@
 			</form>
 		</div>
 	</div>
-	
+
+	{{-- Bet History --}}
+	@livewire('bet-history',['match_id'=> $fixture->id])
+
 	<script>
 		const modal = document.querySelector('.modal');
 		
