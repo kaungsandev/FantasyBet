@@ -73,7 +73,7 @@ class BetController extends Controller
         
         //total bet
         $total_amount = Bet::where('match_id', $match_id)->sum('amount');
-
+        
         $total_player_count = Bet::where('match_id', $match_id)->count();
         //same bet 
         $total_choice_amount = Bet::where('match_id', $match_id)->where('winner', $choice)->sum('amount');
@@ -97,7 +97,7 @@ class BetController extends Controller
                 $fixture->home_team_point = 0.9216/$fixture->away_team_point;
             }
         }else{
-    
+            
             if($choice == $fixture->home_team){ //if user bet for home team
                 $fixture->home_team_point =(($total_amount/$total_choice_amount)-1)* 0.96;
                 $fixture->away_team_point = 0.9216/$fixture->home_team_point;
