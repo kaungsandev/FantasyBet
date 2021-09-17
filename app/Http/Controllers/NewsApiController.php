@@ -33,16 +33,9 @@ class NewsApiController extends Controller
                 $response = $api_response->getBody()->getContents();
                 $decoded = json_decode($response);
                 $news = $decoded->articles;
-                Cache::put('news', $news, now()->addMinutes(30));
+                Cache::put('news', $news, now()->addHour());
             
                 return $news;
-                //return response()->json($news);
-        }
-        //home page news teaser;
-        public function index(){
-            $user = Auth::user();
-            $news = Cache::get('news');
-            return view('news',compact('news','user'));
         }
 }
     

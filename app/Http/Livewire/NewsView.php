@@ -14,7 +14,6 @@ class NewsView extends Component
             $this->news = cache('news');
         }else{
             $this->news = $newsApiController->getNewsFromApi();
-            Cache::add('news', $this->news, now()->addHour());
         }
     }
     public function render()

@@ -3,7 +3,6 @@
 namespace App\Console;
 
 use App\Models\Teams;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 
 class UpdateTeamsTask {
@@ -21,6 +20,5 @@ class UpdateTeamsTask {
                 'short_name' =>$team['short_name'],
             ]);
         }
-        Cache::put('teams',Teams::all());
     }
 }

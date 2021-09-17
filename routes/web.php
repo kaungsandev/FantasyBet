@@ -22,25 +22,15 @@ use Illuminate\Support\Facades\Cache;
 require __DIR__.'/auth.php';
 require __DIR__.'/test.php';
 
-Route::get('/test',function(){
-    $match = Fixture::findOrFail(31);
-    $date1 = new DateTime(now('Asia/Yangon'));
-    $date2 = new DateTime($match->kickoff_time);
-    var_dump($date1);
-    var_dump($date2);
-    if($date1 < $date2){
-        var_dump(false);
-    }else if($date1 > $date2){
-        var_dump(true);
-    }
-});
 Route::middleware(['auth'])->group(function(){
     Route::view('/', 'home')->name('home');
     Route::view('/fixtures','fixture')->name('fixtures');
     Route::view('/bet/history','history')->name('bets.history');
     Route::view('/bet/match/{id}','matchbet')->middleware('matchstate-clean')->name('bet'); 
     Route::post('/bet/match/submit', [BetController::class, 'trybet'])->name('bets.store');
+    // Profile page
     Route::view('/profile', 'profile')->name('profile');
+    Route::view('/players', 'players')->name("players");
     // News Page 
     Route::view('/news','news')->name('news');
 });
