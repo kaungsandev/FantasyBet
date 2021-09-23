@@ -8,6 +8,7 @@ use Livewire\Component;
 class LeftPanel extends Component
 {
     public $avatar;
+    public $admin = false;
     public function mount(){
         // generate random avatar
         $user_id = auth()->user()->id;

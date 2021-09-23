@@ -4,7 +4,7 @@
             <x-nav-link href="{{route('bets.history')}}" class="w-full text-theme-color border-l-2 bg-white text-center hover:border-purple-700 hover:text-purple-700">
                 <div class="w-full p-2 pl-4 flex flex-row justify-end text-right text-lg">
                     <p class="text-theme-color">
-                        ${{auth()->user()->coin}}
+                        &euro;{{auth()->user()->coin}}
                     </p>
                     <p class="w-full text-gray-400">
                         <i class="fas fa-wallet"></i>

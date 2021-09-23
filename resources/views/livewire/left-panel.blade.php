@@ -1,6 +1,22 @@
 <div class="w-1/6 p-8 sticky top-0 h-screen">
     {{-- Profile --}}
     <div class="rounded shadow-md p-2 bg-white mb-8">
+        @if (auth()->user()->admin ==true)
+        <x-nav-link  :active="request()->routeIs('profile')" :href="route('dashboard')">
+            <span class="pl-2 w-12 h-12 rounded-lg">
+                <img class="w-12 h-12 rouned-lg shadodw-lg"
+                src="{{asset('img/avatars/'.cache('avatar-'.auth()->user()->id))}}" alt="">
+            </span>
+            <div class="p-2 pl-4 flex flex-col justify-start text-left">
+                <p>
+                    {{auth()->user()->name}}
+                </p>
+                <p class="text-gray-400">
+                    {{auth()->user()->rank_title}}
+                </p>
+            </div>
+        </x-nav-link>
+        @else
         <x-nav-link  :active="request()->routeIs('profile')" :href="route('profile')">
             <span class="pl-2 w-12 h-12 rounded-lg">
                 <img class="w-12 h-12 rouned-lg shadodw-lg"
@@ -14,10 +30,24 @@
                     {{auth()->user()->rank_title}}
                 </p>
             </div>
-            
         </x-nav-link>
+        @endif
+  
     </div>
     {{-- Navigation --}}
+    @if ($this->admin == true)
+    <div class="rounded p-2 shadow-md bg-white">
+        <x-nav-link  :active="request()->routeIs('dashboard')" :href="route('dashboard')">
+            <span class="pl-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+            </span>
+            <span class="p-2 pl-4">Users</span>
+        </x-nav-link>
+        <hr>
+    </div>
+    @else
     <div class="rounded p-2 shadow-md bg-white">
         <x-nav-link  :active="request()->routeIs('home')" :href="route('home')">
             <span class="pl-2">
@@ -63,6 +93,8 @@
             <span class="p-2 pl-4">Players Statistics</span>
         </x-nav-link>
     </div>
+    @endif
+    
     {{-- Logout --}}
     <div class="rounded shadow-md bg-white mt-8">
         <form action="{{route('logout')}}" method="POST" class="w-full bg-white rounded">

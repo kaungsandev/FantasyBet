@@ -1,3 +1,3 @@
-<x-app-layout>
-
-</x-app-layout>
+<x-admin-layout>
+    @livewire('users-list')
+</x-admin-layout>
