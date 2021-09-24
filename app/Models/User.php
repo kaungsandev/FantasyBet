@@ -10,7 +10,7 @@ use Laravel\Cashier\Billable;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, Billable;
+    use HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -48,5 +48,8 @@ class User extends Authenticatable
 
     public function bets(){
         return $this->hasMany(Bet::class,'supporter');
+    }
+    public function subscription(){
+        return $this->hasOne(Subscription::class);
     }
 }

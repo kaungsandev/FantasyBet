@@ -9,12 +9,13 @@
 
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
-
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+        rel="stylesheet">
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         <link rel="stylesheet" href="{{ asset('css/custom.css')}}">
         <link rel="stylesheet" href="{{ asset('css/fontawesome/all.css')}}">
-
+        @livewireStyles
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
@@ -32,5 +33,6 @@
                 </div>
             </main>
         </div>
+        @livewireScripts
     </body>
 </html>

@@ -10,6 +10,9 @@ class RightPanel extends Component
     use HasPlayers;
 
     public $players;
+    protected $listeners=[
+        'PlanSubscribed' => 'render'
+    ];
     public function mount(){
         if(!cache('players'))
         {

@@ -45,6 +45,12 @@
             </span>
             <span class="p-2 pl-4">Users</span>
         </x-nav-link>
+        <x-nav-link  :active="request()->routeIs('dashboard.packages')" :href="route('dashboard.packages')">
+            <span class="pl-2">
+                <i class="fas fa-store"></i>
+            </span>
+            <span class="p-2 pl-4">Packages</span>
+        </x-nav-link>
         <hr>
     </div>
     @else

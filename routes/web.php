@@ -22,6 +22,15 @@ use Illuminate\Support\Facades\Cache;
 require __DIR__.'/auth.php';
 require __DIR__.'/test.php';
 
+Route::get('/test',function(){
+    $user = auth()->user();
+
+    if($user->subscription){
+        return $user->subscription->packages;
+    }else{
+        dd("NUll");
+    }
+});
 Route::middleware(['auth'])->group(function(){
     Route::view('/', 'home')->name('home');
     Route::view('/fixtures','fixture')->name('fixtures');
@@ -33,28 +42,23 @@ Route::middleware(['auth'])->group(function(){
     Route::view('/players', 'players')->name("players");
     // News Page 
     Route::view('/news','news')->name('news');
-});
-// stop working from below
-Route::middleware(['auth'])->group(function () {
-    // //Fantasy
-    // Route::get('/fantasy/players', [FantasyApiController::class, 'get_players'])->name('fantasy.players');
-    // //Profile Page
-    // Route::get('/profile/$id', [AccountController::class, 'myprofile'])->name('profile');
+    // Pricing Page
+    Route::view('/package/','billing')->name('billing');
+
+    // logout
     Route::get('/logout', function () {
         Auth::logout();
         return redirect()->route('home');
     })->name('logout');
     
-    //Admin
-    Route::middleware(['admin'])->group(function () {
+});
+// stop working from below
+Route::middleware(['auth','admin'])->group(function () {
         //Checking access for dashboard
         
         Route::view('dashboard', 'admin.dashboard')->name('dashboard');
-        
-        // Route::get('/dashboard/user', 'AdminController@user')->name('dashboard.user');
-        Route::view('/dashboard/fixture', 'admin.fixture')->name('dashboard.fixtures');
-        Route::view('/dashboard/users','admin.users')->name('dashboard.users');
+        Route::view('/dashboard/packages','admin.packages')->name('dashboard.packages');
+
+        //Route::view('/dashboard/fixture','admin.fixture');
         Route::resource('fixture', FixtureControllers::class);
-        // Route::get('/betresult', 'BetController@get_winner')->name('betresult');
-    })	;
 });

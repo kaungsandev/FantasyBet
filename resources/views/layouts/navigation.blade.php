@@ -5,15 +5,9 @@
             <div class="w-full flex justify-between">
                 <!-- Logo -->
                 <div class="flex items-center">
-                    @if(Auth::user()->admin)
-                    <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-10 w-full fill-current text-gray-600" />
-                    </a>
-                    @else
                     <a href="{{ route('home') }}">
                         <x-application-logo class="block h-10 w-full fill-current text-gray-600" />
                     </a>
-                    @endif
                 </div>
                 
                 <!-- Navigation Links -->
