@@ -54,7 +54,7 @@
                             For <span class="text-black">{{$package->duration}} days</span>
                         </span>
                     </p>
-                    <p class="font-semibold text-gray-400 text-left pt-5">
+                    <p class="font-semibold text-gray-400 text-left pt-5 mb-10">
                         <span class="material-icons align-middle">
                             done
                         </span>
@@ -64,8 +64,8 @@
                         </span>
                     </p>
                     
-                    <a href="#" class="">
-                        <p class="w-full py-4 bg-blue-600 mt-8 rounded-xl text-white">
+                    <button wire:click='subscribePlan({{$package}})' class="w-full h-auto">
+                        <p class="w-full py-4 bg-blue-600  rounded-xl text-white">
                             <span class="font-medium">
                                 Subscribe
                             </span>
@@ -73,7 +73,7 @@
                                 east
                             </span>
                         </p>
-                    </a>
+                    </button>
                 </div>
             </div>
             <!-- Auto sub Card -->
