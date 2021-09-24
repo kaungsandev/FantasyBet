@@ -27,6 +27,7 @@
                         <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">Email</th>
                         <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">Exp</th>
                         <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">Coin</th>
+                        <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">Subscription</th>
                         <th class="px-6 py-3 border-b-2 border-gray-300"></th>
                     </tr>
                 </thead>
@@ -51,13 +52,22 @@
                                 <span class="relative text-xs">&euro;{{$user->coin}}</span>
                             </span>
                         </td>
-                        <td class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-500 text-sm leading-5">
+                        <td class="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">
+                            @if($user->subscription)
+                            {{$user->subscription->package->name}}
+                            @else
+                            None
+                            @endif
+                        </td>
+                        <td class="w-full grid grid-col-2 gap-2 justify-end px-6 py-4 whitespace-no-wrap text-right border-b border-gray-500 text-sm leading-5">
                             @if ($user_id != null && $user_id == $user->id && $editFormVisible == true)
                             <button wire:click="resetData" class="px-5 py-2 border-red-500 border text-red-500 rounded transition duration-300 hover:bg-red-700 hover:text-white focus:outline-none">Cancel</button>
                             @else
                             <button wire:click="editFormToggle({{$user}})" class="px-5 py-2 border-blue-500 border text-blue-500 rounded transition duration-300 hover:bg-blue-700 hover:text-white focus:outline-none">Edit</button>
                             @endif
-                            
+                            @if ($user->subscription)
+                            <button wire:click="unsubscribe({{$user->subscription->id}})" class="px-5 py-2 border-red-500 border text-red-500 rounded transition duration-300 hover:bg-red-700 hover:text-white focus:outline-none">Unsubscribe</button>
+                            @endif
                         </td>
                     </tr>
                     
@@ -132,7 +142,6 @@
                         <input wire:model='coin' type="number" name="coin" id="coin" placeholder="0" min="0" class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500" />
                         @error('coin') <span class="error">{{ $message }}</span> @enderror
                     </div>
-                   
                     <div class="mb-6">
                         <button wire:click='updateUser' type="button" class="w-full px-3 py-4 text-white bg-indigo-500 rounded-md hover:bg-indigo-600 focus:outline-none duration-100 ease-in-out">Update</button>
                     </div>

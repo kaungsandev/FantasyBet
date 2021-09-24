@@ -8,6 +8,7 @@ use App\Models\User;
 use DateInterval;
 use DateTime;
 use DateTimeZone;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class PackageComponent extends Component
@@ -20,15 +21,15 @@ class PackageComponent extends Component
         ]);
     }
     public function subscribePlan(Packages $package){
-        $user = User::findOrFail(auth()->user()->id)->first();
+        $user = User::findOrFail(Auth::id());
         $startdate = new DateTime('now',new DateTimeZone('Asia/Yangon'));
         $expiredate = new DateTime('now',new DateTimeZone('Asia/Yangon'));
         $expiredate->add(new DateInterval('P'.$package->duration.'D'));
         Subscription::updateOrCreate(
             [
-                'packages_id' => $package->id,
                 'user_id' =>  $user->id,
             ],[
+                'packages_id' => $package->id,
                 'started_date' => $startdate,
                 'expire_date' => $expiredate,
                 'expired' => false

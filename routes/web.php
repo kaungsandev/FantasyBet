@@ -23,13 +23,7 @@ require __DIR__.'/auth.php';
 require __DIR__.'/test.php';
 
 Route::get('/test',function(){
-    $user = auth()->user();
-
-    if($user->subscription){
-        return $user->subscription->packages;
-    }else{
-        dd("NUll");
-    }
+   dd(User::findOrFail(Auth::id()));
 });
 Route::middleware(['auth'])->group(function(){
     Route::view('/', 'home')->name('home');

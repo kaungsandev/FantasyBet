@@ -3,11 +3,13 @@
 namespace App\Http\Livewire;
 
 use App\Models\User;
+use App\Models\Subscription;
 use Livewire\Component;
 
 class UsersList extends Component
 {
     public $editFormVisible = false;
+    public $subscription = null;
     public $user_id,$name,$email,$coin = null;
 
     protected $rules = [
@@ -45,6 +47,11 @@ class UsersList extends Component
         $this->resetData();
         $this->emit('UserUpdated');
     }
+    public function unsubscribe($subscription_id){
+        Subscription::destroy($subscription_id);
+        $this->emit('UserUpdated');
+    }
+
     // reset current user data in compoenent
     public function resetData(){
         $this->editFormVisible = ! $this->editFormVisible;
