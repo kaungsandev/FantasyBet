@@ -90,20 +90,20 @@ class BetController extends Controller
             if($choice == $fixture->home_team){ //if user bet for home team
                 //user choice team must be calculated first
                 //don't change order
-                $fixture->home_team_point =((($total_amount/$total_choice_amount)-1)* 0.96 /$total_player_count);
-                $fixture->away_team_point = 0.9216/$fixture->home_team_point;
+                $fixture->home_team_point = round(((($total_amount/$total_choice_amount)-1)* 0.96 /$total_player_count),2);
+                $fixture->away_team_point = round( 0.9216/$fixture->home_team_point,2);
             }else if($choice == $fixture->away_team){ //if user bet for away team
-                $fixture->away_team_point = ((($total_amount/$total_choice_amount)-1)* 0.96/$total_player_count);
-                $fixture->home_team_point = 0.9216/$fixture->away_team_point;
+                $fixture->away_team_point = round( ((($total_amount/$total_choice_amount)-1)* 0.96/$total_player_count),2);
+                $fixture->home_team_point = round( 0.9216/$fixture->away_team_point,2);
             }
         }else{
             
             if($choice == $fixture->home_team){ //if user bet for home team
-                $fixture->home_team_point =(($total_amount/$total_choice_amount)-1)* 0.96;
-                $fixture->away_team_point = 0.9216/$fixture->home_team_point;
+                $fixture->home_team_point = round((($total_amount/$total_choice_amount)-1)* 0.96,2);
+                $fixture->away_team_point = round( 0.9216/$fixture->home_team_point,2);
             }else if($choice == $fixture->away_team){ //if user bet for away team
-                $fixture->away_team_point = (($total_amount/$total_choice_amount)-1)* 0.96;
-                $fixture->home_team_point = 0.9216/$fixture->away_team_point;
+                $fixture->away_team_point = round( (($total_amount/$total_choice_amount)-1)* 0.96,2);
+                $fixture->home_team_point = round( 0.9216/$fixture->away_team_point,2);
             }
         }
         
