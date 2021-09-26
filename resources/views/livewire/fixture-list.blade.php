@@ -11,7 +11,7 @@
     @if($loop->first || $kickoff_time !== $datetime->format('l d F'))
     @php $kickoff_time = $datetime->format('l d F') @endphp
     <p class="w-2/6 leading-relaxed font-bold m-2 text-xs lg:text-2xl text-theme-color pr-2 border-r-1">
-        {{$datetime->format('l d F')}}
+        {{$datetime->format('l d F')}}  
     </p>
     @endif
     <div class="flex-col text-md text-auto">
@@ -20,7 +20,7 @@
                 <p class="w-2/6 ">{{ $this->getTeamName($fixture->home_team) }}</p>
                 @if ($fixture->finished == false && $fixture->started == false)
                 <p class="w-auto leading-relaxed bg-theme-color text-white pr-2 pl-2 rounded">
-                    {{$datetime->format('h:i A')}}
+                    {{ Timezone::convertToLocal(\Carbon\Carbon::parse($fixture->kickoff_time), 'h:i A', true) }}
                 </p>
                 @else
                 <p class="w-2/6  bg-theme-color text-white">{{$fixture->home_team_score.' | '.$fixture->away_team_score}}</p>

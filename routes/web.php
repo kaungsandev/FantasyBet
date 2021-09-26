@@ -7,7 +7,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Models\Fixture;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Stevebauman\Location\Facades\Location;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +25,8 @@ require __DIR__.'/auth.php';
 require __DIR__.'/test.php';
 
 Route::get('/test',function(){
-   dd(User::findOrFail(Auth::id()));
+   $location = Location::get();
+   dd($location);
 });
 Route::middleware(['auth'])->group(function(){
     Route::view('/', 'home')->name('home');

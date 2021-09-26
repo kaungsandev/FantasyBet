@@ -6,6 +6,7 @@ use App\Console\UpdateBetResultTask;
 use App\Console\UpdateFixtureTask;
 use App\Console\UpdateTeamsTask;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Cache;
 
 class UpdateDB extends Command
 {
@@ -41,13 +42,14 @@ class UpdateDB extends Command
      */
     public function handle()
     {
-        echo("Updating teams' data ...\r\n");
+        //echo("Updating teams' data ...\r\n");
         call_user_func(new UpdateTeamsTask);
-        echo ("Updating fixture ...\r\n");
+        //echo ("Updating fixture ...\r\n");
         call_user_func(new UpdateFixtureTask);
-        echo ("Updating bet results ...\r\n");
+        //echo ("Updating bet results ...\r\n");
         call_user_func(new UpdateBetResultTask);
-        echo ("Database updated. \r\n");
+        //echo ("Database updated. \r\n");
+        Cache::put('dbUpdated', true, now()->addMinutes(45));
         return 0;
     }
 }
