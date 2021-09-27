@@ -7,10 +7,10 @@
     <div class="w-full align-middle flex text-right font-bold bg-white pt-4 p-4 grid grid-cols-4 md:grid-cols-5 text-theme-color mb-1 text-center rounded-lg">
     @elseif ($each_bet->paid ==false && $each_bet->fixture->finished ==true) 
     {{-- bet lost --}}
-    <div class="w-full align-middle flex text-right font-bold bg-red-700 pt-4 p-4 grid grid-cols-4 md:grid-cols-5 text-white mb-1 text-center rounded-lg">
+    <div class="w-full align-middle flex text-right font-bold bg-red-600 pt-4 p-4 grid grid-cols-4 md:grid-cols-5 text-white mb-1 text-center rounded-lg">
     @elseif ($each_bet->paid ==true && $each_bet->fixture->finished ==true)
     {{-- bet-win --}}
-    <div class="w-full align-middle flex text-right font-bold bg-red-600 pt-4 p-4 grid grid-cols-4 md:grid-cols-5 text-theme-color mb-1 text-center rounded-lg">
+    <div class="w-full align-middle flex text-right font-bold bg-blue-600 pt-4 p-4 grid grid-cols-4 md:grid-cols-5 text-white mb-1 text-center rounded-lg">
     @endif
     
    
