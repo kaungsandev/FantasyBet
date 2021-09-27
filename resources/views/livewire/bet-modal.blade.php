@@ -56,7 +56,7 @@
 				@csrf
 				<div class="p-3">
 					<p class="my-4">ဘယ်လောက်ထည့်မလဲ</p>
-					<input name="betamount" placeholder="min: 10" class="border-b-2 border-top-0 border-blue-400 py-2 px-3 text-grey-darkest w-full" type="number" name="coin" min="10" step="10" max="{{ Auth::user()->coin }}" required>
+					<input id="betamount" name="betamount" placeholder="min: 10" class="border-b-2 border-top-0 border-blue-400 py-2 px-3 text-grey-darkest w-full" type="number" name="coin" min="10" step="10" max="{{ Auth::user()->coin }}" required>
 				</div>
 				<input type="hidden" name="match_id" value="{{ $fixture->id }}">
 				<input id="choice" type="hidden" name="choice">
@@ -82,6 +82,7 @@
 			document.getElementById('modal-title').innerText = this.innerText;
 			document.getElementById('choice').value= this.id;
 			modal.classList.remove('hidden')
+			document.getElementById('betamount').focus();
 		});
 		})
 		
