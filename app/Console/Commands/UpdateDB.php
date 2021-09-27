@@ -42,14 +42,13 @@ class UpdateDB extends Command
      */
     public function handle()
     {
-        //echo("Updating teams' data ...\r\n");
-        call_user_func(new UpdateTeamsTask);
-        //echo ("Updating fixture ...\r\n");
+        // echo("Updating teams' data ...\r\n");
+        // call_user_func(new UpdateTeamsTask);
+        echo ("Updating fixture ...\r\n");
         call_user_func(new UpdateFixtureTask);
-        //echo ("Updating bet results ...\r\n");
+        echo ("Updating bet results ...\r\n");
         call_user_func(new UpdateBetResultTask);
-        //echo ("Database updated. \r\n");
-        Cache::put('dbUpdated', true, now()->addMinutes(45));
+        echo ("Database updated. \r\n");
         return 0;
     }
 }

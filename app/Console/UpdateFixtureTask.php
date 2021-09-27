@@ -3,7 +3,6 @@
 namespace App\Console;
 
 use App\Models\Fixture;
-use Carbon\Carbon;
 use DateTime;
 use DateTimeZone;
 use Illuminate\Support\Facades\Cache;
@@ -17,7 +16,9 @@ class UpdateFixtureTask{
         $fixtures =  (object) $response->json();
         foreach ($fixtures as $fixture) {
             
-            $datetime =Carbon::parse($fixture['kickoff_time']);
+            $datetime = new DateTime($fixture['kickoff_time']);
+            $timezone = new DateTimeZone('UTC');
+            $datetime->setTimezone($timezone);
 
             Fixture::updateOrCreate([
                 'event' => $fixture['event'],

@@ -1,14 +1,10 @@
 <?php
 
-use App\Http\Controllers\FixtureController;
 use App\Http\Controllers\BetController;
-use App\Http\Controllers\UserController;
+use App\Models\Fixture;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Models\Fixture;
-use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
 use Stevebauman\Location\Facades\Location;
 
 /*
@@ -24,9 +20,12 @@ use Stevebauman\Location\Facades\Location;
 require __DIR__.'/auth.php';
 require __DIR__.'/test.php';
 
-Route::get('/test',function(){
-   $location = Location::get();
-   dd($location);
+Route::get('/test',function(Request $request){
+    dd($request);
+    // $fixture = Fixture::findOrFail(59);
+    // $datetime = new DateTime($fixture->kickoff_time);
+    // $datetime->setTimezone(new DateTimeZone('Asia/Yangon'));
+    // print_r($datetime);
 });
 Route::middleware(['auth'])->group(function(){
     Route::view('/', 'home')->name('home');
@@ -38,7 +37,7 @@ Route::middleware(['auth'])->group(function(){
     Route::view('/profile', 'profile')->name('profile');
     Route::view('/players', 'players')->name("players");
     // News Page 
-    Route::view('/news','news')->name('news');
+    // Route::view('/news','news')->name('news');
     // Pricing Page
     Route::view('/package/','billing')->name('billing');
 

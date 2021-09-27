@@ -2,10 +2,10 @@
     <!-- component -->
     <div wire:loading.delay>...</div>    
     @php $kickoff_time = null; @endphp
-    
     @foreach($fixtures as $fixture)
     @php
     $datetime = new DateTime($fixture->kickoff_time);
+    $datetime->setTimeZone(new DateTimeZone(auth()->user()->timezone));
     @endphp
     @if ($fixture->finished !=true)
     @if($loop->first || $kickoff_time !== $datetime->format('l d F'))
@@ -19,8 +19,8 @@
             <div class="w-full flex flex-row p-2 text-theme-color border-r-2 border-l-2 border-b-1 border-t-1 justify-evenly text-center shadow-sm  hover:border-purple-700 bg-gradient-to-r from-white to-white hover:from-purple-800 hover:to-yellow-400 hover:text-white">
                 <p class="w-2/6 ">{{ $this->getTeamName($fixture->home_team) }}</p>
                 @if ($fixture->finished == false && $fixture->started == false)
-                <p class="w-auto leading-relaxed bg-theme-color text-white pr-2 pl-2 rounded">
-                    {{ Timezone::convertToLocal(\Carbon\Carbon::parse($fixture->kickoff_time), 'h:i A', true) }}
+                <p class="w-auto leading-relaxed bg-theme-color text-white pr-2 pl-2 rounded kickoff_time">
+                    {{ $datetime->format('H:i A ') }}
                 </p>
                 @else
                 <p class="w-2/6  bg-theme-color text-white">{{$fixture->home_team_score.' | '.$fixture->away_team_score}}</p>

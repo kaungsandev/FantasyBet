@@ -20,5 +20,13 @@
         <div class="font-sans text-gray-900 antialiased">
             {{ $slot }}
         </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.0/moment.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.13/moment-timezone-with-data.js"></script>
+        <script>
+            var timezone = moment.tz.guess();
+            var hidden_input = document.getElementById("timezone");
+            hidden_input.value = timezone;
+            console.log(hidden_input);
+        </script>
     </body>
 </html>

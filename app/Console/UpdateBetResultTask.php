@@ -8,6 +8,7 @@ use App\Models\Fixture;
 use App\Models\User;
 use DateTime;
 use DateTimeZone;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 
 class UpdateBetResultTask{

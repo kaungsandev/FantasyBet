@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class LeftPanel extends Component
 {
-    public $avatar;
+    public $avatar,$timezone;
     public $admin = false;
     public function mount(){
         // generate random avatar

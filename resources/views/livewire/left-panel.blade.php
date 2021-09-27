@@ -1,4 +1,7 @@
 <div class="w-1/6 p-8 sticky top-0 h-screen">
+    @php
+        session(['timezone' => $timezone]);
+    @endphp
     {{-- Profile --}}
     <div class="rounded shadow-md p-2 bg-white mb-8">
         @if (auth()->user()->admin ==true)
@@ -82,14 +85,6 @@
             <span class="p-2 pl-4">Fixture</span>
         </x-nav-link>
         <hr>
-        <x-nav-link  :active="request()->routeIs('news')" :href="route('news')"    >
-            <span class="pl-2">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
-                </svg>
-            </span>
-            <span class="p-2 pl-4">News</span>
-        </x-nav-link>
         <x-nav-link  :active="request()->routeIs('players')" :href="route('players')"     >
             <span class="pl-2">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Console\UpdateBetResultTask;
 use App\Http\Traits\HasPlayers;
 use Livewire\Component;
 
