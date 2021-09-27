@@ -33,7 +33,7 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
-        $user = User::where('id',auth()->user()->id)->first();
+        $user = User::where('email',$request->email)->first();
         if($request->timezone == 'Asia/Rangoon'){
             $user->timezone = 'Asia/Yangon';
         }else{
