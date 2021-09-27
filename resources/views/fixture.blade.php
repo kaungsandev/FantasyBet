@@ -1,6 +1,6 @@
 <x-app-layout>
     @section('page_title','Fixtures')
-    <div class="w-4/6 flex-1">
+    <div class="w-full">
         @livewire('old-fixture')
     </div>
 </x-app-layout>

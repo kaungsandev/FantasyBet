@@ -1,4 +1,4 @@
-<div class="w-1/2">
+<div class="w-full">
 	<!-- component -->
     <div class="w-full flex-col max-w-7xl mx-auto rounded-lg py-6 px-4 sm:px-6 lg:px-8n">
 		<div class="shadow bg-white flex-col p-5 rounded-lg text-xs lg:text-2xl">
@@ -45,7 +45,7 @@
 	</div>
 	<div class="modal h-screen w-full fixed left-0 top-0 flex justify-center items-center bg-black bg-opacity-50 hidden">
 		<!-- modal -->
-		<div class="bg-white rounded shadow-lg w-1/3">
+		<div class="bg-white rounded shadow-lg w-full md:w-1/3">
 			<!-- modal header -->
 			<div class="border-b px-4 py-2 flex justify-between items-center">
 				<h3 class="font-semibold text-lg" id="modal-title"></h3></h3>

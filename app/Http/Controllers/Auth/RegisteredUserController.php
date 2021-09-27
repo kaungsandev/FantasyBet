@@ -45,6 +45,7 @@ class RegisteredUserController extends Controller
             'coin' => 100,
             'rank_title' => "Rookie",
             'rank_no' => 0,
+            'timezone' => 'Asia/Yangon'
         ]));
 
         event(new Registered($user));

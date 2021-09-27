@@ -1,3 +1,5 @@
 <x-app-layout>
-	@livewire('bet-modal')
+	<div class="w-full mx-auto">
+		@livewire('bet-modal')
+	</div>
 </x-app-layout>
