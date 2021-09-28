@@ -11,7 +11,7 @@
     @if($loop->first || $kickoff_time !== $datetime->format('l d F'))
     @php $kickoff_time = $datetime->format('l d F') @endphp
     <p class="w-full leading-relaxed font-bold p-2 text-xs lg:text-2xl text-theme-color pr-2 border-r-1">
-        {{$datetime->format('l d F')}}  
+        {{$datetime->format('l \, j F')}}  
     </p>
     @endif
     <div class="flex-col text-md text-auto">
