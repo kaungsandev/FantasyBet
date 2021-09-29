@@ -43,7 +43,10 @@
                     </div>
                     {{ $slot }}
                 </div>
-                @livewire('right-panel')
+                <div class="hidden md:flex w-1/6">
+                    @livewire('right-panel')
+                </div>
+                
             </div>
         </main>
     </div>

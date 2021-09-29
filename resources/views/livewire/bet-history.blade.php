@@ -4,23 +4,23 @@
   
   @if ($each_bet->paid == false && $each_bet->fixture->finished == false)
   {{-- bet pending --}}
-  <div class="w-full align-middle flex text-xs md:text-md justify-around items-center text-left  font-bold bg-white pt-4 p-4 md:grid md:grid-cols-4 text-theme-color mb-1  rounded-lg">
+  <div class="w-full align-middle flex flex-row text-xs md:text-md justify-evenly items-center text-center  font-bold bg-white pt-4 p-4 md:grid md:grid-cols-4 text-theme-color mb-1  rounded-lg">
     @elseif ($each_bet->paid ==false && $each_bet->fixture->finished ==true) 
     {{-- bet lost --}}
-    <div class="w-full align-middle flex text-xs md:text-md justify-around items-center text-left  font-bold bg-red-600 pt-4 p-4 md:grid md:grid-cols-4 text-white mb-1  rounded-lg">
+    <div class="w-full align-middle flex flex-row text-xs md:text-md justify-evenly items-center text-center  font-bold bg-red-600 pt-4 p-4 md:grid md:grid-cols-4 text-white mb-1  rounded-lg">
       @elseif ($each_bet->paid ==true && $each_bet->fixture->finished ==true)
       {{-- bet-win --}}
-      <div class="w-full align-middle flex text-xs md:text-md justify-around items-center text-left  font-bold bg-blue-600 pt-4 p-4 md:grid md:grid-cols-4 text-white mb-1  rounded-lg">
+      <div class="w-full align-middle flex flex-row text-xs md:text-md justify-evenly items-center text-center  font-bold bg-blue-600 pt-4 p-4 md:grid md:grid-cols-4 text-white mb-1  rounded-lg">
         @endif
         
         {{-- Game week or User name --}}
         @if ($match_id !== null)
         {{-- Show in each bet view --}}
         
-       <div class="w-full flex flex-row justify-evenly items-center">
+       <div class="flex flex-row md:justify-around items-center">
         <img class="w-6 h-6 rouned-lg shadodw-lg"
         src="{{asset('img/avatars/'.'avataaars-'.rand(1,12).'.png') }}" alt="">
-        <p class="text-left text-gray-800">{{$each_bet->user->name}}</p>
+        <p class="pl-4 md:pl-0 text-center text-gray-800">{{$each_bet->user->name}}</p>
        </div>
         @else
         {{-- Show in user history --}}
@@ -42,13 +42,13 @@
           <p class="text-center">&euro;{{$each_bet->amount}}</p>  
           
           @if ($each_bet->paid == false && $each_bet->fixture->finished == false)
-          <p class="text-right">{{'('.$each_bet->amount .') +'.$each_bet->amount * $each_bet->current_point}}</p>
+          <p class="hidden md:block">{{'('.$each_bet->amount .') +'.$each_bet->amount * $each_bet->current_point}}</p>
           {{-- <p class="text-green-400">Pending</p> --}}
           @elseif ($each_bet->paid ==false && $each_bet->fixture->finished ==true)
-          <p class="text-right"> -{{$each_bet->amount}}</p>
+          <p class="hidden md:block"> -{{$each_bet->amount}}</p>
           {{-- <p class="text-red-600">Lose</p> --}}
           @elseif ($each_bet->paid ==true && $each_bet->fixture->finished ==true)
-          <p class="text-right">{{'('.$each_bet->amount .') +'.$each_bet->amount * $each_bet->current_point}}</p>
+          <p class="hidden md:block">{{'('.$each_bet->amount .') +'.$each_bet->amount * $each_bet->current_point}}</p>
           {{-- <p class="text-blue-600">Win</p> --}}
           @endif
           

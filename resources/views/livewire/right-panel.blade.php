@@ -1,4 +1,4 @@
-<div class="hidden md:flex w-1/6 p-8 sticky top-0 h-screen">
+<div class="hidden md:flex w-full p-8 sticky top-0 h-screen">
     <div class="w-full flex flex-col">
         <div class="w-full rounded shadow-md p-2 bg-white mb-8">
             <x-nav-link href="{{route('billing')}}" class="w-full text-theme-color border-l-2 bg-white text-center hover:border-purple-700 hover:text-purple-700">
