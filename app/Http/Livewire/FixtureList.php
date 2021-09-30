@@ -9,7 +9,7 @@ use Livewire\Component;
 
 class FixtureList extends Component
 {
-    use HasTeams,HasFixtures;
+    use HasFixtures;
 
     public $fixtures;
     public function mount(){
