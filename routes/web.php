@@ -55,5 +55,6 @@ Route::middleware(['auth','admin'])->group(function () {
         Route::view('dashboard', 'admin.dashboard')->name('dashboard');
         Route::view('/dashboard/packages','admin.packages')->name('dashboard.packages');
         Route::view('/dashboard/fixture','admin.fixture')->name('dashboard.fixtures');
+        Route::view('/dashboard/teams','admin.team')->name('dashboard.teams');
         
 });
