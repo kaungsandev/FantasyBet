@@ -21,7 +21,9 @@ trait HasFixtures {
         //Find the latest not finished gameweek
         $latest_event = $this->getLatestEvent();
         $fixtures = Fixture::where('event',$latest_event)->orderBy('kickoff_time','asc')->get();
-        return $fixtures;
+        $dota2_fixtures = Fixture::where('fixture_type','dota2')->orderBy('kickoff_time','asc')->get();
+        $all_fixtures  = $fixtures->merge($dota2_fixtures);
+        return $all_fixtures;
 
     }
     public function getFinishedFixture(){
@@ -35,7 +37,9 @@ trait HasFixtures {
         return Fixture::findOrFail($id);
     }
     public function updateSingleFixture(Fixture $match){
-        $API_URL = 'https://fantasy.premierleague.com/api';
+
+        if($match->fixture_type == 'football'){
+            $API_URL = 'https://fantasy.premierleague.com/api';
         $response = Http::get($API_URL.'/fixtures/');
         $fixtures =  (object) $response->json();
         foreach ($fixtures as $fixture) {
@@ -50,6 +54,10 @@ trait HasFixtures {
                     $match->save();
                     break;
                 }
+            }
+        }else if($match->fixture_type == 'dota2'){
+            $match->started = true;
+            $match->save();
         }
         if($match-> started == true && $match->finished == true){
             $bet_controller = new BetController();

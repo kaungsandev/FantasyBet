@@ -23,7 +23,9 @@ class Bet extends Model
         return $this->belongsTo(Fixture::class,'match_id');
     }
     public function team(){
-        return $this->belongsTo(Teams::class,'winner');
+        return $this->belongsTo(Teams::class,'winner')->withDefault([
+            'name' => $this->fixture->hometeam->name,
+        ]);
     }
     public function user(){
         return $this->belongsTo(User::class,'supporter');

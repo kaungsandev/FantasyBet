@@ -1,15 +1,16 @@
 <div class="w-full flex flex-col ">
-    <div class="w-full flex flex-col justify-between p-5 border-b-2 shadow-md border-blue-400">
+    <div class="w-full flex flex-col justify-between p-5">
         @include('components.messages')
         <h1 class="font-bold text-lg pb-5">Create Fixture</h1>
+        <p>{{$this->fixture_type}}</p>
         <form wire:submit.prevent="submit">
             <div class="-mx-3 md:flex mb-6">
                 <div class="md:w-1/5 px-3 mb-6 md:mb-0">
                     <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-first-name">
-                        Match Day
+                        Event
                     </label>
-                    <input wire:model="matchday" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="grid-first-name" type="text" placeholder="Jane">
-                    @error("matchday")
+                    <input wire:model="event" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="grid-first-name" type="text" placeholder="event">
+                    @error("event")
                     <p class="text-red text-xs italic">{{$message}}</p>
                     @enderror
                 </div>
@@ -17,8 +18,8 @@
                     <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-first-name">
                         Home Team
                     </label>
-                    <input wire:model="homeTeam" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="grid-first-name" type="text" placeholder="Jane">
-                    @error("homeTeam")
+                    <input wire:model="home_team" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="grid-first-name" type="text" placeholder="home team">
+                    @error("home_team")
                     <p class="text-red text-xs italic">{{$message}}</p>
                     @enderror
                 </div>
@@ -26,8 +27,8 @@
                     <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-first-name">
                         Away Team
                     </label>
-                    <input wire:model="awayTeam" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="grid-first-name" type="text" placeholder="Jane">
-                    @error("awayTeam")
+                    <input wire:model="away_team" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="grid-first-name" type="text" placeholder="Jane">
+                    @error("away_team")
                     <p class="text-red text-xs italic">{{$message}}</p>
                     @enderror
                 </div>
@@ -35,8 +36,20 @@
                     <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-first-name">
                         Time
                     </label>
-                    <input wire:model="time" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="grid-first-name" type="date" placeholder="Jane">
-                    @error("time")
+                    <input wire:model="kickoff_time" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="grid-first-name" type="datetime-local" placeholder="Jane">
+                    @error("kickoff_time")
+                    <p class="text-red text-xs italic">{{$message}}</p>
+                    @enderror
+                </div>
+                <div class="md:w-1/5 px-3 mb-6 md:mb-0">
+                    <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-first-name">
+                        Type
+                    </label>
+                    <select wire:model="fixture_type" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="grid-first-name" placeholder="Jane">
+                        <option value="football">Football</option>
+                        <option value="dota2">Dota 2</option>
+                    </select>
+                    @error("fixture_type")
                     <p class="text-red text-xs italic">{{$message}}</p>
                     @enderror
                 </div>
@@ -46,7 +59,7 @@
                     </button>
                 </div>
             </form>
-        </div>
+    </div>
         <!-- component -->
     <div class="w-full mx-auto px-4 sm:px-8">
         <div class="py-8">

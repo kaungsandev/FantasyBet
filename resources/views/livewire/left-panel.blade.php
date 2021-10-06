@@ -47,6 +47,12 @@
                 </span>
                 <span class="p-2 pl-4">Users</span>
             </x-nav-link>
+            <x-nav-link  :active="request()->routeIs('dashboard.fixtures')" :href="route('dashboard.fixtures')">
+                <span class="pl-2">
+                    <i class="fas fa-calendar"></i>
+                </span>
+                <span class="p-2 pl-4">Fixtures</span>
+            </x-nav-link>
             <x-nav-link  :active="request()->routeIs('dashboard.packages')" :href="route('dashboard.packages')">
                 <span class="pl-2">
                     <i class="fas fa-store"></i>

@@ -21,11 +21,11 @@ require __DIR__.'/auth.php';
 require __DIR__.'/test.php';
 
 Route::get('/test',function(Request $request){
-    dd($request);
-    // $fixture = Fixture::findOrFail(59);
-    // $datetime = new DateTime($fixture->kickoff_time);
-    // $datetime->setTimezone(new DateTimeZone('Asia/Yangon'));
-    // print_r($datetime);
+  $date1 = new DateTime('now',new DateTimeZone('Asia/Yangon'));
+  $date2 = new DateTime('now',new DateTimeZone('UTC'));
+  var_dump( $date1);
+  echo('/n');
+  var_dump( $date2);
 });
 Route::middleware(['auth'])->group(function(){
     Route::view('/', 'home')->name('home');
@@ -33,7 +33,7 @@ Route::middleware(['auth'])->group(function(){
     Route::view('/bet/history','history')->name('bets.history');
     Route::view('/bet/match/{id}','matchbet')->middleware('matchstate-clean')->name('bet'); 
     Route::post('/bet/match/submit', [BetController::class, 'trybet'])->name('bets.store');
-    // Profile page
+    // Profile page;
     Route::view('/profile', 'profile')->name('profile');
     Route::view('/players', 'players')->name("players");
     // News Page 
@@ -54,7 +54,6 @@ Route::middleware(['auth','admin'])->group(function () {
         
         Route::view('dashboard', 'admin.dashboard')->name('dashboard');
         Route::view('/dashboard/packages','admin.packages')->name('dashboard.packages');
-
-        //Route::view('/dashboard/fixture','admin.fixture');
-        Route::resource('fixture', FixtureControllers::class);
+        Route::view('/dashboard/fixture','admin.fixture')->name('dashboard.fixtures');
+        
 });

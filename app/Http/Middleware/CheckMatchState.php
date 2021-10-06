@@ -6,6 +6,7 @@ use App\Http\Traits\HasFixtures;
 use App\Models\Fixture;
 use Closure;
 use DateTime;
+use DateTimeZone;
 use Illuminate\Http\Request;
 
 class CheckMatchState
@@ -23,6 +24,7 @@ class CheckMatchState
         $match= Fixture::findOrFail($request->id);
         $current_time = new DateTime(now('Asia/Yangon'));
         $kickoff_time = new DateTime($match->kickoff_time);
+        $kickoff_time->setTimezone(new DateTimeZone('Asia/Yangon'));
         if($current_time > $kickoff_time)
         {//Update Fixture data
             $this->updateSingleFixture($match);

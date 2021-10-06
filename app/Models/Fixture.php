@@ -29,9 +29,15 @@ class Fixture extends Model
     }
     // hometeam
     public function hometeam(){
-        return $this->belongsTo(Teams::class,'home_team');
+        return $this->belongsTo(Teams::class,'home_team')->withDefault([
+            'name' => $this->home_team,
+            'short_name' => $this->home_team,
+        ]);
     }
     public function awayteam(){
-        return $this->belongsTo(Teams::class,'away_team');
+        return $this->belongsTo(Teams::class,'away_team')->withDefault([
+            'name' => $this->away_team,
+            'short_name' => $this->away_team
+        ]);
     }
 }
