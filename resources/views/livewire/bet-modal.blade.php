@@ -4,7 +4,11 @@
 		<div class="shadow bg-white flex-col p-5 rounded-lg text-xs lg:text-2xl">
 			<div class="w-full flex justify-between rounded-lg  p-2 bg-gradient-to-r from-blue-700 to-red-700 text-white">
 				<h3>Gameweek {{$fixture->event}}</h3>
-				<p>{{date("F j ,g:i A", strtotime($fixture->kickoff_time))}}</p>
+				@php
+				$datetime = new DateTime($fixture->kickoff_time);
+				$datetime->setTimeZone(new DateTimeZone(auth()->user()->timezone));
+				@endphp
+				<p>{{$datetime->format('F j ,D h:i:A')}}</p>
 			</div>
 			<div class="w-full mt-5 flex text-center justify-around">
 				<p class="w-full font-bold m-2">{{ $fixture->hometeam->name }}</p>
