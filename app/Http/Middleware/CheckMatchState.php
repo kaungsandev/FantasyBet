@@ -22,9 +22,10 @@ class CheckMatchState
     public function handle(Request $request, Closure $next)
     {
         $match= Fixture::findOrFail($request->id);
-        $current_time = new DateTime(now('Asia/Yangon'));
+        $current_time = new DateTime('now',new DateTimeZone('UTC'));
         $kickoff_time = new DateTime($match->kickoff_time);
-        $kickoff_time->setTimezone(new DateTimeZone('Asia/Yangon'));
+        $utc = new DateTimeZone('UTC'); 
+        $kickoff_time->setTimezone($utc);
         if($current_time > $kickoff_time)
         {//Update Fixture data
             $this->updateSingleFixture($match);
