@@ -73,8 +73,8 @@ class FixtureForm extends Component
             'away_team' => $this->away_team,
         ],[
             'kickoff_time'  => $this->kickoff_time,
-            'finished' => (bool)$this->finished,
-            'started' =>(bool) $this->started,
+            'finished' => (boolean)$this->finished,
+            'started' =>(boolean) $this->started,
             'home_team_score' => $this->home_team_score,
             'away_team_score' => $this->away_team_score,
         ]);

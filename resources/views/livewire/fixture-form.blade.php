@@ -79,8 +79,8 @@
                         Started
                     </label>
                     <select wire:model="started" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="grid-first-name" placeholder="Jane">
-                        <option value="true">True</option>
-                        <option value="false">False</option>
+                        <option value=1>True</option>
+                        <option value=0>False</option>
                     </select>
                     @error("started")
                     <p class="text-red text-xs italic">{{$message}}</p>
@@ -91,8 +91,8 @@
                         Finished
                     </label>
                     <select wire:model="finished" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="grid-first-name" placeholder="Jane">
-                        <option value="true">True</option>
-                        <option value="false">False</option>
+                        <option value=1>True</option>
+                        <option value=0>False</option>
                     </select>
                     @error("finished")
                     <p class="text-red text-xs italic">{{$message}}</p>
