@@ -48,7 +48,8 @@ class FixtureForm extends Component
         $this->away_team_score = 0;
         $this->updateForm = false;
     }
-    public function update(Fixture $fixture){
+    public function update($id){
+        $fixture = Fixture::where('id',$id)->first();
         $this->event =$fixture->event;
         $this->home_team = $fixture->home_team;
         $this->away_team =$fixture->away_team;

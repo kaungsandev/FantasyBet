@@ -185,7 +185,7 @@
                                 <td class="p-4 w-1/6">
                                     <div class="flex items-center float-right">
                                         <div class="mr-3">
-                                               <button wire:click='update({{$fixture}})' class="w-full text-white bg-theme-color pl-4 pr-4 pt-2 pb-2 rounded-md">Edit</button>
+                                               <button wire:click='update({{$fixture->id}})' class="w-full text-white bg-theme-color pl-4 pr-4 pt-2 pb-2 rounded-md">Edit</button>
                                         </div>
                                     </div></td> 
                         </tr>
