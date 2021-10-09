@@ -37,7 +37,9 @@ class RegisteredUserController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|confirmed|min:8',
         ]);
-
+        if($request->timezone == 'Asia/Rangoon'){
+            $request->timezone = 'Asia/Yangon';
+        }
         Auth::login($user = User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -45,7 +47,7 @@ class RegisteredUserController extends Controller
             'coin' => 100,
             'rank_title' => "Rookie",
             'rank_no' => 0,
-            'timezone' => 'Asia/Yangon'
+            'timezone' => $request->timezone,
         ]));
 
         event(new Registered($user));

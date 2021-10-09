@@ -24,7 +24,8 @@ class User extends Authenticatable
         'coin', 
         'admin', 
         'rank_title', 
-        'rank_no'
+        'rank_no',
+        'timezone'
     ];
     /**
      * The attributes that should be hidden for arrays.
