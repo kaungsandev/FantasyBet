@@ -22,12 +22,12 @@
             <table class="min-w-full">
                 <thead>
                     <tr>
-                        <th class="px-6 py-3 border-b-2 border-gray-300 text-left leading-4 text-blue-500 tracking-wider">ID</th>
-                        <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">Fullname</th>
-                        <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">Email</th>
-                        <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">Exp</th>
-                        <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">Coin</th>
-                        <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">Subscription</th>
+                        <th class="px-6 py-3 border-b-2 border-gray-300 text-left leading-4 text-theme-color tracking-wider">ID</th>
+                        <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-theme-color tracking-wider">Fullname</th>
+                        <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-theme-color tracking-wider">Email</th>
+                        <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-theme-color tracking-wider">Exp</th>
+                        <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-theme-color tracking-wider">Coin</th>
+                        <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-theme-color tracking-wider">Subscription</th>
                         <th class="px-6 py-3 border-b-2 border-gray-300"></th>
                     </tr>
                 </thead>
@@ -37,22 +37,22 @@
                         <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
                             <div class="flex items-center">
                                 <div>
-                                    <div class="text-sm leading-5 text-gray-800">#{{$user->id}}</div>
+                                    <div class="text-sm leading-5 text-theme-color">#{{$user->id}}</div>
                                 </div>
                             </div>
                         </td>
                         <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
-                            <div class="text-sm leading-5 text-blue-900">{{$user->name}}</div>
+                            <div class="text-sm leading-5 text-theme-color">{{$user->name}}</div>
                         </td>
-                        <td class="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">{{$user->email}}</td>
-                        <td class="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">{{$user->rank_no}}</td>
-                        <td class="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">
+                        <td class="px-6 py-4 whitespace-no-wrap border-b text-theme-color border-gray-500 text-sm leading-5">{{$user->email}}</td>
+                        <td class="px-6 py-4 whitespace-no-wrap border-b text-theme-color border-gray-500 text-sm leading-5">{{$user->rank_no}}</td>
+                        <td class="px-6 py-4 whitespace-no-wrap border-b text-theme-color border-gray-500 text-sm leading-5">
                             <span class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
                                 <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
                                 <span class="relative text-xs">&euro;{{$user->coin}}</span>
                             </span>
                         </td>
-                        <td class="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">
+                        <td class="px-6 py-4 whitespace-no-wrap border-b text-theme-color border-gray-500 text-sm leading-5">
                             @if($user->subscription)
                             {{$user->subscription->package->name}}
                             @else
@@ -63,7 +63,7 @@
                             @if ($user_id != null && $user_id == $user->id && $editFormVisible == true)
                             <button wire:click="resetData" class="px-5 py-2 border-red-500 border text-red-500 rounded transition duration-300 hover:bg-red-700 hover:text-white focus:outline-none">Cancel</button>
                             @else
-                            <button wire:click="editFormToggle({{$user}})" class="px-5 py-2 border-blue-500 border text-blue-500 rounded transition duration-300 hover:bg-blue-700 hover:text-white focus:outline-none">Edit</button>
+                            <button wire:click="editFormToggle({{$user}})" class="px-5 py-2 border-blue-500 border text-theme-color rounded transition duration-300 hover:bg-blue-700 hover:text-white focus:outline-none">Edit</button>
                             @endif
                             @if ($user->subscription)
                             <button wire:click="unsubscribe({{$user->subscription->id}})" class="px-5 py-2 border-red-500 border text-red-500 rounded transition duration-300 hover:bg-red-700 hover:text-white focus:outline-none">Unsubscribe</button>

@@ -6,7 +6,6 @@ use App\Models\Fixture;
 use App\Models\Teams;
 use DateTime;
 use DateTimeZone;
-use Illuminate\Support\Facades\Cache;
 use Livewire\Component;
 
 class FixtureForm extends Component
@@ -28,11 +27,12 @@ class FixtureForm extends Component
         'away_team' => 'required',
         'kickoff_time' => 'required',
     ];
-
+    protected $listeners=[
+        'editFixture' => 'update'
+    ];
     public function render()
     {
         return view('livewire.fixture-form',[
-            'fixtures' =>  Fixture::where('fixture_type','dota2')->get(),
             'teams' => Teams::all(),
         ]);
     }
