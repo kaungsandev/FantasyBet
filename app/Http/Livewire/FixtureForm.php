@@ -14,8 +14,8 @@ class FixtureForm extends Component
     public $home_team;
     public $away_team;
     public $kickoff_time;
-    public $started = false;
-    public $finished = false;
+    public $started = 0;
+    public $finished = 0;
     public $fixture_type = 'football';
     public $home_team_score=0;
     public $away_team_score = 0;
@@ -82,5 +82,6 @@ class FixtureForm extends Component
         $fixture->save();
         $this->clearData();
         session()->flash('success', "Success");
+        $this->emit('fixtureUpdated');
     }
 }
