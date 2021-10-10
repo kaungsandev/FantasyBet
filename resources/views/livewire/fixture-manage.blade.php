@@ -1,4 +1,9 @@
 <div class="w-full pt-8 flex flex-col">
+    @include('components.messages')
+<div class="flex  flex-row justify-around align-center items-center">
+    <h1 class="w-full text-3xl font-auto h-auto">Fixtures</h1>
+    <button wire:click="updateBets" class="w-1/2 bg-white text-theme-color hover:bg-gray-900 hover:text-white p-4 mb-8 rounded-lg shadow-xl">Update Bets</button>
+</div>
 <table class="w-full rounded-lg">
     <thead>
         <tr class="w-full text-center text-white bg-theme-color">
