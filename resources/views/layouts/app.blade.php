@@ -20,15 +20,15 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
 </head>
 <body class="font-sans antialiased">
-    <div class="min-h-screen bg-gray-100">
+    <div class="min-h-screen default-bg-color">
         @include('layouts.navigation')
         
         <!-- Page Content -->
         <main>
             @include('components.messages')
-            <div class="w-full flex flex-col md:flex-row justify-around mx-auto">
+            <div class="w-full flex flex-col md:flex-row justify-evenly mx-auto">
                 @livewire('left-panel')
-                <div class="w-full md:w-1/2 mb-16 md:mb-0">
+                <div class="w-1/2 flex flex-col mb-16 md:mb-0">
                     <div class="block sticky top-0 md:hidden w-full rounded shadow-md p-2 bg-white">
                         <x-nav-link href="{{route('billing')}}" class="w-full text-theme-color bg-white text-center hover:border-purple-700 hover:text-purple-700">
                             <div class="w-full p-2 pl-4 flex flex-row justify-end text-right text-lg">
@@ -43,13 +43,16 @@
                     </div>
                     {{ $slot }}
                 </div>
+                @if (\Route::currentRouteName() != 'players')
                 <div class="hidden md:flex w-1/6">
                     @livewire('right-panel')
                 </div>
-                
+                @endif
             </div>
         </main>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    @yield('scripts')
     @livewireScripts
     
 </body>

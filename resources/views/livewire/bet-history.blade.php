@@ -16,7 +16,6 @@
         {{-- Game week or User name --}}
         @if ($match_id !== null)
         {{-- Show in each bet view --}}
-        
        <div class="w-full flex flex-row md:justify-around items-center">
         <img class="w-6 h-6 rouned-lg shadodw-lg"
         src="{{asset('img/avatars/'.'avataaars-'.rand(1,12).'.png') }}" alt="">
@@ -46,7 +45,7 @@
           <p class="w-full text-right"> - &euro;{{$each_bet->amount}}</p>
           
           @elseif ($each_bet->paid ==true && $each_bet->fixture->finished ==true)
-          <p class="w-full text-right">+ {{$each_bet->amount * $each_bet->current_point}}</p>
+          <p class="w-full text-right">+ &euro;{{$each_bet->amount * $each_bet->current_point}}</p>
           
           @endif
           

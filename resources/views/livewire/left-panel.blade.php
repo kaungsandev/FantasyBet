@@ -37,7 +37,7 @@
             
         </div>
         {{-- Navigation --}}
-        @if ($this->admin == true)
+        @if ($admin == true)
         <div class="rounded p-2 shadow-md bg-white">
             <x-nav-link  :active="request()->routeIs('dashboard')" :href="route('dashboard')">
                 <span class="pl-2">

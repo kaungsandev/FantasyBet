@@ -2,19 +2,22 @@
 
 namespace App\Http\Livewire;
 
+use App\Http\Traits\CustomPagination;
 use App\Http\Traits\HasPlayers;
+use App\Http\Traits\HasTeams;
+use App\Http\Traits\PlayerType;
 use Livewire\Component;
 
 class Playerlist extends Component
 {
-    use HasPlayers;
-    public $players;
+    use HasPlayers, CustomPagination,PlayerType,HasTeams;
 
     public function mount(){
-        $this->players =  cache('players');
     }
     public function render()
     {
-        return view('livewire.playerlist');
+        return view('livewire.playerlist',[
+            'paginatedPlayers' => $this->customPaginate($this->groupPlayersByTeam(),1)
+        ]);
     }
 }

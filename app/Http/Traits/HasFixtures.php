@@ -13,22 +13,16 @@ use phpDocumentor\Reflection\Types\Nullable;
 
 trait HasFixtures {
     
-    public function getLatestEvent(){
-        // added orderby id to avoid search algorithm failure
-        return Fixture::where('finished',false)->orderBy('id')->first()->event;
-    }
     public function getLatestFixture(){
         //Find the latest not finished gameweek
-        $latest_event = $this->getLatestEvent();
-        $fixtures = Fixture::where('event',$latest_event)->orderBy('kickoff_time','asc')->get();
+        $fixtures = Fixture::where('finished',false)->orderBy('kickoff_time','asc')->limit(10)->get();
         $dota2_fixtures = Fixture::where('fixture_type','dota2')->orderBy('kickoff_time','asc')->get();
         $all_fixtures  = $fixtures->merge($dota2_fixtures);
         return $all_fixtures;
 
     }
     public function getFinishedFixture(){
-        $latest_event = $this->getLatestEvent();
-        return Fixture::where('event','<',$latest_event)->orderBy('event','desc')->get();
+        return Fixture::where('finished',true)->orderBy('event','desc')->get();
     }
     public function getFixtureByGameWeek($event){
         return Fixture::where('event',$event)->get(); 

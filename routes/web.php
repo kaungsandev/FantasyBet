@@ -1,11 +1,9 @@
 <?php
 
 use App\Http\Controllers\BetController;
-use App\Models\Fixture;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use Stevebauman\Location\Facades\Location;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,11 +19,8 @@ require __DIR__.'/auth.php';
 require __DIR__.'/test.php';
 
 Route::get('/test',function(Request $request){
-  $date1 = new DateTime('now',new DateTimeZone('Asia/Yangon'));
-  $date2 = new DateTime('now',new DateTimeZone('UTC'));
-  var_dump( $date1);
-  echo('/n');
-  var_dump( $date2);
+    $players = cache('players');
+    dd($players);
 });
 Route::middleware(['auth'])->group(function(){
     Route::view('/', 'home')->name('home');
@@ -40,7 +35,7 @@ Route::middleware(['auth'])->group(function(){
     // Route::view('/news','news')->name('news');
     // Pricing Page
     Route::view('/package/','billing')->name('billing');
-
+    
     // logout
     Route::get('/logout', function () {
         Auth::logout();
@@ -50,11 +45,11 @@ Route::middleware(['auth'])->group(function(){
 });
 // stop working from below
 Route::middleware(['auth','admin'])->group(function () {
-        //Checking access for dashboard
-        
-        Route::view('dashboard', 'admin.dashboard')->name('dashboard');
-        Route::view('/dashboard/packages','admin.packages')->name('dashboard.packages');
-        Route::view('/dashboard/fixture','admin.fixture')->name('dashboard.fixtures');
-        Route::view('/dashboard/teams','admin.team')->name('dashboard.teams');
-        
+    //Checking access for dashboard
+    
+    Route::view('dashboard', 'admin.dashboard')->name('dashboard');
+    Route::view('/dashboard/packages','admin.packages')->name('dashboard.packages');
+    Route::view('/dashboard/fixture','admin.fixture')->name('dashboard.fixtures');
+    Route::view('/dashboard/teams','admin.team')->name('dashboard.teams');
+    
 });
