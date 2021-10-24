@@ -4,20 +4,20 @@
     // If not add withPath(''), pagination will return to home page.
     $paginatedPlayers->withPath(''); 
     @endphp
-    <div class="w-full mb-8 sticky top-0 h-auto pt-8 bg-white">
+    <div class="w-full mb-8 sticky top-0 h-auto bg-white">
         {{$paginatedPlayers->links()}}
       <div class="flex flex-row  mt-8  justify-between items-center">
         <h1 class="w-full text-center font-bold  text-theme-color ">{{$this->getTeamName($paginatedPlayers->currentPage())}}</h1>
         <input class="w-full bg-theme-color text-white focus:ring-4 focus:ring-gray-800 focus:ring-opacity-50 border-none rounded" id="searchBar" type="text" placeholder="Search by name" required>
       </div>
     </div>
-    <div class="w-full grid grid-cols-3 gap-3" id="card-container">
+    <div class="w-full grid grid-cols-1 md:grid-cols-3 gap-3" id="card-container">
         @foreach ($paginatedPlayers as $players)        
         @foreach ($players as $player)
         @php
            $player= (object)$player;
         @endphp
-       <div class="player-card w-full flex flex-row text-black h-auto default-bg-color border-2 border-gray-100 rounded-xl shadow-md mb-8">
+       <div class="player-card w-full flex flex-col md:flex-row text-black h-auto default-bg-color border-2 border-gray-100 rounded-xl shadow-md mb-8">
         {{-- Profile --}}
             <div class="w-full flex flex-col justify-between p-8">
                 {{-- name/price --}}
