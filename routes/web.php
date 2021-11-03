@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BetController;
+use App\Http\Controllers\NewsLetterController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -18,10 +19,7 @@ use Illuminate\Support\Facades\Route;
 require __DIR__.'/auth.php';
 require __DIR__.'/test.php';
 
-Route::get('/test',function(Request $request){
-    $players = cache('players');
-    dd($players);
-});
+Route::get('/newsletter',[NewsLetterController::class,'subscribe']);
 Route::middleware(['auth'])->group(function(){
     Route::view('/', 'home')->name('home');
     Route::view('/fixtures','fixture')->name('fixtures');

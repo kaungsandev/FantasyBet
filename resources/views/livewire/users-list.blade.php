@@ -28,7 +28,9 @@
                         <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-theme-color tracking-wider">Exp</th>
                         <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-theme-color tracking-wider">Coin</th>
                         <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-theme-color tracking-wider">Subscription</th>
+                        <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-theme-color tracking-wider">Mail</th>
                         <th class="px-6 py-3 border-b-2 border-gray-300"></th>
+
                     </tr>
                 </thead>
                 <tbody class="bg-white">
@@ -58,6 +60,11 @@
                             @else
                             None
                             @endif
+                        </td>
+                        <td class="px-6 py-4 whitespace-no-wrap border-b text-theme-color border-gray-500 text-sm leading-5">
+                            <button wire:click='sendMail({{$user->id}})' class="w-auto p-2 bg-theme-color text-white rounded-md shadow-sm">
+                                Send Mail
+                            </button>
                         </td>
                         <td class="w-full grid grid-col-2 gap-2 justify-end px-6 py-4 whitespace-no-wrap text-right border-b border-gray-500 text-sm leading-5">
                             @if ($user_id != null && $user_id == $user->id && $editFormVisible == true)

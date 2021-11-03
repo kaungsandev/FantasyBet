@@ -17,7 +17,8 @@
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.1",
-        "livewire/livewire": "^2.3"
+        "livewire/livewire": "^2.3",
+        "mailchimp/marketing": "^3.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",

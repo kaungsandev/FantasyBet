@@ -60,4 +60,8 @@ class UsersList extends Component
         $this->coin = null;
         $this->user_id = null;
     }
+    //send email to user
+    public function sendMail($userId){
+        
+    }
 }

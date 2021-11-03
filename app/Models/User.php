@@ -23,6 +23,7 @@ class User extends Authenticatable
         'password',
         'coin', 
         'admin', 
+        'fav_team',
         'rank_title', 
         'rank_no',
         'timezone'
