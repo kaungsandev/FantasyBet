@@ -42,8 +42,9 @@ class UpdateDB extends Command
      */
     public function handle()
     {
-        // echo("Updating teams' data ...\r\n");
-        // call_user_func(new UpdateTeamsTask);
+        
+        echo("Updating teams' data ...\r\n");
+        call_user_func(new UpdateTeamsTask);
         echo ("Updating fixture ...\r\n");
         call_user_func(new UpdateFixtureTask);
         echo ("Updating bet results ...\r\n");

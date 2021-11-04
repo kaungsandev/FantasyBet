@@ -19,7 +19,6 @@ use Illuminate\Support\Facades\Route;
 require __DIR__.'/auth.php';
 require __DIR__.'/test.php';
 
-Route::get('/newsletter',[NewsLetterController::class,'subscribe']);
 Route::middleware(['auth'])->group(function(){
     Route::view('/', 'home')->name('home');
     Route::view('/fixtures','fixture')->name('fixtures');
@@ -34,20 +33,18 @@ Route::middleware(['auth'])->group(function(){
     // Pricing Page
     Route::view('/package/','billing')->name('billing');
     
-    // logout
-    Route::get('/logout', function () {
-        Auth::logout();
-        return redirect()->route('home');
-    })->name('logout');
+    // logou
     
 });
 // stop working from below
 Route::middleware(['auth','admin'])->group(function () {
     //Checking access for dashboard
-    
     Route::view('dashboard', 'admin.dashboard')->name('dashboard');
     Route::view('/dashboard/packages','admin.packages')->name('dashboard.packages');
     Route::view('/dashboard/fixture','admin.fixture')->name('dashboard.fixtures');
     Route::view('/dashboard/teams','admin.team')->name('dashboard.teams');
-    
+    // MailChimp Subscriber ID callback
+    Route::get('/mailchimp/subscriber/id',[NewsLetterController::class,'getAllList']);
+    // Newsletter
+    Route::post('/subscribe/newsletter',[NewsLetterController::class,'subscribe'])->name('subscribe.newsletter');
 });

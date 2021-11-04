@@ -62,9 +62,18 @@
                             @endif
                         </td>
                         <td class="px-6 py-4 whitespace-no-wrap border-b text-theme-color border-gray-500 text-sm leading-5">
-                            <button wire:click='sendMail({{$user->id}})' class="w-auto p-2 bg-theme-color text-white rounded-md shadow-sm">
-                                Send Mail
-                            </button>
+                            <form action="{{route('subscribe.newsletter')}}" method="POST">
+                                @csrf
+                                <div class="flex flex-col">
+                                    @error('email')
+                                        <p class="text-red-400">{{$message}}</p>
+                                    @enderror
+                                    <input type="hidden" name="email" value="{{$user->email}}">
+                                    <button type="submit" class="w-auto p-2 bg-theme-color text-white rounded-md shadow-sm">
+                                        Subscribe to Newsletter
+                                    </button>
+                                </div>
+                            </form>
                         </td>
                         <td class="w-full grid grid-col-2 gap-2 justify-end px-6 py-4 whitespace-no-wrap text-right border-b border-gray-500 text-sm leading-5">
                             @if ($user_id != null && $user_id == $user->id && $editFormVisible == true)
