@@ -81,7 +81,7 @@
                                         @error('id')
                                         <p class="text-red-400">{{$message}}</p>
                                         @enderror
-                                        <input type="hidden" name="id" value="{{$user->id}}">
+                                        <input type="hidden" name="email" value="{{$user->email}}">
                                         <button type="submit" class="w-auto p-2 bg-green-400 text-white rounded-md shadow-sm">
                                             Send Invitation
                                         </button>
