@@ -30,7 +30,7 @@ class NewsLetterController extends Controller
     // single user 
     public function sendNewGameweekInvitation(Request $request) 
     {
-        $user = User::find($request)->first();
+        $user = User::find($request->id)->first();
         $fixture = Fixture::where('home_team',$user->fav_team)->orWhere('away_team',$user->fav_team)->orderBy('id','ASC')->get();
         $fixture = $fixture->where('finished',false)->first();
 
