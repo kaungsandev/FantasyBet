@@ -47,4 +47,5 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::get('/mailchimp/subscriber/id',[NewsLetterController::class,'getAllList']);
     // Newsletter
     Route::post('/subscribe/newsletter',[NewsLetterController::class,'subscribe'])->name('subscribe.newsletter');
+    Route::post('/send/invitation',[NewsLetterController::class,'sendNewGameweekInvitation'])->name('send.invitation');
 });

@@ -30,7 +30,7 @@
                         <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-theme-color tracking-wider">Subscription</th>
                         <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-theme-color tracking-wider">Mail</th>
                         <th class="px-6 py-3 border-b-2 border-gray-300"></th>
-
+                        
                     </tr>
                 </thead>
                 <tbody class="bg-white">
@@ -62,18 +62,32 @@
                             @endif
                         </td>
                         <td class="px-6 py-4 whitespace-no-wrap border-b text-theme-color border-gray-500 text-sm leading-5">
-                            <form action="{{route('subscribe.newsletter')}}" method="POST">
-                                @csrf
-                                <div class="flex flex-col">
-                                    @error('email')
+                            <div class="flex flex-row justify-between ">
+                                <form action="{{route('subscribe.newsletter')}}" method="POST">
+                                    @csrf
+                                    <div class="flex flex-col">
+                                        @error('email')
                                         <p class="text-red-400">{{$message}}</p>
-                                    @enderror
-                                    <input type="hidden" name="email" value="{{$user->email}}">
-                                    <button type="submit" class="w-auto p-2 bg-theme-color text-white rounded-md shadow-sm">
-                                        Subscribe to Newsletter
-                                    </button>
-                                </div>
-                            </form>
+                                        @enderror
+                                        <input type="hidden" name="email" value="{{$user->email}}">
+                                        <button type="submit" class="w-auto p-2 bg-theme-color text-white rounded-md shadow-sm" disabled>
+                                            Subscribe to Newsletter
+                                        </button>
+                                    </div>
+                                </form>
+                                <form action="{{route('send.invitation')}}" method="POST">
+                                    @csrf
+                                    <div class="flex flex-col">
+                                        @error('id')
+                                        <p class="text-red-400">{{$message}}</p>
+                                        @enderror
+                                        <input type="hidden" name="id" value="{{$user->id}}">
+                                        <button type="submit" class="w-auto p-2 bg-green-400 text-white rounded-md shadow-sm">
+                                            Send Invitation
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
                         </td>
                         <td class="w-full grid grid-col-2 gap-2 justify-end px-6 py-4 whitespace-no-wrap text-right border-b border-gray-500 text-sm leading-5">
                             @if ($user_id != null && $user_id == $user->id && $editFormVisible == true)

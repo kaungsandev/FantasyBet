@@ -40,7 +40,7 @@ return [
             'port' => env('MAIL_PORT', 587),
             'encryption' => env('MAIL_ENCRYPTION', 'tls'),
             'username' => env('MAIL_USERNAME','iloveu3000girl@gmail.com'),
-            'password' => env('MAIL_PASSWORD','ppkvjtpnunbxdnyx'),  
+            'password' => env('MAIL_PASSWORD','fhgehublhaftzjpv'),  
             'timeout' => null,
             'auth_mode' => null,
         ],
@@ -84,7 +84,7 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'iloveu3000girl@gmail.com'),
+        'address' => env('MAIL_FROM_ADDRESS', 'kaungsan.dev@gmail.com'),
         'name' => env('MAIL_FROM_NAME', 'Fantasy Bet'),
     ],
 
