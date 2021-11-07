@@ -40,6 +40,9 @@ class AuthenticatedSessionController extends Controller
             $user->timezone = $request->timezone;
         }
         $user->save();
+        if($request->redirectRoute){
+            return redirect($request->redirectRoute);
+        }
         return redirect(RouteServiceProvider::HOME);
     }
 
