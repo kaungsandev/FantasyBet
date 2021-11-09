@@ -4,27 +4,24 @@ namespace App\Http\Livewire;
 
 use App\Models\User;
 use App\Models\Subscription;
+use App\Models\Teams;
 use Livewire\Component;
 
-class UsersList extends Component
+class UserDashboard extends Component
 {
     public $editFormVisible = false;
     public $subscription = null;
-    public $user_id,$name,$email,$coin = null;
+    public $user_id,$name,$email,$coin,$favouriteTeam = null;
 
-    protected $rules = [
-        'name' => 'required|min:4',
-        'email' => 'required|email',
-        'coin' => 'required|integer|min:0',
-    ];
     protected $listeners=[
         'UserUpdated' => 'render',
     ];
 
     public function render()
     {
-        return view('livewire.users-list',[
-            'users' => User::all()
+        return view('livewire.user-dashboard',[
+            'users' => User::all(),
+            'teams' => Teams::all()
         ]);
     }
     public function editFormToggle(User $user){
@@ -33,25 +30,31 @@ class UsersList extends Component
         $this->email = $user->email;
         $this->coin = $user->coin;
         $this->user_id = $user->id;
+        $this->favouriteTeam = $user->fav_team;
     }
     public function updateUser(){
         // validate input
-        $this->validate();
-    
+        $this->validate([
+            'name' => 'required|min:4',
+            'email' => 'required|email',
+            'coin' => 'required|integer|min:0',
+            'favouriteTeam' => 'required',
+        ]);
+        
         $user = User::findOrFail($this->user_id);
         $user->name = $this->name;
         $user->email = $this->email;
         $user->coin = $this->coin;
+        $user->fav_team = $this->favouriteTeam;
         $user->save();
 
         $this->resetData();
-        $this->emit('UserUpdated');
+        session()->flash('success','User updated');
     }
     public function unsubscribe($subscription_id){
         Subscription::destroy($subscription_id);
         $this->emit('UserUpdated');
     }
-
     // reset current user data in compoenent
     public function resetData(){
         $this->editFormVisible = ! $this->editFormVisible;
@@ -59,9 +62,8 @@ class UsersList extends Component
         $this->email = null;
         $this->coin = null;
         $this->user_id = null;
-    }
-    //send email to user
-    public function sendMail($userId){
-        
+        $this->favouriteTeam = null;
+        // Reset Error Messages
+        $this->resetValidation(); 
     }
 }

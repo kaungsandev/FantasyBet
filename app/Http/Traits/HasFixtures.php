@@ -22,7 +22,7 @@ trait HasFixtures {
 
     }
     public function getFinishedFixture(){
-        return Fixture::where('finished',true)->orderBy('event','desc')->get();
+        return Fixture::where('finished',true)->orderBy('id','desc')->get();
     }
     public function getFixtureByGameWeek($event){
         return Fixture::where('event',$event)->get(); 

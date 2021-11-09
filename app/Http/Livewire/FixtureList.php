@@ -2,10 +2,7 @@
 
 namespace App\Http\Livewire;
 
-use App\Console\UpdateFixtureTask;
 use App\Http\Traits\HasFixtures;
-use App\Http\Traits\HasTeams;
-use App\Models\Fixture;
 use Livewire\Component;
 
 class FixtureList extends Component

@@ -1,3 +1,3 @@
 <x-admin-layout>
-    @livewire('users-list')
+    @livewire('user-dashboard')
 </x-admin-layout>
