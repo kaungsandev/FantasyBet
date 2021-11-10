@@ -14,6 +14,9 @@ class FixtureCollection extends ResourceCollection
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'count' =>$this->count(),
+            'fixtures' => $this->collection,
+        ];
     }
 }

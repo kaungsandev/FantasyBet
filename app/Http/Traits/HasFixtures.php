@@ -16,7 +16,7 @@ trait HasFixtures {
     public function getLatestFixture(){
         //Find the latest not finished gameweek
         $fixtures = Fixture::where('finished',false)->orderBy('kickoff_time','asc')->limit(10)->get();
-        $dota2_fixtures = Fixture::where('fixture_type','dota2')->orderBy('kickoff_time','asc')->get();
+        $dota2_fixtures = Fixture::where('fixture_type','dota2')->where('finished',false)->orderBy('kickoff_time','asc')->limit(10)->get();
         $all_fixtures  = $fixtures->merge($dota2_fixtures);
         return $all_fixtures;
 
