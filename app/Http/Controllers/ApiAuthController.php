@@ -22,7 +22,7 @@ class ApiAuthController extends Controller
             if (!Auth::attempt($credentials)) {
                 return response()->json([
                     'status_code' => 401,
-                    'message' => 'Unauthorized'
+                    'message' => 'Unauthorized: Email and password do not match our records.'
                 ],401);
             }
             $user = User::where('email', $request->email)->first();
@@ -39,7 +39,8 @@ class ApiAuthController extends Controller
             ],200);
         } catch (ValidationException $error) {
             return response()->json([
-                'status' => $error,
+                'status_code' => $error,
+                'message' => "Something went wrong. Please contact developer."
             ],422);
         }
     }
