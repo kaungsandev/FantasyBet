@@ -23,17 +23,9 @@ class ApiAuthController extends Controller
                 return response()->json([
                     'status_code' => 401,
                     'message' => 'Unauthorized'
-                ]);
+                ],401);
             }
-            // $user = User::all()->where('email', $request->email)->where('email_verified_at', '<>', NULL)->first();
-            $user = User::where('email',$request->email)->first();
-            // if (!$user) {
-            //     return [
-            //         'status_code' => 401,
-            //         "message" => 'Email is not verified',
-            //         "success" => false
-            //     ];
-            // }
+            $user = User::where('email', $request->email)->first();
 
             if (!Hash::check($request->password, $user->password, [])) {
                 throw new \Exception('Error in Login');
@@ -43,13 +35,12 @@ class ApiAuthController extends Controller
                 'status_code' => 200,
                 'access_token' => $tokenResult,
                 'token_type' => 'Bearer',
-            ]);
+                'user' => $user
+            ],200);
         } catch (ValidationException $error) {
             return response()->json([
-                'status_code' => 500,
-                'message' => 'Error in Login',
-                'error' => $error,
-            ]);
+                'status' => $error,
+            ],422);
         }
     }
     public function logout()
