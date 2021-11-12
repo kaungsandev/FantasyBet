@@ -33,6 +33,7 @@ class ApiAuthController extends Controller
             $tokenResult = $user->createToken(time())->plainTextToken;
             return response()->json([
                 'status_code' => 200,
+                'message' => "success",
                 'access_token' => $tokenResult,
                 'token_type' => 'Bearer',
                 'user' => $user
