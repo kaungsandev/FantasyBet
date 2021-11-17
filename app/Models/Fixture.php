@@ -22,7 +22,6 @@ class Fixture extends Model
         'away_team_point',
         'draw_point'
     ];
-
     public function bets()
     {
         return $this->hasMany(Bet::class,'match_id','id');

@@ -7,13 +7,14 @@ use App\Models\Fixture;
 use DateInterval;
 use DateTime;
 use DateTimeZone;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use phpDocumentor\Reflection\Types\Nullable;
 
 trait HasFixtures {
     
-    public function getLatestFixture(){
+    public function getLatestFixture() : Collection{
         //Find the latest not finished gameweek
         $fixtures = Fixture::where('finished',false)->orderBy('kickoff_time','asc')->limit(10)->get();
         $dota2_fixtures = Fixture::where('fixture_type','dota2')->where('finished',false)->orderBy('kickoff_time','asc')->limit(10)->get();

@@ -14,6 +14,8 @@ class FixtureController extends Controller
 
     // FOR API
     public function getFixtures(){
-        return new FixtureCollection($this->getLatestFixture());
+        return new FixtureCollection(
+          $this->getLatestFixture()
+        );
     }
 }
