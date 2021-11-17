@@ -12,6 +12,7 @@ class FixtureController extends Controller
 {
     use HasFixtures;
 
+    // FOR API
     public function getFixtures(){
         return new FixtureCollection($this->getLatestFixture());
     }

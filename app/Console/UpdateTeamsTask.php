@@ -14,8 +14,9 @@ class UpdateTeamsTask {
         $resource = (object) $response->json();
         $teams = $resource->teams;
         foreach ($teams as $team) {
-            Teams::firstOrCreate([
+            Teams::updateOrCreate([
                 'code' => $team['code'],
+            ],[
                 'name' => $team['name'],
                 'short_name' =>$team['short_name'],
             ]);
