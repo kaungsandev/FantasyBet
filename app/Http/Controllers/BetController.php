@@ -16,7 +16,17 @@ class BetController extends Controller
     {
         $this->middleware('auth');
     }
-    
+    /**
+     * trybet
+     *
+     * @param Request $request
+     * required match_id = fixture->id,
+     * required choice = home_team || away_team (team->id)
+     *
+     * required betamount
+     * @return void
+     */
+
     public function trybet(Request $request)
     {   
         $user = User::findOrFail(Auth::user()->id);
@@ -37,13 +47,16 @@ class BetController extends Controller
         if($request->choice == 'draw'){
             $this->drawPointCalculate($request->match_id);
         }else{
-            $this->odd_cal($request->match_id, $request->choice);
+            $this->calculateOdds($request->match_id, $request->choice);
+        }
+        if($request->header('Accept') == 'application/json'){
+            return response()->json(["success"=>"true","status_code" => 200], 200);
         }
         return redirect()->route('home')->with('success','Your bet is placed. Good Luck !');
     }
     // saved current point with each bet.
     // allow user to get their x times of point when their bet is submited
-    // not the one that lastly update by odd_cal method;
+    // not the one that lastly update by calculateOdds method;
     public function getCurrentPointForTeam($match_id,$choice){    
         $fixture = Fixture::findOrFail($match_id);
         if($choice == 'draw'){
@@ -69,7 +82,7 @@ class BetController extends Controller
         $fixture->save();
     }
     
-    public function odd_cal($match_id, $choice){
+    public function calculateOdds($match_id, $choice){
         
         //total bet
         $total_amount = Bet::where('match_id', $match_id)->sum('amount');
