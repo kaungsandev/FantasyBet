@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Console\UpdateBetResultTask;
+use App\Console\UpdateFixtureTask;
 use App\Models\Fixture;
 use Livewire\Component;
 
@@ -21,4 +22,8 @@ class FixtureManage extends Component
        call_user_func(new UpdateBetResultTask);
        session()->flash('success', "Bets Updated");
     }
+    public function updateFixtures(){
+        call_user_func(new UpdateFixtureTask);
+        session()->flash('success', "Fixture Updated");
+     }
 }
