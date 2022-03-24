@@ -21,10 +21,12 @@ class UpdateFixtureTask{
             $datetime->setTimezone($timezone);
 
             Fixture::updateOrCreate([
+                'id' => $fixture['id'],
+                'finished' => false,
+            ],[
                 'event' => $fixture['event'],
                 'home_team' =>$fixture['team_h'], 
                 'away_team' => $fixture['team_a'], 
-            ],[
                 'finished' => (boolean)$fixture['finished'], 
                 'kickoff_time' => $datetime, 
                 'started' =>(boolean) $fixture['started'],
