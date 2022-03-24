@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Console\UpdateBetResultTask;
 use App\Console\UpdateFixtureTask;
+use App\Http\Controllers\FixtureController;
 use App\Models\Fixture;
 use Livewire\Component;
 
@@ -25,5 +26,11 @@ class FixtureManage extends Component
     public function updateFixtures(){
         call_user_func(new UpdateFixtureTask);
         session()->flash('success', "Fixture Updated");
+     }
+     public function refreshFixture(){
+        $delete = new FixtureController;
+        $delete->deleteUnfinishedFixtures();
+        session()->flash('success', "Fixtures are refreshed.");
+        $this->emit('fixtureUpdated');
      }
 }

@@ -18,4 +18,12 @@ class FixtureController extends Controller
           $this->getLatestFixture()
         );
     }
+    // refresh all fixture data for new season
+    public function deleteAllFixtures(){
+      Fixture::truncate();
+    }
+    // Sometimes, fixtures can be rescheduled and it would make the data inconsistency.
+    public function deleteUnfinishedFixtures(){
+      Fixture::where('finished',false)->delete();
+    }
 }
