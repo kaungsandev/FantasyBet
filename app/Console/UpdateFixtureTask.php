@@ -15,8 +15,12 @@ class UpdateFixtureTask{
         $response = Http::get($API_URL.'/fixtures/');
         $fixtures =  (object) $response->json();
         foreach ($fixtures as $fixture) {
-            
-            $datetime = new DateTime($fixture['kickoff_time']);
+            if($fixture['kickoff_time'] == null){
+                $datetime = new DateTime('12/31/2000 12:00 PM');
+            }else{
+                $datetime = new DateTime($fixture['kickoff_time']);
+            }
+
             $timezone = new DateTimeZone('UTC');
             $datetime->setTimezone($timezone);
 
@@ -25,10 +29,10 @@ class UpdateFixtureTask{
                 'finished' => false,
             ],[
                 'event' => $fixture['event'],
-                'home_team' =>$fixture['team_h'], 
-                'away_team' => $fixture['team_a'], 
-                'finished' => (boolean)$fixture['finished'], 
-                'kickoff_time' => $datetime, 
+                'home_team' =>$fixture['team_h'],
+                'away_team' => $fixture['team_a'],
+                'finished' => (boolean)$fixture['finished'],
+                'kickoff_time' => $datetime,
                 'started' =>(boolean) $fixture['started'],
                 'home_team_score' => $fixture['team_h_score'],
                 'away_team_score' => $fixture['team_a_score'],
