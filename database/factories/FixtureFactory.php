@@ -22,7 +22,7 @@ class FixtureFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'event' => $this->faker->numberBetween(1,10)
         ];
     }
 }
