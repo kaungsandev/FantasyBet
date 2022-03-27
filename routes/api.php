@@ -35,6 +35,5 @@ Route::get('/official/teams',function(){
 });
 Route::get('/official/fixtures',function(){
     $response= Http::get('https://fantasy.premierleague.com/api/fixtures/');
-    $resource = (object) $response->json();
-    return response()->json($resource);
+    return response()->json($response);
 });

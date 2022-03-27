@@ -1,15 +1,15 @@
-<div class=" md:w-1/6 md:p-8 md:sticky md:top-0 md:h-screen">
+<div class=" md:w-1/4 lg:w-1/6 md:pt-8 md:sticky md:top-0 md:h-screen">
     {{-- For Desktop --}}
     <div class="hidden md:flex md:flex-col">
         {{-- Profile --}}
-        <div class="rounded shadow-md p-2 bg-white mb-8">
+        <div class="p-2 bg-white rounded shadow-md lg:mb-8">
             @if (auth()->user()->admin ==true)
             <x-nav-link  :active="request()->routeIs('profile')" :href="route('dashboard')">
-                <span class="pl-2 w-12 h-12 rounded-lg">
+                <span class="w-12 h-12 pl-2 rounded-lg">
                     <img class="w-12 h-12 rouned-lg shadodw-lg"
                     src="{{asset('img/avatars/'.cache('avatar-'.auth()->user()->id))}}" alt="">
                 </span>
-                <div class="p-2 pl-4 flex flex-col justify-start text-left">
+                <div class="flex flex-col justify-start p-2 pl-4 text-left">
                     <p>
                         {{auth()->user()->name}}
                     </p>
@@ -20,11 +20,11 @@
             </x-nav-link>
             @else
             <x-nav-link  :active="request()->routeIs('profile')" :href="route('profile')">
-                <span class="pl-2 w-12 h-12 rounded-lg">
+                <span class="w-12 h-12 pl-2 rounded-lg">
                     <img class="w-12 h-12 rouned-lg shadodw-lg"
                     src="{{asset('img/avatars/'.cache('avatar-'.auth()->user()->id))}}" alt="">
                 </span>
-                <div class="p-2 pl-4 flex flex-col justify-start text-left">
+                <div class="flex flex-col justify-start p-2 pl-4 text-left">
                     <p>
                         {{auth()->user()->name}}
                     </p>
@@ -34,14 +34,27 @@
                 </div>
             </x-nav-link>
             @endif
-            
+
+        </div>
+        <div class="hidden w-full p-2 mb-8 bg-white border-t-2 border-teal-100 rounded-b shadow-md border-gray- md:flex lg:hidden">
+            <x-nav-link href="{{route('billing')}}" class="w-full text-center bg-white border-l-2 text-theme-color hover:border-purple-700 hover:text-purple-700">
+                <div class="flex flex-row justify-around w-full p-2 text-lg">
+                    <p class="w-full text-left text-gray-400">
+                        <i class="fas fa-wallet"></i>
+                    </p>
+                    <p class="w-full text-theme-color">
+                        &euro;{{number_format(auth()->user()->coin)}}
+                    </p>
+
+                </div>
+            </x-nav-link>
         </div>
         {{-- Navigation --}}
         @if ($admin == true)
-        <div class="rounded p-2 shadow-md bg-white">
+        <div class="p-2 bg-white rounded shadow-md">
             <x-nav-link  :active="request()->routeIs('dashboard')" :href="route('dashboard')">
                 <span class="pl-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                       </svg>
                 </span>
@@ -49,7 +62,7 @@
             </x-nav-link>
             <x-nav-link  :active="request()->routeIs('dashboard.teams')" :href="route('dashboard.teams')">
                 <span class="pl-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                     </svg>
                 </span>
@@ -70,78 +83,78 @@
             <hr>
         </div>
         @else
-        <div class="rounded p-2 shadow-md bg-white">
+        <div class="p-2 bg-white rounded shadow-md">
             <x-nav-link  :active="request()->routeIs('home')" :href="route('home')">
                 <span class="pl-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                     </svg>
                 </span>
-                <span class="p-2 pl-4">Home</span>
+                <span class="p-2 text-xs l-4 lg:text-md">Home</span>
             </x-nav-link>
             <hr>
             <x-nav-link  :active="request()->routeIs('bets.history')" :href="route('bets.history')"    >
                 <span class="pl-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                     </svg>
                 </span>
-                <span class="p-2 pl-4">History</span>
+                <span class="p-2 text-xs l-4 lg:text-md">History</span>
             </x-nav-link>
             <hr>
             <x-nav-link  :active="request()->routeIs('fixtures')" :href="route('fixtures')"    >
                 <span class="pl-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                     </svg>
                 </span>
-                <span class="p-2 pl-4">Fixture</span>
+                <span class="p-2 text-xs l-4 lg:text-md">Fixture</span>
             </x-nav-link>
             <hr>
             <x-nav-link  :active="request()->routeIs('players')" :href="route('players')"     >
                 <span class="pl-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                     </svg>
                 </span>
-                <span class="p-2 pl-4">Players Statistics</span>
+                <span class="p-2 text-xs l-4 lg:text-md">Players Statistics</span>
             </x-nav-link>
         </div>
         @endif
     </div>
     {{-- Mobile View  Responsive--}}
     <!-- component -->
-    <div class="w-full h-auto md:hidden pb-2">
-        <!-- <section id="bottom-navigation" class="md:hidden block fixed inset-x-0 bottom-0 z-10 bg-white shadow"> // if shown only tablet/mobile-->
-            <div  class="fixed h-16 inset-x-0  bottom-0 z-200 bg-white shadow">
+    <div class="w-full h-auto pb-2 md:hidden">
+        <!-- <section id="bottom-navigation" class="fixed inset-x-0 bottom-0 z-10 block bg-white shadow md:hidden"> // if shown only tablet/mobile-->
+            <div  class="fixed inset-x-0 bottom-0 h-16 bg-white shadow z-200">
                 <div class="flex justify-between">
                     <x-nav-link class="flex items-center justify-center"  :active="request()->routeIs('home')" :href="route('home')">
-                        <span class="pb-4 pt-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <span class="pt-4 pb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                             </svg>
                         </span>
                     </x-nav-link>
                     <hr>
                     <x-nav-link class="flex items-center justify-center"  :active="request()->routeIs('bets.history')" :href="route('bets.history')"    >
-                        <span class="pb-4 pt-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <span class="pt-4 pb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                             </svg>
                         </span>
                     </x-nav-link>
                     <hr>
                     <x-nav-link class="flex items-center justify-center"  :active="request()->routeIs('fixtures')" :href="route('fixtures')"    >
-                        <span class="pb-4 pt-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <span class="pt-4 pb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                             </svg>
                         </span>
                     </x-nav-link>
                     <hr>
                     <x-nav-link class="flex items-center justify-center"  :active="request()->routeIs('players')" :href="route('players')"     >
-                        <span class="pb-4 pt-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <span class="pt-4 pb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                             </svg>
                         </span>
@@ -150,12 +163,12 @@
             </div>
         </div>
         {{-- Logout --}}
-        <div class="hidden md:flex rounded shadow-md bg-white mt-8">
+        <div class="hidden mt-8 bg-white rounded shadow-md md:flex">
             <form action="{{route('logout')}}" method="POST" class="w-full bg-white rounded">
                 @csrf
-                <button type="submit" class="rounded text-red-400 flex flex-row justify-center hover:text-white hover:bg-red-400 w-full">
+                <button type="submit" class="flex flex-row justify-center w-full text-red-400 rounded hover:text-white hover:bg-red-400">
                     <span class="p-2 ">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                         </svg>
                     </span>
@@ -164,4 +177,3 @@
             </form>
         </div>
     </div>
-    

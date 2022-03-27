@@ -14,34 +14,34 @@ use Illuminate\Support\Facades\Http;
 class LocalDevelopmentDataUpdate extends Command
 {
     /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
+    * The name and signature of the console command.
+    *
+    * @var string
+    */
     protected $signature = 'local:update';
 
     /**
-     * The console command description.
-     *
-     * @var string
-     */
+    * The console command description.
+    *
+    * @var string
+    */
     protected $description = 'Update Data for local development.';
 
     /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
+    * Create a new command instance.
+    *
+    * @return void
+    */
     public function __construct()
     {
         parent::__construct();
     }
 
     /**
-     * Execute the console command.
-     *
-     * @return int
-     */
+    * Execute the console command.
+    *
+    * @return int
+    */
     public function handle()
     {
         // API CONNECTION
@@ -53,7 +53,7 @@ class LocalDevelopmentDataUpdate extends Command
         echo("Updating teams' data ...\r\n");
         $teams = $resource->teams;
         foreach ($teams as $team) {
-           Teams::updateOrCreate([
+            Teams::updateOrCreate([
                 'code' => $team['code'],
             ],[
                 'name' => $team['name'],
@@ -65,9 +65,11 @@ class LocalDevelopmentDataUpdate extends Command
         $API_URL = 'https://fantasybet.herokuapp.com/api/official/fixtures';
         $response = Http::get($API_URL);
         echo("Data Received. \r\n");
-        echo("Updating/Creating fixtures. \r\n This could take a while . . .");
+        echo("Updating/Creating fixtures. \r\n");
+        echo("This could take a while . . . \r\n");
         $fixtures =  (object) $response->json();
         foreach ($fixtures as $fixture) {
+
             // Check fixture is TBC or Moved.
             if($fixture['kickoff_time'] == null || $fixture['event'] == null){
                 $datetime = new DateTime('12/31/2000 12:00 PM');
@@ -93,7 +95,8 @@ class LocalDevelopmentDataUpdate extends Command
                 'away_team_score' => $fixture['team_a_score'],
             ]);
         }
-        echo ("Fixtures are updated. \r\n Done.");
+        echo ("Fixtures are updated. \r\n");
+        echo("Done. \r\n");
         return 0;
     }
 }
