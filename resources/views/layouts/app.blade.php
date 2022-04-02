@@ -12,18 +12,18 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
     rel="stylesheet">
     <!-- Styles -->
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}" async>
     <link rel="stylesheet" href="{{ asset('css/custom.css')}}">
     <link rel="stylesheet" href="{{ asset('css/fontawesome/all.css')}}">
     @livewireStyles
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 </head>
-<body class="font-sans antialiased">
+<body class="font-sans antialiased ">
 
 
         <!-- Page Content -->
-        <main class="flex flex-col h-screen">
+        <main class="flex flex-col h-screen bg-slate-900">
             @include('layouts.navigation')
 
             @include('components.messages')

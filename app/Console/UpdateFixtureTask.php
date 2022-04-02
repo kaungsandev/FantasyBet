@@ -28,8 +28,8 @@ class UpdateFixtureTask{
 
             Fixture::updateOrCreate([
                 'id' => $fixture['id'],
-                'finished' => false,
             ],[
+                'id' => $fixture['id'],
                 'event' => $fixture_event,
                 'home_team' =>$fixture['team_h'],
                 'away_team' => $fixture['team_a'],

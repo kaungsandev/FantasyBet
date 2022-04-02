@@ -1,6 +1,6 @@
 <div class=" md:w-1/4 lg:w-1/6 md:pt-8 md:sticky md:top-0 md:h-screen">
     {{-- For Desktop --}}
-    <div class="hidden md:flex md:flex-col">
+    <div class="hidden md:flex md:flex-col border-2">
         {{-- Profile --}}
         <div class="p-2 bg-white rounded shadow-md lg:mb-8">
             @if (auth()->user()->admin ==true)
@@ -36,6 +36,7 @@
             @endif
 
         </div>
+        {{-- Only show in mobile --}}
         <div class="hidden w-full p-2 mb-8 bg-white border-t-2 border-teal-100 rounded-b shadow-md border-gray- md:flex lg:hidden">
             <x-nav-link href="{{route('billing')}}" class="w-full text-center bg-white border-l-2 text-theme-color hover:border-purple-700 hover:text-purple-700">
                 <div class="flex flex-row justify-around w-full p-2 text-lg">

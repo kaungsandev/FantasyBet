@@ -64,7 +64,7 @@ class LocalDevelopmentDataUpdate extends Command
         echo ("Requesting fixtures from FantasyBet API . . .\r\n");
         $API_URL = 'https://fantasybet.herokuapp.com/api/official/fixtures';
         $response = Http::get($API_URL);
-        echo("Data Received. \r\n");
+        echo("Data Received. \r\n");        
         echo("Updating/Creating fixtures. \r\n");
         echo("This could take a while . . . \r\n");
         $fixtures =  (object) $response->json();

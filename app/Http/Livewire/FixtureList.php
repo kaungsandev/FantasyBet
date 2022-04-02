@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Http\Controllers\FixtureController;
 use App\Http\Traits\HasFixtures;
 use DateTime;
 use DateTimeZone;
@@ -9,13 +10,12 @@ use Livewire\Component;
 
 class FixtureList extends Component
 {
-    use HasFixtures;
 
     public $fixtures;
     public $dota2_fixtures;
 
-    public function mount(){
-        $this->fixtures = $this->getLatestFixture();
+    public function mount(FixtureController $fixtureController){
+        $this->fixtures = $fixtureController->getLatestFixture();
     }
     public function render()
     {
