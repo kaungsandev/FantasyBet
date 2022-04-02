@@ -15,7 +15,7 @@ class BetModal extends Component
     public $home_team_count,$away_team_count;
 
     public function mount(Request $request){
-      $this->fixture = Fixture::findOrFail($request->id);
+      $this->fixture = Fixture::with(['hometeam','awayteam'])->findOrFail($request->id);
       $this->bettingData($request->id);
     }
     public function render()

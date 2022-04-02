@@ -24,7 +24,7 @@ class CheckMatchState
         $match= Fixture::findOrFail($request->id);
         $current_time = new DateTime('now',new DateTimeZone('UTC'));
         $kickoff_time = new DateTime($match->kickoff_time);
-        $utc = new DateTimeZone('UTC'); 
+        $utc = new DateTimeZone('UTC');
         $kickoff_time->setTimezone($utc);
         if($current_time > $kickoff_time)
         {//Update Fixture data

@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    
+
     <title>{{ config('app.name', 'Laravel'). ' | '}}@yield('page_title')</title>
-    
+
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
@@ -20,40 +20,40 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
 </head>
 <body class="font-sans antialiased">
-    <div class="min-h-screen default-bg-color">
-        @include('layouts.navigation')
-        
+
+
         <!-- Page Content -->
-        <main>
+        <main class="flex flex-col h-screen">
+            @include('layouts.navigation')
+
             @include('components.messages')
-            <div class="w-full flex flex-col md:flex-row justify-evenly mx-auto">
+            <div class="flex flex-col w-full mx-auto md:flex-row justify-evenly">
                 @livewire('left-panel')
-                <div class="w-full md:w-1/2 flex flex-col mb-16 md:mb-0">
-                    <div class="block sticky top-0 md:hidden w-full rounded shadow-md p-2 bg-white">
-                        <x-nav-link href="{{route('billing')}}" class="w-full text-theme-color bg-white text-center hover:border-purple-700 hover:text-purple-700">
-                            <div class="w-full p-2 pl-4 flex flex-row justify-end text-right text-lg">
+                <div class="flex flex-col w-full mb-16 md:w-3/4 lg:w-1/2 md:mb-0">
+                    <div class="sticky top-0 block w-full p-2 bg-white rounded shadow-md md:hidden">
+                        <x-nav-link href="{{route('billing')}}" class="w-full text-center bg-white text-theme-color hover:border-purple-700 hover:text-purple-700">
+                            <div class="flex flex-row justify-end w-full p-2 pl-4 text-lg text-right">
                                 <p class="w-full text-left text-theme-color">
                                     &euro;{{number_format(auth()->user()->coin)}}
                                 </p>
                                 <p class="w-full text-gray-400">
                                     <i class="fas fa-wallet"></i>
-                                </p>          
+                                </p>
                             </div>
                         </x-nav-link>
                     </div>
                     {{ $slot }}
                 </div>
                 @if (\Route::currentRouteName() != 'players')
-                <div class="hidden md:flex w-1/6">
                     @livewire('right-panel')
-                </div>
+
                 @endif
             </div>
         </main>
-    </div>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     @yield('scripts')
     @livewireScripts
-    
+
 </body>
 </html>

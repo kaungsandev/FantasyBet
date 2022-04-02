@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Http\Traits;
 
@@ -13,10 +13,10 @@ use Illuminate\Support\Facades\Http;
 use phpDocumentor\Reflection\Types\Nullable;
 
 trait HasFixtures {
-    
+
     public function getLatestFixture() : Collection{
         //Find the latest not finished gameweek
-        $fixtures = Fixture::where('finished',false)->orderBy('kickoff_time','asc')->limit(20)->get();
+        $fixtures = Fixture::with(['hometeam','awayteam'])->where('finished',false)->where('event','!=', 'TBC')->orderBy('kickoff_time','asc')->limit(50)->get();
         $dota2_fixtures = Fixture::where('fixture_type','dota2')->where('finished',false)->orderBy('kickoff_time','asc')->limit(10)->get();
         $all_fixtures  = $fixtures->merge($dota2_fixtures);
         return $all_fixtures;
@@ -26,7 +26,7 @@ trait HasFixtures {
         return Fixture::where('finished',true)->orderBy('id','desc')->get();
     }
     public function getFixtureByGameWeek($event){
-        return Fixture::where('event',$event)->get(); 
+        return Fixture::where('event',$event)->get();
     }
     public function getMatch($id){
         return Fixture::findOrFail($id);
@@ -60,3 +60,4 @@ trait HasFixtures {
         }
     }
 }
+
