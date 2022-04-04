@@ -23,13 +23,11 @@
 
 
         <!-- Page Content -->
-        <main class="flex flex-col h-screen bg-slate-900">
-            @include('layouts.navigation')
-
+        <main class="flex flex-col bg-slate-900">
             @include('components.messages')
-            <div class="flex flex-col w-full mx-auto md:flex-row justify-evenly">
+            <div class="flex flex-col w-full mx-auto md:flex-row justify-start">
                 @livewire('left-panel')
-                <div class="flex flex-col w-full mb-16 md:w-3/4 lg:w-1/2 md:mb-0">
+                <div class="flex flex-col w-full mb-16 md:w-3/4 lg:w-full md:mb-0 p-8">
                     <div class="sticky top-0 block w-full p-2 bg-white rounded shadow-md md:hidden">
                         <x-nav-link href="{{route('billing')}}" class="w-full text-center bg-white text-theme-color hover:border-purple-700 hover:text-purple-700">
                             <div class="flex flex-row justify-end w-full p-2 pl-4 text-lg text-right">
