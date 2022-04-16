@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Http\Traits\HasFixtures;
+use App\Http\Controllers\FixtureController;
 use App\Models\Fixture;
 use Closure;
 use DateTime;
@@ -11,7 +11,6 @@ use Illuminate\Http\Request;
 
 class CheckMatchState
 {
-    use HasFixtures;
     /**
      * Handle an incoming request.
      *
@@ -23,12 +22,11 @@ class CheckMatchState
     {
         $match= Fixture::findOrFail($request->id);
         $current_time = new DateTime('now',new DateTimeZone('UTC'));
-        $kickoff_time = new DateTime($match->kickoff_time);
-        $utc = new DateTimeZone('UTC');
-        $kickoff_time->setTimezone($utc);
+        $kickoff_time = new DateTime($match->kickoff_time,new DateTimeZone('UTC'));
         if($current_time > $kickoff_time)
         {//Update Fixture data
-            $this->updateSingleFixture($match);
+            $FixtureController = new FixtureController();
+            $FixtureController->updateSingleFixture($match);
         }
         if($match->finished == true){
             return redirect()->route('home')->with('info','The match is already finished');

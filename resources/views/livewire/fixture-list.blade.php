@@ -16,7 +16,7 @@
     @endif
     <div class="flex-col text-md text-auto">
         <a id="match{{$fixture->id}}" href="{{ ($fixture->started == true) ? '#match'.$fixture->id : route('bet', ['id' => $fixture->id])}}">
-            <div class="flex flex-row w-full p-2 text-sm text-center border-l-2 border-r-2 shadow-sm md:text-lg text-theme-color border-b-1 border-t-1 justify-evenly hover:border-purple-700 bg-gradient-to-r from-white to-white hover:from-purple-800 hover:to-yellow-400 hover:text-white">
+            <div class="flex flex-row w-full p-2 text-sm text-center border-l-2 border-r-2 shadow-sm md:text-lg text-theme-color border-b-1 border-t-1 justify-evenly hover:border-purple-700 bg-gradient-to-r from-white to-white hover:from-purple-800 hover:to-gray-800 hover:text-white">
                 <p class="hidden w-2/6 md:block">{{ $fixture->hometeam->name }}</p>
                 <p class="block w-2/6 md:hidden">{{ $fixture->hometeam->short_name }}</p>
                 @if ($fixture->finished == false && $fixture->started == false)

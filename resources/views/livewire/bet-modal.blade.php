@@ -2,7 +2,7 @@
 	<!-- component -->
     <div class="flex-col w-full px-4 py-6 mx-auto rounded-lg max-w-7xl sm:px-6 lg:px-8n">
 		<div class="flex-col p-5 text-xs bg-white rounded-lg shadow lg:text-2xl">
-			<div class="flex justify-between w-full p-2 text-white rounded-lg bg-gradient-to-r from-blue-700 to-red-700">
+			<div class="flex justify-between w-full p-2 text-white rounded-lg bg-gradient-to-r from-purple-900 to-gray-700">
 				<h3>Gameweek {{$fixture->event}}</h3>
 				@php
 				$datetime = new DateTime($fixture->kickoff_time);
