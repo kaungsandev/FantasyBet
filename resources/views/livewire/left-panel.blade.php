@@ -1,4 +1,4 @@
-<div class="sticky top-0 h-screen border-r-2 md:w-1/4 lg:w-1/6">
+<div class="md:sticky md:top-0 md:h-screen border-r-2 md:w-1/4 lg:w-1/6 bg-gray-100">
     {{-- For Desktop --}}
     <div class="flex-col justify-around hidden h-full space-y-4 md:flex">
         <div class="pl-8">
@@ -8,7 +8,7 @@
 
         {{-- Navigation --}}
         @if ($admin == true)
-            <div class="p-2 bg-white rounded shadow-md">
+            <div class="p-2 rounded shadow-md">
                 <x-nav-link :active="request()->routeIs('profile')" :href="route('dashboard')" id="profile">
                     <span class="w-12 h-12 pl-2 rounded-lg">
                         <img class="w-12 h-12 rouned-lg shadodw-lg"
@@ -58,7 +58,7 @@
                 <hr>
             </div>
         @else
-            <div class="flex-col bg-white rounded ">
+            <div class="flex-col rounded ">
                 <x-nav-link :active="request()->routeIs('profile')" :href="route('profile')" id="profile" class="scale-125 shadow-xl">
                     <span class="w-12 h-12 pl-2 rounded-lg">
                         <img class="w-12 h-12 rouned-lg shadodw-lg"
@@ -138,9 +138,12 @@
     </div>
     {{-- Mobile View  Responsive --}}
     <!-- component -->
-    <div class="w-full h-auto pb-2 md:hidden">
+    <div class="md:hidden w-full h-auto px-4 py-2 pt-4 border-b-2">
+        <p class="w-full text-center font-extrabold leading-relaxed">FANTASY BET</p>
+    </div>
+    <div class="w-full h-auto md:hidden">
         <!-- <section id="bottom-navigation" class="fixed inset-x-0 bottom-0 z-10 block bg-white shadow md:hidden"> // if shown only tablet/mobile-->
-        <div class="fixed inset-x-0 bottom-0 h-16 bg-white shadow z-200">
+        <div class="fixed inset-x-0 bottom-0 h-16 bg-black shadow z-200">
             <div class="flex justify-between">
                 <x-nav-link class="flex items-center justify-center" :active="request()->routeIs('home')" :href="route('home')">
                     <span class="pt-4 pb-4">

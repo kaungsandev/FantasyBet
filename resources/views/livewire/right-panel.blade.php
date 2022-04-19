@@ -1,7 +1,7 @@
 <div class="hidden p-8 lg:w-1/5 lg:sticky lg:top-0 lg:h-screen lg:flex">
     <div class="flex flex-col w-full">
-        <div class="w-full p-2 mb-8 bg-white rounded shadow-md">
-            <x-nav-link href="{{route('billing')}}" class="w-full text-center bg-white border-l-2 text-theme-color hover:border-purple-700 hover:text-purple-700">
+        <div class="w-full p-2 mb-8  rounded shadow-md bg-gray-100">
+            <x-nav-link href="{{route('billing')}}" class="w-full text-center  border-l-2 text-theme-color hover:border-purple-700 hover:text-purple-700">
                 <div class="flex flex-row justify-end w-full p-2 pl-4 text-lg text-right">
                     <p class="text-theme-color">
                         &euro;{{number_format(auth()->user()->coin)}}
