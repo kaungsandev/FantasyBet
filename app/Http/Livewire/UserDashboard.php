@@ -11,7 +11,11 @@ class UserDashboard extends Component
 {
     public $editFormVisible = false;
     public $subscription = null;
-    public $user_id,$name,$email,$coin,$favouriteTeam = null;
+    public $user_id;
+    public $name;
+    public $email;
+    public $coin;
+    public $favouriteTeam = null;
 
     protected $listeners=[
         'UserUpdated' => 'render',
@@ -40,7 +44,7 @@ class UserDashboard extends Component
             'coin' => 'required|integer|min:0',
             'favouriteTeam' => 'required',
         ]);
-        
+
         $user = User::findOrFail($this->user_id);
         $user->name = $this->name;
         $user->email = $this->email;
@@ -64,6 +68,6 @@ class UserDashboard extends Component
         $this->user_id = null;
         $this->favouriteTeam = null;
         // Reset Error Messages
-        $this->resetValidation(); 
+        $this->resetValidation();
     }
 }
