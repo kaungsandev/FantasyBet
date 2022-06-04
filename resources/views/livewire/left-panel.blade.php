@@ -2,7 +2,7 @@
     {{-- For Desktop --}}
     <div class="flex-col justify-around hidden h-full space-y-4 md:flex">
         <div class="pl-8">
-            <h1 class="text-xl font-extrabold uppercase leading-relax">FantasyBet</h1>
+            <h1 class="text-xl font-extrabold uppercase leading-relax font-varela">Fantasy Bet</h1>
         </div>
 
 
@@ -11,8 +11,9 @@
             <div class="p-2 rounded shadow-md">
                 <x-nav-link :active="request()->routeIs('profile')" :href="route('dashboard')" id="profile">
                     <span class="w-12 h-12 pl-2 rounded-lg">
-                        <img class="w-12 h-12 rouned-lg shadodw-lg"
-                            src="{{ asset('img/avatars/' . cache('avatar-' . auth()->user()->id)) }}" alt="">
+                        <i class="fa-solid fa-user"></i>
+                        {{-- <img class="w-12 h-12 rouned-lg shadodw-lg"
+                            src="{{ asset('img/avatars/' . cache('avatar-' . auth()->user()->id)) }}" alt=""> --}}
                     </span>
                     <div class="flex flex-col justify-start p-2 pl-4 text-left">
                         <p>
@@ -58,17 +59,14 @@
                 <hr>
             </div>
         @else
-            <div class="flex-col rounded ">
-                <x-nav-link :active="request()->routeIs('profile')" :href="route('profile')" id="profile" class="scale-125 shadow-xl">
-                    <span class="w-12 h-12 pl-2 rounded-lg">
-                        <img class="w-12 h-12 rouned-lg shadodw-lg"
-                            src="{{ asset('img/avatars/' . cache('avatar-' . auth()->user()->id)) }}" alt="">
-                    </span>
+            <div class="flex-col rounded flex space-y-4">
+                <x-nav-link :active="request()->routeIs('profile')" :href="route('profile')" id="profile" class="">
+                    <span><i class="fa-solid fa-user  text-3xl pl-2"></i></span>
                     <div class="flex flex-col justify-start p-2 pl-4 text-left">
-                        <p class="text-lg font-bold">
+                        <p class="text-xs font-bold ">
                             {{ auth()->user()->name }}
                         </p>
-                        <p class="text-gray-400">
+                        <p class="text-gray-500">
                             {{ auth()->user()->rank_title }}
                         </p>
                     </div>

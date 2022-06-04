@@ -1,6 +1,6 @@
 <x-app-layout>
-    @section('page_title','Fixtures')
+    @section('page_title', 'Fixtures')
     <div class="w-full">
-        @livewire('old-fixture')
+        @livewire('fixture-list', ['history' => true])
     </div>
 </x-app-layout>

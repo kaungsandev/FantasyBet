@@ -16,14 +16,13 @@ class ApiAuthController extends Controller
         try {
             $request->validate([
                 'email' => 'email|required',
-                'password' => 'required'
+                'password' => 'required|min:8',
             ]);
-            $credentials = request(['email', 'password']);
-            if (!Auth::attempt($credentials)) {
+            if (!Auth::attempt(request(['email', 'password']))) {
                 return response()->json([
                     'status_code' => 401,
-                    'message' => 'Unauthorized: Email and password do not match our records.'
-                ],401);
+                    'message' => 'Unauthorized: Email and password do not match our records.',
+                ], 401);
             }
             $user = User::where('email', $request->email)->first();
 
@@ -33,16 +32,17 @@ class ApiAuthController extends Controller
             $tokenResult = $user->createToken(time())->plainTextToken;
             return response()->json([
                 'status_code' => 200,
-                'message' => "success",
+                'message' => 'success',
                 'access_token' => $tokenResult,
                 'token_type' => 'Bearer',
-                'user' => $user
-            ],200);
+                'user' => $user,
+            ], 200);
         } catch (ValidationException $error) {
             return response()->json([
                 'status_code' => $error,
-                'message' => "Something went wrong. Please contact developer."
-            ],422);
+                'error' => $error->getMessage(),
+                'message' => 'Something went wrong. Please contact developer.',
+            ], 422);
         }
     }
     public function logout()

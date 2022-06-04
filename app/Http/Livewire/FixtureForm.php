@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Http\Controllers\BetController;
 use App\Models\Fixture;
 use App\Models\Teams;
 use DateTime;
@@ -17,7 +18,7 @@ class FixtureForm extends Component
     public $started = 0;
     public $finished = 0;
     public $fixture_type = 'football';
-    public $home_team_score=0;
+    public $home_team_score = 0;
     public $away_team_score = 0;
     public $updateForm = false;
 
@@ -27,59 +28,64 @@ class FixtureForm extends Component
         'away_team' => 'required',
         'kickoff_time' => 'required',
     ];
-    protected $listeners=[
+    protected $listeners = [
         'editFixture' => 'update'
     ];
     public function render()
     {
-        return view('livewire.fixture-form',[
+        return view('livewire.fixture-form', [
             'teams' => Teams::all(),
         ]);
     }
-    public function clearData(){
-        $this->event =null;
-        $this->home_team =null;
-        $this->away_team =null;
-        $this->kickoff_time= null;
+    public function clearData()
+    {
+        $this->event = null;
+        $this->home_team = null;
+        $this->away_team = null;
+        $this->kickoff_time = null;
         $this->fixture_type = 'football';
         $this->started = false;
         $this->finished = false;
-        $this->home_team_score =0;
+        $this->home_team_score = 0;
         $this->away_team_score = 0;
         $this->updateForm = false;
     }
-    public function update($id){
-        $fixture = Fixture::where('id',$id)->first();
-        $this->event =$fixture->event;
+    public function update($id)
+    {
+        $fixture = Fixture::where('id', $id)->first();
+        $this->event = $fixture->event;
         $this->home_team = $fixture->home_team;
-        $this->away_team =$fixture->away_team;
-        $this->kickoff_time= $fixture->kickoff_time;
+        $this->away_team = $fixture->away_team;
+        $this->kickoff_time = $fixture->kickoff_time;
         $this->fixture_type = $fixture->fixture_type;
         $this->started = $fixture->started;
         $this->finished = $fixture->finished;
-        $this->home_team_score =$fixture->home_team_score;
+        $this->home_team_score = $fixture->home_team_score;
         $this->away_team_score = $fixture->away_team_score;
         $this->updateForm = true;
     }
-    public function submit(){
-       $this->validate();
-       $this->kickoff_time = new DateTime($this->kickoff_time,new DateTimeZone('Asia/Yangon'));
-       $utc = new DateTimeZone('UTC'); 
-       $this->kickoff_time->setTimezone($utc);
+    public function submit()
+    {
+        $this->validate();
+        $this->kickoff_time = new DateTime($this->kickoff_time, new DateTimeZone('Asia/Yangon'));
+        $utc = new DateTimeZone('UTC');
+        $this->kickoff_time->setTimezone($utc);
 
         $fixture = Fixture::updateOrCreate([
             'event' => $this->event,
             'home_team' => $this->home_team,
             'away_team' => $this->away_team,
-        ],[
+        ], [
             'kickoff_time'  => $this->kickoff_time,
-            'finished' => (boolean)$this->finished,
-            'started' =>(boolean) $this->started,
+            'finished' => (bool)$this->finished,
+            'started' => (bool) $this->started,
             'home_team_score' => $this->home_team_score,
             'away_team_score' => $this->away_team_score,
         ]);
         $fixture->fixture_type = $this->fixture_type;
         $fixture->save();
+        $betController = new BetController();
+        $betController->updateBetResult($fixture);
         $this->clearData();
         session()->flash('success', "Success");
         $this->emit('fixtureUpdated');

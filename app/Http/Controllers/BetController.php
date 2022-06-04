@@ -47,8 +47,9 @@ class BetController extends Controller
         // odd will not be change for draw | draw point constant at 0.1
         if ($request->choice === 'draw') {
             $this->drawPointCalculate($request->match_id);
+        } else {
+            $this->calculateOdds($request->match_id, $request->choice);
         }
-        $this->calculateOdds($request->match_id, $request->choice);
         if ($request->header('Accept') === 'application/json') {
             return response()->json(['success' => 'true', 'status_code' => 200], 200);
         }

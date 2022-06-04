@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\FixtureCollection;
-use App\Models\Fixture;
-use DateTime;
-use DateTimeZone;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Database\Eloquent\Collection;
+use DateTimeZone;
+use DateTime;
+use App\Models\Fixture;
+use App\Http\Resources\FixtureCollection;
 
 class FixtureController extends Controller
 {
     private $API_URL = 'https://fantasy.premierleague.com/api';
     public function requestFixtureFromAPI()
     {
-        $response = Http::get($this->API_URL.'/fixtures/');
+        $response = Http::get($this->API_URL . '/fixtures/');
         return (object) $response->json();
     }
 
@@ -33,6 +33,17 @@ class FixtureController extends Controller
         return Fixture::with(['hometeam', 'awayteam'])
             ->where('finished', true)->orderBy('id', 'desc')->get();
     }
+    public function getLastFiveMatches($team_id)
+    {
+        return Fixture::with(['hometeam', 'awayteam'])
+            ->where('finished', true)
+            ->where(function ($query) use ($team_id) { //#Advanced Where Clause Section in Documentation.
+                $query->where('home_team', $team_id)->orWhere('away_team', $team_id);
+            })
+            ->orderBy('kickoff_time', 'desc')
+            ->limit(5)
+            ->get();
+    }
     public function getFixtureByGameWeek($event)
     {
         return Fixture::where('event', $event)->get();
@@ -49,6 +60,7 @@ class FixtureController extends Controller
         } else { //Fixture has only 2 types, `dota2` and `football`
             $fixtures = $this->requestFixtureFromAPI();
             foreach ($fixtures as $match) {
+                $match = (object) $match;
                 if ($match->id === $fixture->id) {
                     $fixture->finished = (bool) $match->finished;
                     $fixture->started = (bool) $match->started;

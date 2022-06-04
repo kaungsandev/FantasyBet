@@ -2,20 +2,20 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Fixture extends Model
 {
     use HasFactory;
-    
-    protected $fillable =[
+
+    protected $fillable = [
         'event',
-        'finished', 
-        'kickoff_time', 
+        'finished',
+        'kickoff_time',
         'started',
-        'home_team', 
-        'away_team', 
+        'home_team',
+        'away_team',
         'home_team_score',
         'away_team_score',
         'home_team_point',
@@ -24,17 +24,19 @@ class Fixture extends Model
     ];
     public function bets()
     {
-        return $this->hasMany(Bet::class,'match_id','id');
+        return $this->hasMany(Bet::class, 'match_id', 'id');
     }
     // hometeam
-    public function hometeam(){
-        return $this->belongsTo(Teams::class,'home_team')->withDefault([
+    public function hometeam()
+    {
+        return $this->belongsTo(Teams::class, 'home_team')->withDefault([
             'name' => $this->home_team,
             'short_name' => $this->home_team,
         ]);
     }
-    public function awayteam(){
-        return $this->belongsTo(Teams::class,'away_team')->withDefault([
+    public function awayteam()
+    {
+        return $this->belongsTo(Teams::class, 'away_team')->withDefault([
             'name' => $this->away_team,
             'short_name' => $this->away_team
         ]);

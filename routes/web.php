@@ -1,10 +1,10 @@
 <?php
 
-use App\Http\Controllers\BetController;
-use App\Http\Controllers\NewsLetterController;
-use App\Http\Livewire\Profile;
-use App\Http\Livewire\UserDashboard;
 use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\UserDashboard;
+use App\Http\Livewire\Profile;
+use App\Http\Controllers\NewsLetterController;
+use App\Http\Controllers\BetController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,14 +22,14 @@ require __DIR__ . '/test.php';
 
 Route::middleware(['auth'])->group(function () {
     Route::view('/', 'home')->name('home');
-    Route::view('/fixtures', 'fixture')->name('fixtures');
+    Route::view('/fixtures/history', 'fixture')->name('fixtures');
     Route::view('/bet/history', 'history')->name('bets.history');
     Route::view('/bet/match/{id}', 'matchbet')->middleware('matchstate-clean')->name('bet');
     Route::post('/bet/match/submit', [BetController::class, 'trybet'])->name('bets.store');
     // Profile page;
     Route::get('/profile', Profile::class)->name('profile');
     Route::view('/players', 'players')->name("players");
-    // News Page 
+    // News Page
     // Route::view('/news','news')->name('news');
     // Pricing Page
     Route::view('/package/', 'billing')->name('billing');

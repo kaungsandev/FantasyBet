@@ -20,18 +20,19 @@ class CheckMatchState
      */
     public function handle(Request $request, Closure $next)
     {
-        $match= Fixture::findOrFail($request->id);
-        $current_time = new DateTime('now',new DateTimeZone('UTC'));
-        $kickoff_time = new DateTime($match->kickoff_time,new DateTimeZone('UTC'));
-        if($current_time > $kickoff_time)
-        {//Update Fixture data
+        $match = Fixture::findOrFail($request->id);
+        $current_time = new DateTime('now', new DateTimeZone('UTC'));
+        $kickoff_time = new DateTime($match->kickoff_time, new DateTimeZone('UTC'));
+        if ($current_time > $kickoff_time || $match->finished == true) { //Update Fixture data
             $FixtureController = new FixtureController();
             $FixtureController->updateSingleFixture($match);
-        }
-        if($match->finished == true){
-            return redirect()->route('home')->with('info','The match is already finished');
-        }else if($match->started == true ){
-            return redirect()->route('home')->with('info','The match is already started');
+            $match = Fixture::findOrFail($request->id);
+            if ($match->started === true) {
+                return redirect()->route('home')->with('info', 'The match is already started');
+            }
+            if ($match->finished === true) {
+                return redirect()->route('home')->with('info', 'The match is already finished');
+            }
         }
         return $next($request);
     }
