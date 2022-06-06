@@ -1,5 +1,5 @@
 <div>
-    <h1 class="pl-2 mb-2 text-xl font-bold text-left">History</h1>
+    <h1 class="pl-2 mt-4 mb-2 text-xl font-bold text-left">History</h1>
     @foreach ($history as $each_bet)
         <div
             class="flex items-center justify-around w-full p-4 pt-4 mb-1 text-xs font-bold text-center align-middle bg-white rounded-lg flex-evenly md:text-md text-theme-color">
@@ -22,27 +22,28 @@
             @endif
 
             {{-- Team Choice --}}
-            @if ($each_bet->winner === 'draw')
-                <p class="w-full text-left">
+
+            <p class="w-full text-left">
+                @if ($each_bet->winner === 'draw')
                     Draw
-                </p>
-            @else
-                <p class="w-full text-left">{{ $each_bet->team->name }}</p>
-            @endif
+                @else
+                    {{ $each_bet->team->name }}
+                @endif
+            </p>
             {{-- bet amount --}}
-            <p class="hidden w-full text-right md:block">&euro;{{ $each_bet->amount }}</p>
+            <p class="hidden w-full text-right md:block">&euro; {{ $each_bet->amount }}</p>
 
             {{-- BET LOST --}}
             @if ($each_bet->paid == false && $each_bet->fixture->finished == true)
                 <div class="w-full text-right "><span class="p-2 text-white bg-red-400 rounded-lg md:px-4 md:py-2">
                         -
-                        &euro;{{ $each_bet->amount }}
+                        &euro; {{ $each_bet->amount }}
                     </span></div>
                 <p class="hidden w-full text-right text-red-400 uppercase md:block">LOST</p>
                 {{-- BET WIN --}}
             @elseif($each_bet->paid == true && $each_bet->fixture->finished == true)
                 <div class="w-full text-right"><span class="p-2 text-white bg-blue-500 rounded-lg md:px-4 md:py-2">
-                        + &euro;{{ $each_bet->amount * $each_bet->current_point }}</span></div>
+                        + &euro; {{ $each_bet->amount * $each_bet->current_point }}</span></div>
                 <p class="hidden w-full text-right text-blue-500 uppercase md:block">WIN</p>
             @else
                 {{-- BET PENDING --}}

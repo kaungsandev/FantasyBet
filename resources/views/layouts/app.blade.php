@@ -24,25 +24,15 @@
 
 
     <!-- Page Content -->
-    <main class="flex flex-col bg-gray-200">
-
-        <div class="flex flex-col justify-start w-full mx-auto md:flex-row max-h-full">
+    <main class="flex flex-col h-screen bg-gray-200">
+        <div class="flex flex-col justify-start w-full mx-auto overflow-y-auto md:flex-row no-scrollbar">
             @livewire('left-panel')
-            <div class="flex flex-col w-full p-8 justify-start md:w-3/4 lg:w-full md:mb-0 max-h-full">
+            <div class="sticky top-0 block w-full rounded shadow-md shadow-gray-400 md:hidden">
+                <x-wallet-card />
+            </div>
+            <div
+                class="flex flex-col justify-start w-full p-2 pb-24 overflow-y-auto lg:p-8 md:w-3/4 lg:w-full md:mb-0 lg:pb-0 no-scrollbar">
                 @include('components.messages')
-                <div class="sticky top-0 block w-full p-2 rounded shadow-md md:hidden bg-white">
-                    <x-nav-link href="{{ route('billing') }}"
-                        class="w-full text-center text-theme-color bg-white hover:border-purple-700 hover:text-purple-700">
-                        <div class="flex flex-row justify-end w-full p-2 pl-4 text-lg text-right">
-                            <p class="w-full text-left text-theme-color">
-                                &euro;{{ number_format(auth()->user()->coin) }}
-                            </p>
-                            <p class="w-full text-gray-400">
-                                <i class="fas fa-wallet"></i>
-                            </p>
-                        </div>
-                    </x-nav-link>
-                </div>
 
                 {{ $slot }}
 

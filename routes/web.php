@@ -20,6 +20,9 @@ use App\Http\Controllers\BetController;
 require __DIR__ . '/auth.php';
 require __DIR__ . '/test.php';
 
+
+Route::get('/test', function () {
+});
 Route::middleware(['auth'])->group(function () {
     Route::view('/', 'home')->name('home');
     Route::view('/fixtures/history', 'fixture')->name('fixtures');

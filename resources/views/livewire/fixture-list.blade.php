@@ -1,4 +1,4 @@
-<div class="flex-col w-full pt-6 mx-auto space-y-2 md:px-4 sm:px-6 lg:px-8n">
+<div class="flex-col w-full pt-6 mx-auto space-y-2 overflow-y-auto md:px-4 sm:px-6 lg:px-8n no-scollbar">
     <!-- component -->
     @if ($fixtures->count() < 1)
         <p class="w-full font-bold text-center text-gray-400">No Fixtures Available</p>
