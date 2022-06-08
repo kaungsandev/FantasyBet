@@ -24,20 +24,38 @@
         </div>
         {{-- Betting Rate --}}
         <p class="font-bold text-center text-gray-700">Betting Rate</p>
-        <div class="pt-1 ">
-            <div class="flex h-6 mb-4 overflow-hidden text-xs rounded">
-                <div style="width: {{ $home_team_betting_rate }}%"
-                    class="flex flex-col justify-center text-right text-white bg-blue-500 shadow-none ">
-                    <i class="pr-2 text-lg fa-regular fa-futbol"></i>
+        <div class="pt-1">
+            <div class="flex mb-4  text-xs rounded">
+                <div class=" font-bold flex flex-col space-y-3" style="width: {{ $home_team_betting_rate }}%">
+                    @if ($home_team_betting_rate > 0)
+                        <p>{{ $fixture->hometeam->name }}</p>
+                        <p class="text-blue-500">{{ $home_team_betting_rate }}%</p>
+                    @endif
+                    <div class="flex flex-col justify-center text-right text-white bg-blue-500 shadow-none ">
+                        <i class="pr-2 text-lg fa-regular fa-futbol"></i>
+                    </div>
                 </div>
-                <div style="width: {{ 100 - ($home_team_betting_rate + $away_team_betting_rate) }}%"
-                    class="flex flex-col justify-center text-xs text-center text-white bg-green-500 shadow-none">
-                    Draw
+                <div class="font-bold flex flex-col space-y-3 text-center" style="width: {{ $draw_betting_rate }}%">
+                    @if ($draw_betting_rate != 0)
+                        <p>Draw</p>
+                        <p class="text-green-500">{{ $draw_betting_rate }}%</p>
+                    @endif
+                    <div
+                        class="flex flex-col justify-center text-xs text-center text-white bg-green-500 shadow-none overflow-hidden">
+                        <i class="pl-2 text-lg fa-regular fa-futbol"></i>
+                    </div>
                 </div>
-                <div style="width: {{ $away_team_betting_rate }}%"
-                    class="flex flex-col justify-center text-left text-white bg-red-500 shadow-none">
-                    <i class="pl-2 text-lg fa-regular fa-futbol"></i>
+                <div class=" font-bold flex flex-col space-y-3 text-right"
+                    style="width: {{ $away_team_betting_rate }}%">
+                    @if ($away_team_betting_rate > 0)
+                        <p>{{ $fixture->awayteam->name }}</p>
+                        <p class="text-red-500">{{ $away_team_betting_rate }}%</p>
+                    @endif
+                    <div class="flex justify-start text-white bg-red-500 shadow-none">
+                        <i class="pl-2 text-lg fa-regular fa-futbol"></i>
+                    </div>
                 </div>
+
 
             </div>
         </div>
