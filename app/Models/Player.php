@@ -77,4 +77,22 @@ class Player extends Model
         'penalties_order',
         'penalties_text',
     ];
+
+    public function element_type(int $type) : String
+    {
+        switch ($type) {
+            case 1:
+                return 'GKP';
+                break;
+            case 2:
+                return 'DEF';
+                break;
+            case 3:
+                return 'MID';
+                break;
+            case 4:
+                return 'FWD';
+                break;
+        }
+    }
 }

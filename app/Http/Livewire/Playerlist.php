@@ -2,11 +2,11 @@
 
 namespace App\Http\Livewire;
 
-use App\Http\Traits\CustomPagination;
-use App\Http\Traits\HasPlayers;
-use App\Http\Traits\HasTeams;
-use App\Http\Traits\PlayerType;
 use Livewire\Component;
+use App\Http\Traits\PlayerType;
+use App\Http\Traits\HasTeams;
+use App\Http\Traits\HasPlayers;
+use App\Http\Traits\CustomPagination;
 
 class Playerlist extends Component
 {
