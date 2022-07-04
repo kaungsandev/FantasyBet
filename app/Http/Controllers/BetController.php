@@ -12,22 +12,22 @@ use Illuminate\Support\Facades\Auth;
 class BetController extends Controller
 {
     use HasTeams;
+
     public function __construct()
     {
         $this->middleware('auth');
     }
+
     /**
      * trybet
      *
-     * @param Request $request
+     * @param  Request  $request
      * required match_id = fixture->id,
      * required choice = home_team || away_team (team->id)
      *
      * required betamount
-     *
      * @return void
      */
-
     public function trybet(Request $request)
     {
         $user = User::findOrFail(Auth::user()->id);
@@ -53,8 +53,10 @@ class BetController extends Controller
         if ($request->header('Accept') === 'application/json') {
             return response()->json(['success' => 'true', 'status_code' => 200], 200);
         }
+
         return redirect()->route('home')->with('success', 'Your bet is placed. Good Luck !');
     }
+
     // saved current point with each bet.
     // allow user to get their x times of point when their bet is submited
     // not the one that lastly update by calculateOdds method;
@@ -67,8 +69,10 @@ class BetController extends Controller
         if ($fixture->home_team === $choice) {
             return $fixture->home_team_point;
         }
+
         return $fixture->away_team_point;
     }
+
     public function drawPointCalculate($id)
     {
         $total_draw = Bet::where('match_id', $id)->where('winner', 'draw')->count();
@@ -112,6 +116,7 @@ class BetController extends Controller
         }
         $fixture->save();
     }
+
     public function updateBetResult(Fixture $fixture)
     {
         $winner = null;

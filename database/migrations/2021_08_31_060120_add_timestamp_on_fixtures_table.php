@@ -14,7 +14,7 @@ class AddTimestampOnFixturesTable extends Migration
      */
     public function up()
     {
-        Schema::table('fixtures',function(Blueprint $table){
+        Schema::table('fixtures', function (Blueprint $table) {
             $table->increments('id')->first();
             $table->dateTime('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->dateTime('updated_at')->nullable();

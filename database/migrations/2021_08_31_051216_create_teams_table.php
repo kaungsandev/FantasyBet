@@ -17,7 +17,7 @@ class CreateTeamsTable extends Migration
             $table->id();
             $table->tinyInteger('code');
             $table->string('name');
-            $table->char('short_name',3);
+            $table->char('short_name', 3);
             $table->timestamps();
         });
     }

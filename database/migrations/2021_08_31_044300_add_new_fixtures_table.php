@@ -13,7 +13,7 @@ class AddNewFixturesTable extends Migration
      */
     public function up()
     {
-        Schema::create('fixtures',function(Blueprint $table){
+        Schema::create('fixtures', function (Blueprint $table) {
             $table->integer('event');
             $table->boolean('finished')->default(false);
             $table->dateTime('kickoff_time');

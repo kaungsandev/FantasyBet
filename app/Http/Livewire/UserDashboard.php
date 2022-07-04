@@ -2,33 +2,41 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\User;
 use App\Models\Subscription;
 use App\Models\Teams;
+use App\Models\User;
 use Livewire\Component;
 
 class UserDashboard extends Component
 {
     public $editFormVisible = false;
+
     public $subscription = null;
+
     public $user_id;
+
     public $name;
+
     public $email;
+
     public $coin;
+
     public $favouriteTeam = null;
 
-    protected $listeners=[
+    protected $listeners = [
         'UserUpdated' => 'render',
     ];
 
     public function render()
     {
-        return view('livewire.user-dashboard',[
+        return view('livewire.user-dashboard', [
             'users' => User::all(),
-            'teams' => Teams::all()
+            'teams' => Teams::all(),
         ]);
     }
-    public function editFormToggle(User $user){
+
+    public function editFormToggle(User $user)
+    {
         $this->editFormVisible = true;
         $this->name = $user->name;
         $this->email = $user->email;
@@ -36,7 +44,9 @@ class UserDashboard extends Component
         $this->user_id = $user->id;
         $this->favouriteTeam = $user->fav_team;
     }
-    public function updateUser(){
+
+    public function updateUser()
+    {
         // validate input
         $this->validate([
             'name' => 'required|min:4',
@@ -53,14 +63,18 @@ class UserDashboard extends Component
         $user->save();
 
         $this->resetData();
-        session()->flash('success','User updated');
+        session()->flash('success', 'User updated');
     }
-    public function unsubscribe($subscription_id){
+
+    public function unsubscribe($subscription_id)
+    {
         Subscription::destroy($subscription_id);
         $this->emit('UserUpdated');
     }
+
     // reset current user data in compoenent
-    public function resetData(){
+    public function resetData()
+    {
         $this->editFormVisible = ! $this->editFormVisible;
         $this->name = null;
         $this->email = null;

@@ -1,23 +1,25 @@
 <?php
 namespace App\Http\Traits;
-trait PlayerType{
-    public function playerType($player_type){
-        switch ($player_type) {
-            case 1:
-                return 'GKP';
-                break;
-                case 2:
-                    return 'DEF';
-                    break;
-                    case 3:
-                        return 'MID';
-                        break;
-                        case 4:
-                            return 'FWD';
-                            break;
-                            default:
-                            return 'Unknown';
-                            break;
-                        }
-                    }
-                }
+
+trait PlayerType
+{
+    public function getPlayerTypeShort($type)
+    {
+        return match ($type) {
+            1 => 'GK',
+            2 => 'DEF',
+            3 => 'MID',
+            4 => 'FWD'
+        };
+    }
+
+    public function getPlayerTypeLong($type)
+    {
+        return match ($type) {
+            1 => 'Goalkeeper',
+            2 => 'Defender',
+            3 => 'Midfielder',
+            4 => 'Forward'
+        };
+    }
+}

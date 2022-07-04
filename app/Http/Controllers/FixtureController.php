@@ -2,19 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Http;
-use Illuminate\Database\Eloquent\Collection;
-use DateTimeZone;
-use DateTime;
-use App\Models\Fixture;
 use App\Http\Resources\FixtureCollection;
+use App\Models\Fixture;
+use DateTime;
+use DateTimeZone;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Http;
 
 class FixtureController extends Controller
 {
     private $API_URL = 'https://fantasy.premierleague.com/api';
+
     public function requestFixtureFromAPI()
     {
-        $response = Http::get($this->API_URL . '/fixtures/');
+        $response = Http::get($this->API_URL.'/fixtures/');
+
         return (object) $response->json();
     }
 
@@ -26,13 +28,16 @@ class FixtureController extends Controller
             ->where('finished', false)
             ->orderBy('kickoff_time', 'asc')
             ->limit(10)->get();
+
         return $fixtures->merge($dota2_fixtures);
     }
+
     public function getFinishedFixture()
     {
         return Fixture::with(['hometeam', 'awayteam'])
             ->where('finished', true)->orderBy('id', 'desc')->get();
     }
+
     public function getLastFiveMatches($team_id)
     {
         return Fixture::with(['hometeam', 'awayteam'])
@@ -44,14 +49,17 @@ class FixtureController extends Controller
             ->limit(5)
             ->get();
     }
+
     public function getFixtureByGameWeek($event)
     {
         return Fixture::where('event', $event)->get();
     }
+
     public function getMatch($id)
     {
         return Fixture::findOrFail($id);
     }
+
     public function updateSingleFixture(Fixture $fixture)
     {
         if ($fixture->fixture_type === 'dota2') {
@@ -77,6 +85,7 @@ class FixtureController extends Controller
             $bet_controller->updateBetResult($fixture);
         }
     }
+
     public function updateAllFixtures()
     {
         $fixtures = $this->requestFixtureFromAPI();
@@ -100,6 +109,7 @@ class FixtureController extends Controller
             ]);
         }
     }
+
     // FOR API
     public function getFixtures()
     {
@@ -107,6 +117,7 @@ class FixtureController extends Controller
             $this->getLatestFixture()
         );
     }
+
     // refresh all fixture data for new season
     public function deleteAllFixtures()
     {

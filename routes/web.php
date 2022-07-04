@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Livewire\UserDashboard;
 use App\Http\Livewire\Profile;
 use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\NewsLetterController;
@@ -21,7 +20,6 @@ use App\Http\Controllers\BetController;
 require __DIR__ . '/auth.php';
 require __DIR__ . '/test.php';
 
-
 Route::get('/test', function () {
     $c = new PlayerController();
     $c->getTop10PlayersThisWeek();
@@ -34,7 +32,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/bet/match/submit', [BetController::class, 'trybet'])->name('bets.store');
     // Profile page;
     Route::get('/profile', Profile::class)->name('profile');
-    Route::view('/players', 'players')->name("players");
+    Route::get('/players', [PlayerController::class, 'index'])->name('players');
+    Route::get('/players/{team}', [PlayerController::class, 'index'])->name('players.team');
     // News Page
     // Route::view('/news','news')->name('news');
     // Pricing Page

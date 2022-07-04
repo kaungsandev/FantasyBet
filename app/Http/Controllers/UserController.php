@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-     /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -74,9 +74,10 @@ class UserController extends Controller
         $user = User::where('id', $id)->first();
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->coin =$request->coin;
-        $user->rank_no =$request->rank_no;
+        $user->coin = $request->coin;
+        $user->rank_no = $request->rank_no;
         $user->save();
+
         return redirect()->route('dashboard.user');
     }
 

@@ -10,13 +10,16 @@ class Subscription extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id', 'packages_id', 'started_date', 'expire_date', 'expired'
+        'user_id', 'packages_id', 'started_date', 'expire_date', 'expired',
     ];
-    
-    public function package(){
-        return $this->belongsTo(Packages::class,'packages_id','id');
+
+    public function package()
+    {
+        return $this->belongsTo(Packages::class, 'packages_id', 'id');
     }
-    public function user(){
+
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 }

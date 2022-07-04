@@ -38,9 +38,10 @@ class SetAdmin extends Command
      */
     public function handle()
     {
-        $user = User::where('email','kaungsan206@gmail.com')->first();
+        $user = User::where('email', 'kaungsan206@gmail.com')->first();
         $user->admin = true;
         $user->save();
+
         return 0;
     }
 }

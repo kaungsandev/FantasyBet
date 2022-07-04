@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\Fixture;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {

@@ -18,10 +18,9 @@ class CheckAdmin
     public function handle(Request $request, Closure $next)
     {
         $user = Auth::user();
-        if($user->admin){
+        if ($user->admin) {
             return $next($request);
-        }
-        else{
+        } else {
             abort(404);
         }
     }

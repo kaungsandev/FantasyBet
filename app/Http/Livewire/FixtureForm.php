@@ -12,14 +12,23 @@ use Livewire\Component;
 class FixtureForm extends Component
 {
     public $event;
+
     public $home_team;
+
     public $away_team;
+
     public $kickoff_time;
+
     public $started = 0;
+
     public $finished = 0;
+
     public $fixture_type = 'football';
+
     public $home_team_score = 0;
+
     public $away_team_score = 0;
+
     public $updateForm = false;
 
     protected $rules = [
@@ -28,15 +37,18 @@ class FixtureForm extends Component
         'away_team' => 'required',
         'kickoff_time' => 'required',
     ];
+
     protected $listeners = [
-        'editFixture' => 'update'
+        'editFixture' => 'update',
     ];
+
     public function render()
     {
         return view('livewire.fixture-form', [
             'teams' => Teams::all(),
         ]);
     }
+
     public function clearData()
     {
         $this->event = null;
@@ -50,6 +62,7 @@ class FixtureForm extends Component
         $this->away_team_score = 0;
         $this->updateForm = false;
     }
+
     public function update($id)
     {
         $fixture = Fixture::where('id', $id)->first();
@@ -64,6 +77,7 @@ class FixtureForm extends Component
         $this->away_team_score = $fixture->away_team_score;
         $this->updateForm = true;
     }
+
     public function submit()
     {
         $this->validate();
@@ -77,7 +91,7 @@ class FixtureForm extends Component
             'away_team' => $this->away_team,
         ], [
             'kickoff_time'  => $this->kickoff_time,
-            'finished' => (bool)$this->finished,
+            'finished' => (bool) $this->finished,
             'started' => (bool) $this->started,
             'home_team_score' => $this->home_team_score,
             'away_team_score' => $this->away_team_score,
@@ -87,7 +101,7 @@ class FixtureForm extends Component
         $betController = new BetController();
         $betController->updateBetResult($fixture);
         $this->clearData();
-        session()->flash('success', "Success");
+        session()->flash('success', 'Success');
         $this->emit('fixtureUpdated');
     }
 }

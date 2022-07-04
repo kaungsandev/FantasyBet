@@ -13,8 +13,8 @@ class AddDrawPointtoFixturesTable extends Migration
      */
     public function up()
     {
-        Schema::table('fixtures',function (Blueprint $table){
-            $table->float('draw_point',4,2)->default(0.30);
+        Schema::table('fixtures', function (Blueprint $table) {
+            $table->float('draw_point', 4, 2)->default(0.30);
         });
     }
 

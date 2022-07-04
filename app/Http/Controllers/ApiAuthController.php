@@ -18,7 +18,7 @@ class ApiAuthController extends Controller
                 'email' => 'email|required',
                 'password' => 'required|min:8',
             ]);
-            if (!Auth::attempt(request(['email', 'password']))) {
+            if (! Auth::attempt(request(['email', 'password']))) {
                 return response()->json([
                     'status_code' => 401,
                     'message' => 'Unauthorized: Email and password do not match our records.',
@@ -26,10 +26,11 @@ class ApiAuthController extends Controller
             }
             $user = User::where('email', $request->email)->first();
 
-            if (!Hash::check($request->password, $user->password, [])) {
+            if (! Hash::check($request->password, $user->password, [])) {
                 throw new \Exception('Error in Login');
             }
             $tokenResult = $user->createToken(time())->plainTextToken;
+
             return response()->json([
                 'status_code' => 200,
                 'message' => 'success',
@@ -45,9 +46,11 @@ class ApiAuthController extends Controller
             ], 422);
         }
     }
+
     public function logout()
     {
         request()->user()->currentAccessToken()->delete();
+
         return response()->json(['message' => 'Success'], 200);
     }
 }

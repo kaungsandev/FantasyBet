@@ -11,24 +11,27 @@ class Bet extends Model
 
     protected $fillable = [
         'match_id',
-        'winner', 
-        'supporter', 
-        'amount'  ,
+        'winner',
+        'supporter',
+        'amount',
         'current_point',
-        'paid'
+        'paid',
     ];
 
-    
-    public function fixture(){
-        return $this->belongsTo(Fixture::class,'match_id');
+    public function fixture()
+    {
+        return $this->belongsTo(Fixture::class, 'match_id');
     }
-    public function team(){
-        return $this->belongsTo(Teams::class,'winner')->withDefault([
+
+    public function team()
+    {
+        return $this->belongsTo(Teams::class, 'winner')->withDefault([
             'name' => $this->fixture->hometeam->name,
         ]);
     }
-    public function user(){
-        return $this->belongsTo(User::class,'supporter');
-    }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'supporter');
+    }
 }

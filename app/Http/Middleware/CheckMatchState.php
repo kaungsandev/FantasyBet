@@ -34,6 +34,7 @@ class CheckMatchState
                 return redirect()->route('home')->with('info', 'The match is already finished');
             }
         }
+
         return $next($request);
     }
 }

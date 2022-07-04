@@ -1,6 +1,10 @@
 <?php
+
 namespace App\Services;
-interface NewsLetter{
+
+interface NewsLetter
+{
     public function listId();
-    public function subscribe(string $email,string $list = null);
+
+    public function subscribe(string $email, string $list = null);
 }

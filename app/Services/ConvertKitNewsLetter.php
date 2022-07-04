@@ -1,6 +1,7 @@
-<?php 
+<?php
+
 namespace App\Services;
 
-class ConvertKitNewsLetter{
-
+class ConvertKitNewsLetter
+{
 }

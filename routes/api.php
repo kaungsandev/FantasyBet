@@ -1,10 +1,9 @@
 <?php
 
-use App\Http\Controllers\FixtureController;
 use App\Http\Controllers\ApiAuthController;
 use App\Http\Controllers\BetController;
+use App\Http\Controllers\FixtureController;
 use App\Models\Fixture;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 
@@ -32,9 +31,11 @@ Route::middleware(['auth:sanctum'])->group(function () {
 Route::get('/official/teams', function () {
     $response = Http::get('https://fantasy.premierleague.com/api/bootstrap-static/');
     $resource = (object) $response->json();
+
     return response()->json($resource);
 });
 Route::get('/official/fixtures', function () {
     $response = Http::get('https://fantasy.premierleague.com/api/fixtures/');
+
     return response()->json($response->json());
 });

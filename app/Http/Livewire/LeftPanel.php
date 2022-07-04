@@ -8,7 +8,9 @@ use Livewire\Component;
 class LeftPanel extends Component
 {
     public $avatar;
+
     public $admin = false;
+
     public function mount()
     {
         // generate random avatar
@@ -18,6 +20,7 @@ class LeftPanel extends Component
         //     Cache::put('avatar-'.$user_id, $random_avatar);
         // }
     }
+
     public function render()
     {
         return view('livewire.left-panel');

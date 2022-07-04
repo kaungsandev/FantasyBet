@@ -19,9 +19,9 @@ class CreateFixturesTable extends Migration
             $table->string('homeTeam');
             $table->string('awayTeam');
             $table->string('time');
-            $table->string('result')->default("Vs");
+            $table->string('result')->default('Vs');
             $table->string('winner')->default('unknown');
-            $table->string('status')->default("UpComing");
+            $table->string('status')->default('UpComing');
             $table->float('team1_point', 4, 2)->default(0.96);
             $table->float('team2_point', 4, 2)->default(0.96);
             $table->timestamps();

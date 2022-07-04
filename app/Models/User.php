@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -18,16 +17,17 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 
+        'name',
         'email',
         'password',
-        'coin', 
-        'admin', 
+        'coin',
+        'admin',
         'fav_team',
-        'rank_title', 
+        'rank_title',
         'rank_no',
-        'timezone'
+        'timezone',
     ];
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -36,7 +36,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
-        'admin'
+        'admin',
     ];
 
     /**
@@ -48,13 +48,18 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function bets(){
-        return $this->hasMany(Bet::class,'supporter');
+    public function bets()
+    {
+        return $this->hasMany(Bet::class, 'supporter');
     }
-    public function subscription(){
+
+    public function subscription()
+    {
         return $this->hasOne(Subscription::class);
     }
-    public function favouriteTeam(){
-        return $this->hasOne(Teams::class,'id','fav_team');
+
+    public function favouriteTeam()
+    {
+        return $this->hasOne(Teams::class, 'id', 'fav_team');
     }
 }

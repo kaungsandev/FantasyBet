@@ -1,14 +1,16 @@
 <?php
+
 namespace App\Http\Livewire;
 
-use Livewire\Component;
 use App\Http\Controllers\PlayerController;
+use Livewire\Component;
 
 class RightPanel extends Component
 {
     public $players;
+
     protected $listeners = [
-        'PlanSubscribed' => 'render'
+        'PlanSubscribed' => 'render',
     ];
 
     public function mount(PlayerController $playerController)

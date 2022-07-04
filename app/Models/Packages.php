@@ -9,13 +9,17 @@ class Packages extends Model
 {
     use HasFactory;
 
-    protected $fillable =[
-        'name', 'amount', 'duration', 'auto_sub' 
+    protected $fillable = [
+        'name', 'amount', 'duration', 'auto_sub',
     ];
-    public function users(){
+
+    public function users()
+    {
         return $this->hasMany(User::class);
     }
-    public function subscriptions(){
+
+    public function subscriptions()
+    {
         return $this->hasMany(Subscription::class);
     }
 }

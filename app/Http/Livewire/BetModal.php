@@ -1,18 +1,22 @@
 <?php
+
 namespace App\Http\Livewire;
 
-use Livewire\Component;
-use Illuminate\Http\Request;
-use App\Models\Fixture;
 use App\Models\Bet;
+use App\Models\Fixture;
+use Illuminate\Http\Request;
+use Livewire\Component;
 
 class BetModal extends Component
 {
     public $fixture;
+
     public $totalCount;
 
     public $home_team_betting_rate = '50';
+
     public $away_team_betting_rate = '50';
+
     public $draw_betting_rate = '0';
 
     public function mount(Request $request)

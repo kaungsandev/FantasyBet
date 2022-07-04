@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class Fixture extends Model
 {
@@ -20,12 +20,14 @@ class Fixture extends Model
         'away_team_score',
         'home_team_point',
         'away_team_point',
-        'draw_point'
+        'draw_point',
     ];
+
     public function bets()
     {
         return $this->hasMany(Bet::class, 'match_id', 'id');
     }
+
     // hometeam
     public function hometeam()
     {
@@ -34,11 +36,12 @@ class Fixture extends Model
             'short_name' => $this->home_team,
         ]);
     }
+
     public function awayteam()
     {
         return $this->belongsTo(Teams::class, 'away_team')->withDefault([
             'name' => $this->away_team,
-            'short_name' => $this->away_team
+            'short_name' => $this->away_team,
         ]);
     }
 }
