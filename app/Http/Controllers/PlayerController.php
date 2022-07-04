@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Collection;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Http\Request;
 use App\Models\Teams;
 
 class PlayerController extends Controller
@@ -40,44 +41,14 @@ class PlayerController extends Controller
         return $sorted_players;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $paginatedPlayer = $this->groupPlayersByTeam();
+        $all_players = collect(cache('players'));
         $teams = Teams::all();
-        return view('players', ['paginatedPlayers' => $paginatedPlayer, 'teams' => $teams]);
-    }
 
-    public function groupPlayersByTeam()
-    {
-        $players = collect(cache('players'));
-        // Laravel Collection Sort
-        $sorted_players = $players->sortBy('team');
+        $team_id = $teams->where('id', $request['team'])->first()->id;
 
-        $groupByTeam = [];
-        $teamId = 1; //team id starts from 1.
-        foreach ($sorted_players as $player) {
-            if ($player['team'] == $teamId) {
-                $groupByTeam[$player['team']][] = $player;
-                $groupByTeam[$player['team']]['team'] = $player['team'];
-            } elseif ($player['team'] > $teamId) {
-                $teamId = $player['team'];
-            }
-        }
-
-        $paginatedPlayer = $this->paginate($groupByTeam);
-
-        return $paginatedPlayer;
-    }
-
-    public function paginate($items, $perPage = 1, $page = null, $options = [])
-    {
-        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
-        //$items = $items instanceof Collection ? $items : Collection::make($items);
-        $options = ['path' => Paginator::resolveCurrentPath()];
-        $total = count($items);
-        $offset = ($page * $perPage) - $perPage;
-        $items = array_slice($items, $offset, $perPage);
-        $items = $items instanceof Collection ? $items : Collection::make($items);
-        return new LengthAwarePaginator($items->forPage($page, $perPage), $total, $perPage, $page, $options);
+        $players = $all_players->where('team', $team_id)->sortBy('element_type')->all();
+        return view('players', ['players' => $players, 'teams' => $teams,'team_id' =>$team_id]);
     }
 }

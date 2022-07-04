@@ -15,7 +15,7 @@
                 @if ($fixture->finished === false && $fixture->started === false)
                     <p class="">{{ $datetime->format('H:i A') }}</p>
                 @else
-                    <div class="flex flex-row justify-around p-2 space-x-2 font-bold text-white bg-gray-900">
+                    <div class="flex flex-row justify-around p-2 space-x-2 font-bold text-white bg-gray-900 rounded-md">
                         <p class="w-full">{{ $fixture->home_team_score }}</p>
                         <p class="border border-gray-400"></p>
                         <p class="w-full">{{ $fixture->away_team_score }}</p>

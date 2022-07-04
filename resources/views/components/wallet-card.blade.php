@@ -5,6 +5,6 @@
         <span class="text-sm font-bold lg:hidden">Account Balance: </span>
     </x-slot:icon>
     <p class="w-full text-lg text-right">
-        &euro; {{ number_format(auth()->user()->coin) }}
+        &pound; {{ number_format(auth()->user()->coin) }}
     </p>
 </x-nav-link>

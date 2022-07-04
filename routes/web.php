@@ -32,8 +32,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/bet/match/submit', [BetController::class, 'trybet'])->name('bets.store');
     // Profile page;
     Route::get('/profile', Profile::class)->name('profile');
-    Route::get('/players', [PlayerController::class, 'index'])->name('players');
-    Route::get('/players/{team}', [PlayerController::class, 'index'])->name('players.team');
+    Route::get('/{team_name?}/players/{team?}', [PlayerController::class, 'index'])->name('players');
+
     // News Page
     // Route::view('/news','news')->name('news');
     // Pricing Page

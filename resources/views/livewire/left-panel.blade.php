@@ -2,7 +2,7 @@
     {{-- For Desktop --}}
     <div class="flex-col justify-center hidden h-full space-y-4 md:flex">
         <div class="pl-6">
-            <h1 class="text-xl font-extrabold uppercase leading-relax font-varela">Fantasy Bet</h1>
+            <h1 class="font-extrabold uppercase  leading-relax">Fantasy Bet</h1>
         </div>
 
 
@@ -80,7 +80,7 @@
                     Fixture
                 </x-nav-link>
 
-                <x-nav-link :active="request()->routeIs('players')" :href="route('players')">
+                <x-nav-link :active="request()->routeIs('players')" :href="route('players', ['team_name' => 'Arsenal', 'team' => 1])">
                     <x-slot:icon>
                         <i class="fa-solid fa-chart-simple"></i>
                     </x-slot:icon>
@@ -145,7 +145,7 @@
                     </span>
                 </x-nav-link>
 
-                <x-nav-link class="flex items-center justify-center" :active="request()->routeIs('players')" :href="route('players')">
+                <x-nav-link class="flex items-center justify-center" :active="request()->routeIs('players')" :href="route('players', ['team_name' => 'Arsenal', 'team' => 1])">
                     <span class="pt-4 pb-4">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
