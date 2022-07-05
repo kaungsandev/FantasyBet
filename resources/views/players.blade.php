@@ -1,14 +1,7 @@
 <x-app-layout>
     @section('page_title', 'Players')
     <div class="flex flex-row justify-around h-auto space-x-4 overflow-y-auto no-scrollbar">
-
-        <div class="grid w-full gap-2 overflow-y-auto lg:grid-cols-3 no-scrollbar">
-
-            @foreach ($players as $player)
-                @livewire('player-card', ['player' => $player, 'teams' => $teams], key($player['id']))
-            @endforeach
-
-        </div>
+        @livewire('player-card-list', ['all_players' => $players, 'teams' => $teams, 'team_id' => $team_id])
         <div class="flex flex-col w-64 p-4 space-y-2 overflow-y-auto bg-white rounded-lg no-scrollbar">
             <h1 class="font-bold border-b">Teams</h1>
             <div class="flex flex-col justify-between h-full px-4 py-2 space-y-2 text-sm text-gray-400">

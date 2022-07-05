@@ -48,7 +48,7 @@ class PlayerController extends Controller
 
         $team_id = $teams->where('id', $request['team'])->first()->id;
 
-        $players = $all_players->where('team', $team_id)->sortBy('element_type')->all();
-        return view('players', ['players' => $players, 'teams' => $teams,'team_id' =>$team_id]);
+        
+        return view('players', ['players' => $all_players, 'teams' => $teams,'team_id' =>$team_id]);
     }
 }
