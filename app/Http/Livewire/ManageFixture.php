@@ -3,12 +3,11 @@
 namespace App\Http\Livewire;
 
 use App\Console\UpdateBetResultTask;
-use App\Console\UpdateFixtureTask;
 use App\Http\Controllers\FixtureController;
 use App\Models\Fixture;
 use Livewire\Component;
 
-class FixtureManage extends Component
+class ManageFixture extends Component
 {
     protected $listeners = [
         'fixtureUpdated' => 'render',
@@ -16,7 +15,7 @@ class FixtureManage extends Component
 
     public function render()
     {
-        return view('livewire.fixture-manage', [
+        return view('livewire.manage-fixture', [
             'fixtures' => Fixture::where('finished', false)->orderBy('id', 'asc')->cursorPaginate(10),
         ]);
     }
@@ -27,16 +26,16 @@ class FixtureManage extends Component
         session()->flash('success', 'Bets Updated');
     }
 
-    public function updateFixtures()
+    public function updateFixtures(FixtureController $fixtureController)
     {
-        call_user_func(new UpdateFixtureTask);
-        session()->flash('success', 'Fixture Updated');
+        $fixtureController->updateAllFixtures();
+        session()->flash('success', 'Fixture Updated. Please run Update Bets to update betting result');
+        $this->emit('fixtureUpdated');
     }
 
-    public function refreshFixture()
+    public function refreshFixture(FixtureController $fixtureController)
     {
-        $delete = new FixtureController;
-        $delete->deleteUnfinishedFixtures();
+        $fixtureController->deleteAllFixtures();
         session()->flash('success', 'Fixtures are refreshed.');
         $this->emit('fixtureUpdated');
     }

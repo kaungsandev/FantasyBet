@@ -1,20 +1,19 @@
 <?php
+
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Collection;
-use Illuminate\Pagination\Paginator;
-use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Http\Request;
 use App\Models\Teams;
+use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Http;
 
 class PlayerController extends Controller
 {
     //
     public function __construct()
     {
-        if (!cache('players')) {
+        if (! cache('players')) {
             $this->getPlayersFromAPI();
         }
     }
@@ -48,7 +47,6 @@ class PlayerController extends Controller
 
         $team_id = $teams->where('id', $request['team'])->first()->id;
 
-        
-        return view('players', ['players' => $all_players, 'teams' => $teams,'team_id' =>$team_id]);
+        return view('players', ['players' => $all_players, 'teams' => $teams, 'team_id' =>$team_id]);
     }
 }

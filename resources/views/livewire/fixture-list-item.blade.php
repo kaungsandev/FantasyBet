@@ -12,7 +12,7 @@
                 <p class="hidden md:block">{{ $fixture->hometeam->name }}</p>
                 {{-- Smaller Device --}}
                 <p class="block md:hidden">{{ $fixture->hometeam->short_name }}</p>
-                @if ($fixture->finished === false && $fixture->started === false)
+                @if ($fixture->finished == false && $fixture->started == false)
                     <p class="">{{ $datetime->format('H:i A') }}</p>
                 @else
                     <div class="flex flex-row justify-around p-2 space-x-2 font-bold text-white bg-gray-900 rounded-md">

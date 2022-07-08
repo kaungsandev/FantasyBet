@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Livewire\Profile;
-use App\Http\Controllers\PlayerController;
-use App\Http\Controllers\NewsLetterController;
 use App\Http\Controllers\BetController;
+use App\Http\Controllers\NewsLetterController;
+use App\Http\Controllers\PlayerController;
+use App\Http\Livewire\Profile;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,8 +17,8 @@ use App\Http\Controllers\BetController;
 |
 */
 
-require __DIR__ . '/auth.php';
-require __DIR__ . '/test.php';
+require __DIR__.'/auth.php';
+require __DIR__.'/test.php';
 
 Route::get('/test', function () {
     $c = new PlayerController();

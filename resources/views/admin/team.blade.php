@@ -1,3 +1,3 @@
 <x-admin-layout>
-    @livewire('team-manage')
+    @livewire('manage-team')
 </x-admin-layout>

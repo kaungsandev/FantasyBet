@@ -1,17 +1,22 @@
 <?php
+
 namespace App\Http\Livewire;
 
-use Livewire\Component;
 use App\Http\Traits\PlayerType;
+use Livewire\Component;
 
 class PlayerCard extends Component
 {
     use PlayerType;
+
     public $player;
+
     public $teams; //passed from controller
 
     public $team;
+
     public $player_type_long;
+
     public $player_type_short;
 
     public function mount()

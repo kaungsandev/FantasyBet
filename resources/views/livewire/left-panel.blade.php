@@ -2,7 +2,7 @@
     {{-- For Desktop --}}
     <div class="flex-col justify-center hidden h-full space-y-4 md:flex">
         <div class="pl-6">
-            <h1 class="font-extrabold uppercase  leading-relax">Fantasy Bet</h1>
+            <h1 class="font-extrabold uppercase leading-relax">Fantasy Bet</h1>
         </div>
 
 

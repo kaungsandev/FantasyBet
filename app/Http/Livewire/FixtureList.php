@@ -2,10 +2,10 @@
 
 namespace App\Http\Livewire;
 
-use Livewire\Component;
-use Illuminate\Support\Facades\Auth;
-use DateTime;
 use App\Http\Controllers\FixtureController;
+use DateTime;
+use Illuminate\Support\Facades\Auth;
+use Livewire\Component;
 
 class FixtureList extends Component
 {

@@ -2,10 +2,11 @@
 
 namespace App\Http\Livewire;
 
+use App\Console\UpdateTeamsTask;
 use App\Models\Teams;
 use Livewire\Component;
 
-class TeamManage extends Component
+class ManageTeam extends Component
 {
     public $name;
 
@@ -18,7 +19,7 @@ class TeamManage extends Component
 
     public function render()
     {
-        return view('livewire.team-manage', [
+        return view('livewire.manage-team', [
             'teams' => Teams::orderBy('id', 'desc')->get(),
         ]);
     }
@@ -39,5 +40,10 @@ class TeamManage extends Component
         ]);
         $this->clearData();
         session()->flash('success', 'New Team Added');
+    }
+
+    public function updateTeams(UpdateTeamsTask $updateTeamsTask)
+    {
+        $updateTeamsTask->__invoke();
     }
 }

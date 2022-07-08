@@ -2,9 +2,9 @@
 
 namespace Database\Factories;
 
-use Illuminate\Support\Str;
-use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class UserFactory extends Factory
 {
@@ -32,7 +32,7 @@ class UserFactory extends Factory
             'rank_title' => 'BetLord',
             'rank_no' => 99999,
             'remember_token' => Str::random(10),
-            'timezone' => 'Asia/Yangon'
+            'timezone' => 'Asia/Yangon',
         ];
     }
 }
